@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-expedia-primary {
+  background-color: #f7ba2a;
+  color: black;
+  border: none;
+  border-radius: 30px;
+}
+
+.btn-expedia-primary:hover {
+  background-color: #e0a922;
+}
+
+.btn-expedia-secondary {
+  background-color: #191e3c;
+  color: white;
+  border: none;
+  border-radius: 30px;
+}
+
+.btn-expedia-secondary:hover {
+  background-color: #191e3c;
+  color: white;
+}
