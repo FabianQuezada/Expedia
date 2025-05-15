@@ -1,0 +1,122 @@
+.exp-disp {
+    max-width: 65%; 
+    margin: 0 auto; 
+    margin-top: 30px;
+}
+
+.titulo-disponibilidad {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.linea-separadora {
+    border: none;          
+    height: 1px;          
+    background-color: black;  
+    opacity: 1;            
+    margin: 10px 0;        
+}
+
+.botones-container {
+    display: flex;
+    gap: 20px; /* separación entre botones */
+    justify-content: flex-start; /* o center, según dónde quieras */
+}
+
+.boton-fecha {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centra vertical */
+    align-items: center;     /* centra horizontal */
+    text-align: center;
+    width: 216px;  /* ancho fijo para que tengan tamaño igual */
+    height: 85px;  /* altura fija para que el texto se centre verticalmente */
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    line-height: 1;
+    font-weight: 600;
+    transition: background-color 0.2s ease, border 0.2s ease;
+}
+.boton-fecha:hover {
+      background-color: rgba(61, 173, 255, 0.21); /* 21% opacidad */
+}
+
+.boton-fecha:active {
+    background-color: #3DADFF; 
+    border: 2px solid black;   
+}
+
+.boton-fecha .fecha {
+     font-size: 16px;
+}
+
+.boton-fecha .precio {
+     font-size: 20px;
+}
+
+.cuadro-incluye {
+    margin-top: 20px;
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.fila {
+     display: flex;
+}
+
+.fila:not(:last-child) {
+    margin-bottom: 50px;
+}
+
+.col-izq {
+    font-weight: bold;
+    min-width: 200px;
+    white-space: nowrap; /* evita que el texto se divida en varias líneas */
+    font-size: 32px;
+    line-height: 1;
+    padding-right: 150px; /* espacio entre etiqueta y contenido */
+    display: flex;
+    align-items: flex-start;
+}
+
+.col-der {
+    flex: 1; 
+    font-size: 20px;
+    line-height: 1;
+    padding-left: 0;
+}
+
+.col-der p {
+    margin: 0;
+    margin-bottom: 0.5em;
+    padding-left: 1em;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.lista-incluye {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-incluye li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+}
+
+.lista-incluye i {
+    font-size: 20px;
+}

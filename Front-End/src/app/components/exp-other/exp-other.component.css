@@ -1,0 +1,115 @@
+.exp-other {
+     max-width: 65%; 
+     margin: 0 auto; 
+     margin-top: 30px;
+}
+
+.titulo {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.cards-otras-actividades {
+    display: flex;
+    gap: 29.66px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.actividad-card {
+    width: 392.56px;
+    height: 560px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0px 20px rgba(0,0,0,0.3);
+    border: 1px solid #A9A9A9;
+    background-color: white;
+}
+
+.actividad-img {
+    height: 265px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    display: block;
+}
+
+.actividad-contenido {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 3px;
+}
+
+.actividad-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1px;
+    font-size: 20px;
+    color: black;
+}
+
+.actividad-info i {
+    font-size: 20px;
+    color: black;
+}
+
+.actividad-valoracion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 20px;
+    color: black;
+}
+
+.actividad-valoracion strong {
+     font-weight: bold;
+}
+
+.actividad-valoracion span {
+    color: black;
+}
+
+.actividad-footer {
+    margin-top: auto; /* ← empuja esto al fondo */
+    display: flex;
+    flex-direction: column;
+    gap: 0px; /* espacio entre cancelación y precio */
+}
+
+.actividad-cancelacion {
+    color: #297950;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.actividad-precio {
+    margin-top: auto; /* empuja este bloque al final */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* para que queden alineados a la izquierda */
+}
+
+.actividad-precio > span:first-child {
+  margin-bottom: -8px; /* mueve hacia arriba */
+}
+
+.precio {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+}
+
+.precio-adulto {
+    font-size: 16px;
+    color: black;
+}

@@ -5,12 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ExpImagesComponent } from './components/exp-images/exp-images.component';
+import { ExpDescComponent } from './components/exp-desc/exp-desc.component';
+import { ExpDispComponent } from './components/exp-disp/exp-disp.component';
+import { ExpOtherComponent } from './components/exp-other/exp-other.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
+    ExpImagesComponent,
+    ExpDescComponent,
+    ExpDispComponent,
+    ExpOtherComponent
   ],
   imports: [
     BrowserModule,

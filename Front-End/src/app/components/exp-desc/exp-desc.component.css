@@ -1,0 +1,90 @@
+.exp-desc-wrapper {
+  display: flex;
+  max-width: 65%; /* Mismo ancho que el componente anterior */
+  margin: 0 auto; /* Centrar horizontalmente */
+  gap: 20px;
+}
+
+.left-content, .right-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-content {
+  flex: 2;
+}
+
+.right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+}
+
+.datos-generales ul {
+  padding-left: 20px;
+}
+
+.titulo-datos {
+  font-size: 32px;
+}
+
+.lista-datos {
+  font-size: 24px;
+}
+
+.titulo-caracteristicas {
+  margin-top: 20px;
+  font-size: 32px;
+}
+
+.caracteristica-item {
+  font-size: 24px;
+}
+
+.caracteristicas-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto); /* máx 3 ítems por columna */
+  gap: 12px 32px;
+  margin-top: 10px;
+}
+
+.caracteristica-item i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.stars i {
+  color: #444;
+  font-size: 50px;
+  margin-right: 5px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.rating-score {
+  background-color: #227950;
+  color: white;
+  font-weight: bold;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-size: 24px;
+}
+
+.rating-text {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.map img {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
