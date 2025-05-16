@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Descuento } from "../../descuento/entities/Descuento";
-import { Notificacion } from "../../notificacion/entities/Notificacion";
-import { Reseña } from "../../reseña/entities/Reseña";
-import { Reserva } from "../../reserva/entities/Reserva";
+import { Descuento } from "../../descuento/entities/descuento.entity";
+import { Notificacion } from "../../notificacion/entities/notificacion.entity";
+import { Reseña } from "../../reseña/entities/reseña.entity";
+import { Reserva } from "../../reserva/entities/reserva.entity";
 
 @Entity("usuario", { schema: "nest_bd" })
 export class Usuario {
@@ -18,7 +18,7 @@ export class Usuario {
   @Column("varchar", { name: "Genero", length: 10 })
   genero: string;
 
-  @CreateDateColumn({ name: "Fecha_Nacimiento", type: "date" })
+  @Column({ name: "Fecha_Nacimiento", type: "date" })
   fechaNacimiento: Date;
 
   @Column("varchar", { name: "Numero_telefono", length: 15 })

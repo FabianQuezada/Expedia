@@ -8,8 +8,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Descuento } from "../../descuento/entities/Descuento";
-import { Experiencia } from "../../experiencia/entities/Experiencia";
+import { Descuento } from "../../descuento/entities/descuento.entity";
+import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 
 @Entity("proveedor", { schema: "nest_bd" })
 export class Proveedor {

@@ -1,5 +1,5 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Reserva } from "../../reserva/entities/Reserva";
+import { Reserva } from "../../reserva/entities/reserva.entity";
 
 @Index("Id_Reserva", ["idReserva", "idUsuario"], {})
 @Entity("pago", { schema: "nest_bd" })

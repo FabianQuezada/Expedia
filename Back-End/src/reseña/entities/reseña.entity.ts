@@ -1,6 +1,6 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
-import { Usuario } from "../../usuario/entities/Usuario";
-import { Experiencia } from "../../experiencia/entities/Experiencia";
+import { Usuario } from "../../usuario/entities/usuario.entity";
+import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 
 @Index("ID_Usuario", ["idUsuario"], {})
 @Index("ID_Experiencia", ["idExperiencia"], {})

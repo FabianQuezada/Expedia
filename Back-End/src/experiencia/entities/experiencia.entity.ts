@@ -7,9 +7,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Proveedor } from "../../proveedor/entities/Proveedor";
-import { FechasExperiencia } from "../../fechas-experiencia/entities/FechasExperiencia";
-import { Reseña } from "../../reseña/entities/Reseña";
+import { Proveedor } from "../../proveedor/entities/proveedor.entity";
+import { FechasExperiencia } from "../../fechas-experiencia/entities/fechas-experiencia.entity";
+import { Reseña } from "../../reseña/entities/reseña.entity";
 
 @Index("ID_Proveedor", ["idProveedor"], {})
 @Entity("experiencia", { schema: "nest_bd" })

@@ -6,9 +6,9 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
-import { Experiencia } from "../../experiencia/entities/Experiencia";
-import { Descuento } from "../../descuento/entities/Descuento";
-import { Reserva } from "../../reserva/entities/Reserva";
+import { Experiencia } from "../../experiencia/entities/experiencia.entity";
+import { Descuento } from "../../descuento/entities/descuento.entity";
+import { Reserva } from "../../reserva/entities/reserva.entity";
 
 @Index("ID_Experiencia", ["idExperiencia"], {})
 @Index("ID_Descuento", ["idDescuento"], {})
