@@ -6,6 +6,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Descuento } from "../../descuento/entities/Descuento";
 import { Usuario } from "../../usuario/entities/Usuario";
@@ -13,7 +14,7 @@ import { Usuario } from "../../usuario/entities/Usuario";
 @Index("ID_Descuento", ["idDescuento"], {})
 @Entity("notificacion", { schema: "nest_bd" })
 export class Notificacion {
-  @Column("int", { primary: true, name: "ID_Notificaciones" })
+  @PrimaryGeneratedColumn({ name: "ID_Notificaciones" })
   idNotificaciones: number;
 
   @Column("varchar", { name: "Titulo", length: 100 })
@@ -23,7 +24,7 @@ export class Notificacion {
   mensaje: string;
 
   @Column("date", { name: "Fecha_envio" })
-  fechaEnvio: string;
+  fechaEnvio: Date;
 
   @Column("varchar", { name: "Estado", length: 20 })
   estado: string;

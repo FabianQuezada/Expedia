@@ -7,7 +7,7 @@ import { Experiencia } from "../../experiencia/entities/Experiencia";
 @Entity("reseña", { schema: "nest_bd" })
 export class Reseña {
   @Column("int", { primary: true, name: "ID_Reserva" })
-  idReserva: number;
+  idReseña: number;
 
   @Column("int", { primary: true, name: "ID_Usuario" })
   idUsuario: number;
@@ -19,7 +19,7 @@ export class Reseña {
   comentario: string;
 
   @Column("date", { name: "Fecha" })
-  fecha: string;
+  fecha: Date;
 
   @Column("int", { name: "ID_Experiencia" })
   idExperiencia: number;

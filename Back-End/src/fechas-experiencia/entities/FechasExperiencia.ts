@@ -15,7 +15,7 @@ import { Reserva } from "../../reserva/entities/Reserva";
 @Entity("fechas_experiencia", { schema: "nest_bd" })
 export class FechasExperiencia {
   @Column("date", { primary: true, name: "Fecha" })
-  fecha: string;
+  fecha: Date;
 
   @Column("int", { primary: true, name: "ID_Experiencia" })
   idExperiencia: number;

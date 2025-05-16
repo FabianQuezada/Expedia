@@ -23,7 +23,7 @@ export class Reserva {
   idUsuario: number;
 
   @Column("date", { name: "Fecha_Reserva" })
-  fechaReserva: string;
+  fechaReserva: Date;
 
   @Column("int", { name: "Cantidad_Personas" })
   cantidadPersonas: number;
@@ -35,7 +35,7 @@ export class Reserva {
   totalPago: string;
 
   @Column("date", { name: "Fecha" })
-  fecha: string;
+  fecha: Date;
 
   @Column("int", { name: "ID_Experiencia" })
   idExperiencia: number;

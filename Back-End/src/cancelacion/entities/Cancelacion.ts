@@ -1,17 +1,17 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Reserva } from "../../reserva/entities/Reserva"
 
 @Index("Id_Reserva", ["idReserva", "idUsuario"], {})
 @Entity("cancelacion", { schema: "nest_bd" })
 export class Cancelacion {
-  @Column("int", { primary: true, name: "ID_Cancelacion" })
+  @PrimaryGeneratedColumn({ name: "ID_Cancelacion" })
   idCancelacion: number;
 
   @Column("text", { name: "Motivo" })
   motivo: string;
 
   @Column("date", { name: "Fecha_Cancelacion" })
-  fechaCancelacion: string;
+  fechaCancelacion: Date;
 
   @Column("int", { name: "Id_Reserva" })
   idReserva: number;

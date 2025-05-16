@@ -5,6 +5,7 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Proveedor } from "../../proveedor/entities/Proveedor";
 import { FechasExperiencia } from "../../fechas-experiencia/entities/FechasExperiencia";
@@ -13,7 +14,7 @@ import { Reseña } from "../../reseña/entities/Reseña";
 @Index("ID_Proveedor", ["idProveedor"], {})
 @Entity("experiencia", { schema: "nest_bd" })
 export class Experiencia {
-  @Column("int", { primary: true, name: "ID_Experiencia" })
+  @PrimaryGeneratedColumn({ name: "ID_Experiencia" })
   idExperiencia: number;
 
   @Column("varchar", { name: "Titulo", length: 100 })

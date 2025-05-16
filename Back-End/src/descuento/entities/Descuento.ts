@@ -6,6 +6,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { Proveedor } from "../../proveedor/entities/Proveedor";
 import { FechasExperiencia } from "../../fechas-experiencia/entities/FechasExperiencia";
@@ -15,11 +16,11 @@ import { Usuario } from "../../usuario/entities/Usuario";
 @Index("ID_Proveedor", ["idProveedor"], {})
 @Entity("descuento", { schema: "nest_bd" })
 export class Descuento {
-  @Column("int", { primary: true, name: "ID_Descuento" })
+  @PrimaryGeneratedColumn({ name: "ID_Descuento" })
   idDescuento: number;
 
   @Column("date", { name: "Fecha_creacion" })
-  fechaCreacion: string;
+  fechaCreacion: Date;
 
   @Column("int", { name: "Porcentaje" })
   porcentaje: number;
