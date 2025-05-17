@@ -1,0 +1,111 @@
+<div class="container py-5">
+  <header class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+    <img src="assets/expedia-logo.png" alt="Expedia" style="height: 40px;" />
+    <nav class="d-flex gap-3 align-items-center">
+      <a routerLink="/anuncio" class="text-decoration-none fw-bold text-dark">Anunciar una propiedad</a>
+      <a href="#" class="text-decoration-none fw-bold text-dark">Atención al cliente</a>
+      <a routerLink="/perfil" class="text-decoration-none fw-bold text-dark">Mis viajes</a>
+      <a routerLink="/login" class="btn btn-outline-dark">Iniciar Sesión</a>
+    </nav>
+  </header>
+
+  <form *ngIf="formulario" [formGroup]="formulario" (ngSubmit)="reservar()" class="card shadow p-4">
+
+    <!-- VIAJEROS -->
+    <section class="mb-5">
+      <h3 class="mb-4"><i class="bi bi-people-fill me-2"></i>¿Quiénes viajan?</h3>
+
+      <div formArrayName="viajeros">
+        <div *ngFor="let viajero of viajeros.controls; let i = index" [formGroupName]="i" class="mb-4 border rounded p-3">
+          <h5 class="mb-3">
+            <i class="bi" [ngClass]="viajero.value.tipo === 'adulto' ? 'bi-person-fill' : 'bi-emoji-smile-fill'"></i>
+            {{ viajero.value.tipo === 'adulto' ? 'Adulto' : 'Niño' }} {{ contarPorTipo(i, viajero.value.tipo) }}
+          </h5>
+
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label class="form-label">Nombre completo:</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Juan Pérez"
+              [class.is-invalid]="campoInvalido('viajeros.' + i + '.nombre')" />
+            <div class="invalid-feedback">Solo letras. Obligatorio.</div>
+          </div>
+
+          <ng-container *ngIf="viajero.value.tipo === 'adulto'">
+            <!-- Correo -->
+            <div class="mb-3">
+              <label class="form-label">Correo electrónico:</label>
+              <input type="email" class="form-control" formControlName="correo" placeholder="correo@ejemplo.com"
+                [class.is-invalid]="campoInvalido('viajeros.' + i + '.correo')" />
+              <div class="invalid-feedback">Correo no válido.</div>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+              <label class="form-label">Teléfono:</label>
+              <input type="text" class="form-control" formControlName="telefono" placeholder="912345678" maxlength="9"
+                inputmode="numeric" pattern="^\d{9}$"
+                [class.is-invalid]="campoInvalido('viajeros.' + i + '.telefono')" />
+              <div class="invalid-feedback">Debe tener 9 dígitos numéricos.</div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGO -->
+    <section [formGroup]="pagoGroup" class="mb-5">
+      <h3 class="mb-4"><i class="bi bi-credit-card me-2"></i>Pago</h3>
+
+      <!-- Nombre tarjeta -->
+      <div class="mb-3">
+        <label class="form-label">Nombre en la tarjeta:</label>
+        <input type="text" class="form-control" formControlName="nombreTarjeta" placeholder="Ej: Juan Pérez"
+          [class.is-invalid]="campoInvalido('pago.nombreTarjeta')" />
+        <div class="invalid-feedback">Solo letras. Campo obligatorio.</div>
+      </div>
+
+      <!-- N° tarjeta -->
+      <div class="mb-3">
+        <label class="form-label">Número de tarjeta:</label>
+        <input type="text" class="form-control" formControlName="numeroTarjeta" placeholder="1234 5678 9012 3456"
+          maxlength="16" inputmode="numeric" pattern="^\d{16}$"
+          [class.is-invalid]="campoInvalido('pago.numeroTarjeta')" />
+        <div class="invalid-feedback">Debe tener exactamente 16 números.</div>
+      </div>
+
+      <div class="row">
+        <!-- Vencimiento -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Fecha de vencimiento (MM/AA):</label>
+          <input type="text" class="form-control" formControlName="vencimiento" placeholder="08/26" maxlength="5"
+            pattern="^(0[1-9]|1[0-2])\/\d{2}$" [class.is-invalid]="campoInvalido('pago.vencimiento')" />
+          <div class="invalid-feedback">Formato inválido. Usa MM/AA.</div>
+        </div>
+
+        <!-- CVV -->
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Código de seguridad (CVV):</label>
+          <input type="text" class="form-control" formControlName="cvv" placeholder="123" maxlength="3"
+            inputmode="numeric" pattern="^\d{3}$" [class.is-invalid]="campoInvalido('pago.cvv')" />
+          <div class="invalid-feedback">Debe tener exactamente 3 dígitos.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMEN -->
+    <section class="mb-4">
+      <h3 class="mb-3"><i class="bi bi-clipboard-check me-2"></i>Resumen de la experiencia</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Ubicación: {{ datosRecibidos.ciudad }}</li>
+        <li class="list-group-item">Experiencia: {{ datosRecibidos.titulo }}</li>
+        <li class="list-group-item">Fecha: {{ datosRecibidos.fecha }}</li>
+        <li class="list-group-item">Hora: {{ datosRecibidos.hora }}</li>
+        <li class="list-group-item fw-bold">Total a pagar: CLP {{ datosRecibidos.total }}</li>
+      </ul>
+    </section>
+
+    <button type="submit" class="btn btn-primary w-100 fs-5" [disabled]="formulario.invalid">
+      <i class="bi bi-check-circle-fill me-2"></i>Reservar
+    </button>
+  </form>
+</div>
