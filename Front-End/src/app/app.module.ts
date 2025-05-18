@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component';
 import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
 import { CardActividadComponent } from './components/card-actividad/card-actividad.component';
+import { SearchBarActivityComponent } from './components/search-bar-activity/search-bar-activity.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CardActividadComponent } from './components/card-actividad/card-activid
     HomeComponent,
     CardVueloComponent,
     CardHospedajeComponent,
-    CardActividadComponent
+    CardActividadComponent,
+    SearchBarActivityComponent
   ],
   imports: [
     BrowserModule,
