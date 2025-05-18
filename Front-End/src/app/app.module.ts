@@ -8,6 +8,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HomepageComponent } from './components/home/homepage/homepage.component';
 import { SearchbarComponent } from './components/home/searchbar/searchbar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HomepageComponent,
     SearchbarComponent,
     NavbarComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
