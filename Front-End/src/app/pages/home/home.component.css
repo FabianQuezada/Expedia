@@ -1,0 +1,57 @@
+.img-background {
+  background-image: url('/assets/images/imagen.webp');
+  background-size: cover;
+  background-position: center;
+  height: 75vh; /* 3/4 de la altura de la pantalla */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+a {
+  text-decoration: none;   
+  color: inherit; 
+}
+
+.image-gradient {
+  background: linear-gradient(to right, #eff3f7, rgba(255,255,255,0));
+}
+
+.bg-azul-muy-claro {
+  background-color: #eff3f7;
+}
+
+.bg-azul-oscuro {
+  background-color: #191e3b;
+}
+
+
+.card-hospedaje {
+  height: 15.625rem; /* 250px */
+  overflow: hidden;
+}
+  
+@media (min-width: 576px) {
+  .card-hospedaje {
+    height: 17.5rem; /* 280px */
+  }
+}
+  
+@media (min-width: 768px) {
+  .card-hospedaje {
+    height: 18.75rem; /* 300px */
+  }
+}
+  
+@media (min-width: 992px) {
+  .card-hospedaje {
+    height: 20rem; /* 320px */
+  }
+}
+  
+@media (min-width: 1200px) {
+  .card-hospedaje {
+    height: 21.25rem; /* 340px */
+  }
+}
+  

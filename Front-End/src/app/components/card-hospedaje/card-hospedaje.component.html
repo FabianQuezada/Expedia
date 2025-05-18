@@ -1,0 +1,8 @@
+<a [routerLink]="['/', hospedaje.id]" class="d-block position-relative rounded-3 h-100">
+  <img [src]="hospedaje.imagen" alt="{{ hospedaje.nombre }}" class="w-100 h-100 object-fit-cover rounded-3">
+  <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-end card-degraded rounded-3">
+    <h3 class="text-white m-3 fs-6 poppins-medium">
+      {{ hospedaje.nombre }}
+    </h3>
+  </div>
+</a>
