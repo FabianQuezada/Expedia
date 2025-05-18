@@ -3,16 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component';
+import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
+import { CardActividadComponent } from './components/card-actividad/card-actividad.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    CardVueloComponent,
+    CardHospedajeComponent,
+    CardActividadComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

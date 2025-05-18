@@ -1,0 +1,20 @@
+<div class="card rounded-4">
+    <img
+      [src]="vuelo.imagen"
+      alt="imagen"
+      class="card-img-top rounded-top-4"
+    />
+    <div class="card-body">
+      <div class="d-flex align-items-end mb-2">
+        <img class="me-1 w-25" [src]="vuelo.logo" alt="logo">
+        <h6 class="card-title poppins-medium">{{vuelo.nombre}}</h6>
+      </div>
+        <h6 class="card-text fw-bold mb-0 poppins-light">{{vuelo.horaInicio}} - {{vuelo.horaFinal}}</h6>
+        <p class="card-text">{{vuelo.lugarInicio}} - {{vuelo.lugarFinal}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="card-text fw-bold fs-5 poppins-semi-bold">CLP {{vuelo.precio}}</span>
+          <button class="btn btn-primary btn-sm rounded-2 poppins-light fw-medium">Detalles</button>
+        </div>
+    </div>
+  </div>
+  
