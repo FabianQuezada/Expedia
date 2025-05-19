@@ -31,11 +31,11 @@ export class AuthService {
 
   async login({ correo, contraseña }: LoginDto) {
     let usuario: any = await this.usuarioService.findOneByEmail(correo);
-    let tipo = 'usuario';
+    let rol = 'usuario';
 
     if (!usuario) {
         usuario = await this.proveedorService.findOneByEmail(correo);
-        tipo = 'proveedor';
+        rol = 'proveedor';
     }
 
     if (!usuario) {
@@ -47,9 +47,13 @@ export class AuthService {
         throw new UnauthorizedException('La contraseña es incorrecta');
     }
 
-    const payload = { correo: usuario.correo, tipo };
+    const payload = { correo: usuario.correo, rol };
     const token = await this.jwtService.signAsync(payload);
-    return { token, correo: usuario.correo, tipo };
+    return { token, correo: usuario.correo, rol };
     }
+  
+  async profile({correo, rol}: {correo: string, rol: string}) {
+    return await this.usuarioService.findOneByEmail(correo);
+  }
 
 }
