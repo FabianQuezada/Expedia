@@ -21,12 +21,17 @@ export class AuthService {
       throw new BadRequestException('El correo ya está registrado');
     }
 
-    return await this.usuarioService.create({
+    await this.usuarioService.create({
       nombre,
       apellido,
       correo,
       contraseña: await bcrypt.hash(contraseña, 10),
     });
+
+    return {
+      nombre,
+      correo
+    }
   }
 
   async login({ correo, contraseña }: LoginDto) {
