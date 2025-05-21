@@ -12,6 +12,7 @@ export interface User {
   correo: string;
   contrasena: string;
   fechaRegistro: string;
+  tipo: 'Usuario' | 'Proveedor';
 }
 
 @Injectable({

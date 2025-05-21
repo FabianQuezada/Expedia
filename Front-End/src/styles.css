@@ -21,3 +21,90 @@
   background-color: #191e3c;
   color: white;
 }
+
+.btn-opciones {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: #ffffff;
+  text-align: left;
+  width: 100%;
+  gap: 0.75rem;
+  line-height: 1.5;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-opciones.active {
+  background-color: #1E1E1E;
+  color: white;
+  transform: scale(1.02);
+}
+
+.btn-opciones.active .subtitulo {
+  color:white !important
+}
+
+.subtitulo {
+  font-size: 0.65rem;
+}
+
+.servicio-card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px !important;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.servicio-img {
+  width: 297px;
+  height: 235px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.precio-editar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px; /* espacio vertical entre precio y botón */
+}
+
+.precio {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.btn-editar {
+  background-color: #ffc107; /* amarillo Bootstrap */
+  border: none;
+  border-radius: 30px;
+  padding: 6px 20px;
+  color: #212529; /* texto oscuro */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover {
+  background-color: #e0a800; /* un amarillo más oscuro al pasar el mouse */
+}
+
+.btn-agregar-servicio {
+  background-color: #0799FE; /* azul Bootstrap */
+  border: none;
+  border-radius: 30px;
+  padding: 6px 15px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-agregar-servicio:hover {
+  background-color: #0056b3; /* azul más oscuro al hover */
+}
