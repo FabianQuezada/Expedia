@@ -8,6 +8,9 @@ import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component
 import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
 import { CardActividadComponent } from './components/card-actividad/card-actividad.component';
 import { SearchBarActivityComponent } from './components/search-bar-activity/search-bar-activity.component';
+import { ExperienceHistoryComponent } from './pages/experience-history/experience-history.component';
+import { CarouselExperiencesComponent } from './components/carousel-experiences/carousel-experiences.component';
+import { CardExperienceComponent } from './components/card-experience/card-experience.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { SearchBarActivityComponent } from './components/search-bar-activity/sea
     CardVueloComponent,
     CardHospedajeComponent,
     CardActividadComponent,
-    SearchBarActivityComponent
+    SearchBarActivityComponent,
+    ExperienceHistoryComponent,
+    CarouselExperiencesComponent,
+    CardExperienceComponent
   ],
   imports: [
     BrowserModule,
