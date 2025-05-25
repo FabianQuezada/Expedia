@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Experience } from 'src/app/models/experience.model';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-experience-history',
   templateUrl: './experience-history.component.html',
-  styleUrls: ['./experience-history.component.css']
+  styleUrls: ['./experience-history.component.css'],
 })
-export class ExperienceHistoryComponent {
+export class ExperienceHistoryComponent implements OnInit {
+  constructor(private experienceService: ExperienceService) {}
+  experienceInactive: Experience[] = [];
+  experienceActive: Experience[] = [];
 
+  ngOnInit(): void {
+    this.experienceService.getAllExperiences$().subscribe((experiences) => {
+      this.experienceActive = experiences.filter((exp) => exp.esActiva());
+      this.experienceInactive = experiences.filter((exp) => !exp.esActiva());
+    });
+  }
 }
