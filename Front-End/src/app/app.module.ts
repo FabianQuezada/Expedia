@@ -8,7 +8,8 @@ import { VisualizarExperienciaComponent } from './paginas/visualizar-experiencia
 import { PagoComponent } from './paginas/pago/pago.component';
 import { AnuncioComponent } from './paginas/anuncio/anuncio.component';
 import { PerfilComponent } from './paginas/perfil/perfil.component';
-import { LoginComponent } from './paginas/login/login.component'; // Asegúrate de que esté
+import { LoginComponent } from './paginas/login/login.component';
+import { ReprogramacionComponent } from './paginas/reprogramacion/reprogramacion.component'; // Asegúrate de que esté
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoginComponent } from './paginas/login/login.component'; // Asegúrate 
     PagoComponent,
     AnuncioComponent,
     PerfilComponent,
-    LoginComponent
+    LoginComponent,
+    ReprogramacionComponent
   ],
   imports: [
     BrowserModule,

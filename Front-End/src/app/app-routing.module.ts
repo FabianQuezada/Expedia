@@ -4,7 +4,8 @@ import { VisualizarExperienciaComponent } from '../app/paginas/visualizar-experi
 import { PagoComponent } from './paginas/pago/pago.component';
 import { AnuncioComponent } from './paginas/anuncio/anuncio.component';
 import { PerfilComponent } from './paginas/perfil/perfil.component';
-import { LoginComponent } from './paginas/login/login.component'; // ✅ nuevo import
+import { LoginComponent } from './paginas/login/login.component';
+import { ReprogramacionComponent } from './paginas/reprogramacion/reprogramacion.component'; // ✅ nuevo import
 
 const routes: Routes = [
   { path: '', redirectTo: '/experiencia', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'pago', component: PagoComponent },
   { path: 'anuncio', component: AnuncioComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'login', component: LoginComponent }, // ✅ nueva ruta agregada
+  { path: 'login', component: LoginComponent },
+  { path: 'reprogramacion', component: ReprogramacionComponent }, // ✅ nueva ruta
 
   // Ruta comodín
   { path: '**', redirectTo: '/experiencia' }

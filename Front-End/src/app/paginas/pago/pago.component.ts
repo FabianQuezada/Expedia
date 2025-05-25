@@ -1,25 +1,38 @@
-
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  trigger,
+  transition,
+  style,
+  animate
+} from '@angular/animations';
 
 @Component({
   selector: 'app-pago',
   templateUrl: './pago.component.html',
-  styleUrls: ['./pago.component.css']
+  styleUrls: ['./pago.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(-10px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class PagoComponent implements OnInit {
 
   formulario!: FormGroup;
   datosRecibidos: any;
   resumen: any;
+  metodoSeleccionado: 'credito' | 'debito' | 'paypal' | null = null;
+  mostrarFormulario = false;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    // Recibir datos desde navegación
     this.datosRecibidos = history.state;
 
-    // Valores por defecto si no vienen datos
     if (!this.datosRecibidos?.adultos) {
       this.datosRecibidos = {
         ciudad: 'Santiago',
@@ -33,77 +46,89 @@ export class PagoComponent implements OnInit {
       };
     }
 
-    // Inicializar formulario principal
     this.formulario = this.fb.group({
-      viajeros: this.fb.array([]),
+      encargado: this.fb.group({
+        nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]],
+        correo: ['', [Validators.required, Validators.email]],
+        telefono: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
+      }),
+      metodo: [''],
       pago: this.fb.group({
         nombreTarjeta: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]],
-        numeroTarjeta: ['', [Validators.required, Validators.pattern(/^\d{13,16}$/)]],
+        numeroTarjeta: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
         vencimiento: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
-        cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]]
+        cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]]
+      }),
+      paypal: this.fb.group({
+        correoPaypal: ['', [Validators.required, Validators.email]],
+        contrasenaPaypal: ['', [Validators.required, Validators.minLength(6)]]
       })
     });
-
-    // Cargar viajeros según cantidad
-    this.agregarViajeros();
   }
 
-  // Getter del FormArray de viajeros
-  get viajeros(): FormArray {
-    return this.formulario.get('viajeros') as FormArray;
-  }
-
-  // Getter del FormGroup de pago
+  // Getters
   get pagoGroup(): FormGroup {
     return this.formulario.get('pago') as FormGroup;
   }
 
-  // Añadir viajeros adultos y niños al FormArray
-  agregarViajeros(): void {
-    for (let i = 0; i < this.datosRecibidos.adultos; i++) {
-      this.viajeros.push(this.fb.group({
-        tipo: 'adulto',
-        nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]],
-        correo: ['', [Validators.required, Validators.email]],
-        telefono: ['', [Validators.required, Validators.pattern(/^\d+$/)]]
-      }));
-    }
-
-    for (let i = 0; i < this.datosRecibidos.ninos; i++) {
-      this.viajeros.push(this.fb.group({
-        tipo: 'niño',
-        nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]]
-      }));
-    }
+  get paypalGroup(): FormGroup {
+    return this.formulario.get('paypal') as FormGroup;
   }
 
-  // Función para contar viajeros por tipo (adulto o niño) hasta el índice actual
-  contarPorTipo(index: number, tipo: string): number {
-    let contador = 0;
-    for (let i = 0; i <= index; i++) {
-      if (this.viajeros.at(i).value.tipo === tipo) {
-        contador++;
-      }
-    }
-    return contador;
+  get encargadoGroup(): FormGroup {
+    return this.formulario.get('encargado') as FormGroup;
   }
 
-  // Verificar si un campo es inválido (para validación visual)
+  // Campo inválido para mostrar feedback
   campoInvalido(campoPath: string): boolean {
     const control = this.formulario.get(campoPath);
     return !!control && control.invalid && control.touched;
   }
 
-  // Generar una hora aleatoria entre 9:00 y 20:59
   generarHora(): string {
     const hora = Math.floor(Math.random() * 12) + 9;
     const minutos = Math.floor(Math.random() * 60);
     return `${hora}:${minutos.toString().padStart(2, '0')}`;
   }
 
-  // Enviar formulario si es válido
+  seleccionarMetodo(metodo: 'credito' | 'debito' | 'paypal') {
+    this.metodoSeleccionado = metodo;
+    this.formulario.get('metodo')?.setValue(metodo);
+    this.mostrarFormulario = true;
+
+    // Activar todos los grupos primero
+    this.pagoGroup.enable();
+    this.paypalGroup.enable();
+
+    // Deshabilitar los grupos no usados
+    if (metodo === 'paypal') {
+      this.pagoGroup.disable();
+    } else {
+      this.paypalGroup.disable();
+    }
+  }
+  soloNumeros(event: KeyboardEvent): void {
+    const tecla = event.key;
+    if (!/^\d$/.test(tecla) && tecla !== 'Backspace' && tecla !== 'Tab' && tecla !== 'ArrowLeft' && tecla !== 'ArrowRight') {
+      event.preventDefault();
+    }
+  }
+
+  soloNumerosYSlash(event: KeyboardEvent): void {
+    const tecla = event.key;
+    if (!/^\d$/.test(tecla) && tecla !== '/' && tecla !== 'Backspace' && tecla !== 'Tab' && tecla !== 'ArrowLeft' && tecla !== 'ArrowRight') {
+      event.preventDefault();
+    }
+  }
+
+
+
   reservar(): void {
     if (this.formulario.valid) {
+      const datosPago = this.metodoSeleccionado === 'paypal'
+        ? this.paypalGroup.value
+        : this.pagoGroup.value;
+
       this.resumen = {
         ubicacion: this.datosRecibidos.ciudad,
         experiencia: this.datosRecibidos.titulo,
@@ -113,8 +138,9 @@ export class PagoComponent implements OnInit {
       };
 
       console.log('✅ Reserva confirmada:', {
-        viajeros: this.formulario.value.viajeros,
-        pago: this.formulario.value.pago,
+        encargado: this.encargadoGroup.value,
+        metodo: this.metodoSeleccionado,
+        datosPago,
         resumen: this.resumen
       });
 
