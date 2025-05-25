@@ -9,6 +9,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FechasExperienciaModule } from './fechas-experiencia/fechas-experiencia.module';
 import { ReservaModule } from './reserva/reserva.module';
 import { AuthModule } from './auth/auth.module';
+import { CaracteristicaModule } from './caracteristica/caracteristica.module';
+import { ImagenModule } from './imagen/imagen.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -32,7 +34,9 @@ import { AuthModule } from './auth/auth.module';
     }),
     FechasExperienciaModule,
     ReservaModule,
-    AuthModule
+    AuthModule,
+    CaracteristicaModule,
+    ImagenModule
   ],
   controllers: [AppController],
   providers: [AppService],

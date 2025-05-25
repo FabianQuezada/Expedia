@@ -6,6 +6,7 @@ import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ProveedorService } from 'src/proveedor/proveedor.service';
 import { registerPDto } from './dto/registerP.dto';
+import { Rol } from '../common/enums/rol.enum';
 
 @Injectable()
 export class AuthService {
@@ -56,11 +57,11 @@ export class AuthService {
 
   async login({ correo, contraseña }: LoginDto) {
     let usuario: any = await this.usuarioService.findByEmailWithPassword(correo);
-    let rol = 'usuario';
+    let rol = Rol.USUARIO;
 
     if (!usuario) {
         usuario = await this.proveedorService.findByEmailWithPassword(correo);
-        rol = 'proveedor';
+        rol = Rol.PROVEEDOR;
     }
 
     if (!usuario) {
@@ -72,9 +73,10 @@ export class AuthService {
         throw new UnauthorizedException('La contraseña es incorrecta');
     }
 
-    const payload = { correo: usuario.correo, rol };
+    const payload = { correo: usuario.correo, rol,id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor };
     const token = await this.jwtService.signAsync(payload);
-    return { token, correo: usuario.correo, rol };
+    
+    return { token, correo: usuario.correo, rol, id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor };
     }
   
   async profile({correo, rol}: {correo: string, rol: string}) {
