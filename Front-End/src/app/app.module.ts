@@ -9,6 +9,9 @@ import { HomepageComponent } from './components/home/homepage/homepage.component
 import { SearchbarComponent } from './components/home/searchbar/searchbar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { NewServiceComponent } from './components/new-service/new-service.component';
+import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ServiceDetailUploadComponent } from './components/service-detail-upload/service-detail-upload.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     SearchbarComponent,
     NavbarComponent,
     UserProfileComponent,
+    NewServiceComponent,
+    ImageUploadComponent,
+    ServiceDetailUploadComponent,
   ],
   imports: [
     BrowserModule,
