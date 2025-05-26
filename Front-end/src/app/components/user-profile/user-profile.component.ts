@@ -10,7 +10,9 @@ import { ServiceProvider } from 'src/app/models/service-provider';
 export class UserProfileComponent implements OnInit {
   user!: User;
   servicios: ServiceProvider[] = [];
-  seccionSeleccionada: 'perfil' | 'servicios' = 'perfil';
+  seccionSeleccionada: 'perfil' | 'servicios' | 'detalleServicio' | 'notificaciones' | 'ayudaComentarios' | 'misReservas' = 'perfil';
+  servicioEditando: any = null;
+  servicioSeleccionado?: ServiceProvider;
 
   constructor(private providerService: ProviderService) {}
 
@@ -35,5 +37,10 @@ export class UserProfileComponent implements OnInit {
     this.seccionSeleccionada = 'servicios';
     this.servicios = this.providerService.getServices();
     console.log('Servicios:', this.servicios);
+  }
+
+  mostrarDetalle(servicio: ServiceProvider) {
+    this.servicioSeleccionado = servicio;
+    this.seccionSeleccionada = 'detalleServicio';
   }
 }

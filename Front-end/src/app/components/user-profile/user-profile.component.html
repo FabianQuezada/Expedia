@@ -12,13 +12,15 @@
         <div class="d-flex flex-column gap-3">
 
           <!-- PERFIL -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white" (click)="seccionSeleccionada = 'perfil'">
-            <i class="bi bi-person fs-4 me-3 mt-1"></i>
-            <div>
+          <button class="btn-opciones" 
+          [ngClass]="{ 'active': seccionSeleccionada === 'perfil' }"
+          (click)="seccionSeleccionada = 'perfil'">
+            <i class="bi bi-person fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Perfil</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Ingresa tus datos personales y documentos de viaje</div>
+              <div class="text-muted subtitulo" style="font-size: 0.65rem;">Ingresa tus datos personales y documentos de viaje</div>
             </div>
-          </div>
+          </button>
 
           <!-- MIS SERVICIOS -->
           <button
@@ -34,41 +36,43 @@
             </div>
           </button>
 
-
           <!-- OTROS -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
-            <i class="bi bi-bell fs-4 me-3 mt-1"></i>
-            <div>
+          <button class="btn-opciones"
+            [ngClass]="{ 'active': seccionSeleccionada === 'notificaciones' }">
+            <i class="bi bi-bell fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Notificaciones</div>
               <div class="text-muted" style="font-size: 0.65rem;">Elige las notificaciones que quieres recibir</div>
             </div>
-          </div>
+          </button>
 
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
-            <i class="bi bi-question-circle fs-4 me-3 mt-1"></i>
-            <div>
+          <button class="btn-opciones"
+            [ngClass]="{ 'active': seccionSeleccionada === 'ayudaComentarios' }">
+            <i class="bi bi-question-circle fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Ayuda y comentarios</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Obtén asistencia</div>
+              <div class="text-muted subtitulo" style="font-size: 0.65rem;">Obtén asistencia</div>
             </div>
-          </div>
+          </button>
 
           <!-- CLIENTE -->
-          <div *ngIf="user?.tipo === 'Usuario'" class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
-            <i class="bi bi-journal-text fs-4 me-3 mt-1"></i>
-            <div>
+          <button *ngIf="user?.tipo === 'Usuario'" class="btn-opciones"
+            [ngClass]="{ 'active': seccionSeleccionada === 'misReservas' }">
+            <i class="bi bi-journal-text fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Mis Reservas</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Edita o cancela tus reservas</div>
+              <div class="text-muted subtitulo" style="font-size: 0.65rem;">Edita o cancela tus reservas</div>
             </div>
-          </div>
+          </button>
 
           <!-- CERRAR SESIÓN -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
-            <i class="bi bi-box-arrow-right fs-4 me-3 mt-1"></i>
-            <div>
+          <button class="btn-opciones">
+            <i class="bi bi-box-arrow-right fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Cerrar Sesión</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Salir de tu cuenta de forma segura</div>
+              <div class="text-muted subtitulo" style="font-size: 0.65rem;">Salir de tu cuenta de forma segura</div>
             </div>
-          </div>
+          </button>
 
         </div>
       </div>
@@ -77,7 +81,6 @@
     <!-- PANEL DERECHO -->
     <div class="col-md-9">
       <div class="right-panel card p-4">
-
         <!-- PERFIL -->
         <ng-container *ngIf="seccionSeleccionada === 'perfil'">
           <h4 class="fw-bold">{{ user?.nombre }} {{ user?.apellido }}</h4>
@@ -165,7 +168,7 @@
                 </div>
                 <div class="precio-editar-container">
                   <p class="mb-0 precio">CLP {{ servicio.precio.toLocaleString('es-CL') }}</p>
-                  <button class="btn-editar">Editar</button>
+                  <button class="btn-editar" (click)="mostrarDetalle(servicio)">Ver</button>
                 </div>
               </div>
             </div>
@@ -176,6 +179,13 @@
           </ng-template>
         </ng-container>
 
+        <ng-container *ngIf="seccionSeleccionada === 'detalleServicio' && servicioSeleccionado">
+          <h4 class="fw-bold mb-3">Mis Servicios</h4>
+          <div class="fixed-height-scroll">
+            <app-view-service [servicio]="servicioSeleccionado"></app-view-service>
+          </div>
+        </ng-container>
+        
       </div>
     </div>
   </div>

@@ -1,0 +1,47 @@
+<div class="scroll-fade-container">
+  <div class="scroll-content" #scrollBox (scroll)="onScroll()">
+    <!-- CONTENIDO que se desplaza -->
+    <img [src]="servicio.imagen" alt="{{ servicio.nombre }}" class="service-image mb-3 rounded" />
+
+    <h2 class="fw-bold">{{ servicio.nombre }}</h2>
+    <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
+    <div class="map">
+      <strong>Ubicación:</strong>
+      <iframe
+        width="100%"
+        height="200"
+        style="border:0; border-radius: 10px; margin-top: 10px"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        [src]="sanitizarMapa(servicio.ubicacion)">
+      </iframe>
+    </div>
+    <p><strong>Categoría:</strong> {{ servicio.categoria }}</p>
+    <p><strong>Precio:</strong> CLP {{ servicio.precio.toLocaleString('es-CL') }}</p>
+
+    <h4 class="mt-4">Características</h4>
+    <ul style="list-style-type: none; padding-left: 0;">
+      <li *ngFor="let caracteristica of servicio.caracteristicas; let i = index">
+        <i
+          class="bi me-2"
+          [ngClass]="
+            i === 3
+              ? 'bi-clock-history'
+              : iconosCaracteristicas[caracteristica] || 'bi-question-circle'
+          "
+        ></i>
+        {{ caracteristica }}
+      </li>
+    </ul>
+
+    <h4 class="mt-4">Datos Generales</h4>
+    <ul>
+      <li *ngFor="let dato of servicio.datosGenerales">{{ dato }}</li>
+    </ul>
+  </div>
+
+  <!-- FADES para el efecto de borde superior/inferior -->
+  <div class="fade fade-top" [class.visible]="isTopVisible"></div>
+  <div class="fade fade-bottom" [class.visible]="isBottomVisible"></div>
+</div>
