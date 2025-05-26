@@ -12,6 +12,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { NewServiceComponent } from './components/new-service/new-service.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { ServiceDetailUploadComponent } from './components/service-detail-upload/service-detail-upload.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,8 @@ import { ServiceDetailUploadComponent } from './components/service-detail-upload
     ImageUploadComponent,
     ServiceDetailUploadComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, GoogleMapsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
