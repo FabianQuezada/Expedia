@@ -13,6 +13,7 @@ import { NewServiceComponent } from './components/new-service/new-service.compon
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { ServiceDetailUploadComponent } from './components/service-detail-upload/service-detail-upload.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     ImageUploadComponent,
     ServiceDetailUploadComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, GoogleMapsModule],
+  imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

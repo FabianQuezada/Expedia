@@ -124,3 +124,13 @@
 .img-upload-btn:hover {
   filter: brightness(1.05);
 }
+
+.auto-expand {
+  overflow: hidden;
+  resize: none; /* evita que el usuario lo estire manualmente */
+
+  /* Estilo input-like */
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+}
