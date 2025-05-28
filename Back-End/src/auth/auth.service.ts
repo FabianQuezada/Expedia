@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ProveedorService } from 'src/proveedor/proveedor.service';
-import { Rol } from './enums/rol.enum';
+import { Rol } from '../common/enums/rol.enum';
 
 @Injectable()
 export class AuthService {

@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { FechasExperienciaService } from './fechas-experiencia.service';
 import { CreateFechasExperienciaDto } from './dto/create-fechas-experiencia.dto';
 import { UpdateFechasExperienciaDto } from './dto/update-fechas-experiencia.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
 
 @Controller('fechas-experiencia')
 export class FechasExperienciaController {
   constructor(private readonly fechasExperienciaService: FechasExperienciaService) {}
 
-  @Post()
-  create(@Body() createFechasExperienciaDto: CreateFechasExperienciaDto) {
-    return this.fechasExperienciaService.create(createFechasExperienciaDto);
+  @Post('agregar-fechas/:idExperiencia')
+  @Auth(Rol.PROVEEDOR)
+  async agregarFechas(
+    @Param('idExperiencia', ParseIntPipe) idExperiencia: number,
+    @Body() createFechasExperienciaDto: CreateFechasExperienciaDto[],
+  ) {
+    
+    return this.fechasExperienciaService.agregarFechas(idExperiencia, createFechasExperienciaDto);
   }
 
   @Get()

@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { registerDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Request } from 'express';
-import { Rol } from './enums/rol.enum';
+import { Rol } from '../common/enums/rol.enum';
 import { Auth } from './decorators/auth.decorator';
 
 interface RequestWithUser extends Request {
