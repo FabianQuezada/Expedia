@@ -11,6 +11,7 @@ import { ReservaModule } from './reserva/reserva.module';
 import { AuthModule } from './auth/auth.module';
 import { CaracteristicaModule } from './caracteristica/caracteristica.module';
 import { ImagenModule } from './imagen/imagen.module';
+import { PagoModule } from './pago/pago.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -36,7 +37,8 @@ import { ImagenModule } from './imagen/imagen.module';
     ReservaModule,
     AuthModule,
     CaracteristicaModule,
-    ImagenModule
+    ImagenModule,
+    PagoModule
   ],
   controllers: [AppController],
   providers: [AppService],

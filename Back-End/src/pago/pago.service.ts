@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePagoDto } from './dto/create-pago.dto';
 import { UpdatePagoDto } from './dto/update-pago.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Pago } from './entities/pago.entity';
+import { Repository } from 'typeorm';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
+import { Reserva } from 'src/reserva/entities/reserva.entity';
 
 @Injectable()
 export class PagoService {
-  create(createPagoDto: CreatePagoDto) {
-    return 'This action adds a new pago';
+
+  constructor(
+    @InjectRepository(Pago)
+    private readonly pagoRepository: Repository<Pago>,
+    @InjectRepository(Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
+    @InjectRepository(Reserva)
+    private readonly reservaRepository: Repository<Reserva>,
+  ){}
+
+  async create(createPagoDto: CreatePagoDto) {
+    const { metodo, monto, idReserva, idUsuario } = createPagoDto;
+
+    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario } });
+    if (!usuario) throw new NotFoundException('Usuario no encontrado');
+
+    const reserva = await this.reservaRepository.findOne({ where: { idReserva } });
+    if (!reserva) throw new NotFoundException('Reserva no encontrada');
+
+    const pago = this.pagoRepository.create({ metodo, monto, idUsuario, idReserva });
+    return await this.pagoRepository.save(pago);
   }
 
-  findAll() {
-    return `This action returns all pago`;
+  async findAll() {
+    return await this.pagoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pago`;
+  async findOne(idPago: number) {
+    return await this.pagoRepository.findOneBy({idPago});
   }
 
-  update(id: number, updatePagoDto: UpdatePagoDto) {
-    return `This action updates a #${id} pago`;
+  async update(idPago: number, updatePagoDto: UpdatePagoDto) {
+    return await this.pagoRepository.update(idPago, updatePagoDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pago`;
+  async remove(idPago: number) {
+    return this.pagoRepository.softDelete(idPago);
   }
 }
