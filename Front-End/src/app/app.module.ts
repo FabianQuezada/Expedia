@@ -10,6 +10,8 @@ import { ExpImagesComponent } from './components/exp-images/exp-images.component
 import { ExpDescComponent } from './components/exp-desc/exp-desc.component';
 import { ExpDispComponent } from './components/exp-disp/exp-disp.component';
 import { ExpOtherComponent } from './components/exp-other/exp-other.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ExperienceComponent } from './components/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ExpOtherComponent } from './components/exp-other/exp-other.component';
     ExpImagesComponent,
     ExpDescComponent,
     ExpDispComponent,
-    ExpOtherComponent
+    ExpOtherComponent,
+    ReviewsComponent,
+    ExperienceComponent
   ],
   imports: [
     BrowserModule,

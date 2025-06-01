@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+.html, body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400; /* Regular como valor base */
+}
+
+.light {
+  font-weight: 300;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
 .btn-expedia-primary {
   background-color: #f7ba2a;
   color: black;
@@ -21,3 +38,35 @@
   background-color: #191e3c;
   color: white;
 }
+
+.order-options {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  border-bottom: 2px solid #ccc; /* línea gris base extendida */
+  width: 100%;
+  max-width: none;
+}
+
+.order-option {
+  color: #666;
+  padding-bottom: 6px;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.order-option.active {
+  color: #0d6efd;
+}
+
+.order-line-active {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #0d6efd;
+  border-radius: 1px;
+  transition: transform 0.3s ease, width 0.3s ease;
+  will-change: transform, width;
+}
+
