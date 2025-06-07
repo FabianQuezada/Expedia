@@ -21,3 +21,5 @@ describe('ServiceDetailUploadComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+

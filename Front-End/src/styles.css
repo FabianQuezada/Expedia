@@ -134,3 +134,22 @@
   line-height: 1.5;
   padding: 0.5rem 0.75rem;
 }
+
+input.form-control {
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.input-group-text {
+  background-color: white;
+  border: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

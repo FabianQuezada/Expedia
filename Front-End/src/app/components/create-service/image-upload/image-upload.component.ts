@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image-upload',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent {
+@Output() imagenesCambiadas = new EventEmitter<(string | null)[]>();
 imagePreviews: (string | null)[] = [null, null, null, null];
 
 onImageSelected(event: Event, index: number): void {

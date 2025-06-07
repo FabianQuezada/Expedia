@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="row gx-4 gy-4 justify-content-center">
+    <!-- COL IZQUIERDA -->
+    <div class="col-12 col-xl-7 col-md-6">
+      <p class="fs-3 fw-semibold">Título de la experiencia</p>
+      <textarea
+        class="form-control form-control-lg auto-expand fw-semibold fs-3 mb-3"
+        rows="1"
+        [(ngModel)]="nuevaExperiencia.titulo"
+        (input)="autoResize($event)"
+      ></textarea>
+
+      <p class="fs-3 fw-semibold">Descripción</p>
+      <textarea
+        class="form-control auto-expand mb-3"
+        rows="7"
+        [(ngModel)]="nuevaExperiencia.descripcion"
+        (input)="autoResize($event)"
+      ></textarea>
+
+      <p class="fs-3 fw-semibold">Caracteristicas</p>
+      <div class="row fw-light">
+        <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkCancelacion"
+            />
+            <label class="form-check-label" for="checkCancelacion">
+              Cancelación gratuita disponible
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkVoucher"
+            />
+            <label class="form-check-label" for="checkVoucher">
+              Voucher móvil
+            </label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkConfirmacion"
+            />
+            <label class="form-check-label" for="checkConfirmacion">
+              Confirmación instantánea
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkTraslado"
+            />
+            <label class="form-check-label" for="checkTraslado">
+              Traslado de hoteles seleccionados
+            </label>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkIdiomas"
+            />
+            <label class="form-check-label" for="checkIdiomas">
+              Varios idiomas
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL DERECHA -->
+    <div class="col-12 col-xl-5 col-md-5">
+      <p class="fs-3 fw-semibold">Ubicación</p>
+      <input
+        id="autocomplete"
+        class="form-control mb-3"
+        type="text"
+        placeholder="Busca una dirección..."
+      />
+
+      <google-map
+        [center]="center"
+        [zoom]="zoom"
+        height="265px"
+        width="100%"
+        (mapClick)="onMapClick($event)"
+      >
+        <map-marker
+          *ngIf="markerPosition"
+          [position]="markerPosition"
+        ></map-marker>
+      </google-map>
+
+      <div class="d-flex align-items-center gap-3 mt-4">
+        <p class="fs-3 fw-semibold mt-3">CLP</p>
+        <input
+          type="number"
+          class="form-control w-50"
+          [(ngModel)]="nuevaExperiencia.precio"
+        />
+      </div>
+    </div>
+  </div>
+</div>
