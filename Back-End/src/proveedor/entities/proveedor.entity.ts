@@ -1,13 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Descuento } from "../../descuento/entities/descuento.entity";
 import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 
@@ -37,6 +28,6 @@ export class Proveedor {
   @OneToMany(() => Descuento, (descuento) => descuento.idProveedor2)
   descuentos: Descuento[];
 
-  @OneToMany(() => Experiencia, (experiencia) => experiencia.idProveedor2)
+  @OneToMany(() => Experiencia, (experiencia) => experiencia.proveedor)
   experiencias: Experiencia[];
 }

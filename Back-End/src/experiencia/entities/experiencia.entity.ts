@@ -29,8 +29,8 @@ export class Experiencia {
   @Column("int", { name: "Cupos_Disponibles" })
   cuposDisponibles: number;
 
-  @Column("varchar", { name: "Datos_Generales" })
-  datosGenerales: string;
+  @Column("simple-array", { name: "Datos_Generales" })
+  datosGenerales: string[];
 
   @Column("int", { name: "ID_Proveedor" })
   idProveedor: number;
@@ -40,7 +40,7 @@ export class Experiencia {
     onUpdate: "RESTRICT",
   })
   @JoinColumn([{ name: "ID_Proveedor", referencedColumnName: "idProveedor" }])
-  idProveedor2: Proveedor;
+  proveedor: Proveedor;
 
   @OneToMany(
     () => FechasExperiencia,

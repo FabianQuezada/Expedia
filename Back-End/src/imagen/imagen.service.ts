@@ -1,11 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateImagenDto } from './dto/create-imagen.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Imagen } from './entities/imagen.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ImagenService {
-  create(createImagenDto: CreateImagenDto) {
-    return 'This action adds a new imagen';
+    constructor(
+    @InjectRepository(Imagen)
+    private readonly imagenRepository: Repository<Imagen>,
+  ) {}
+
+  async agregarImagenes(idExperiencia: number, imagenes: { url: string }[]) {
+    if (!imagenes?.length) throw new BadRequestException('Debes enviar al menos una imagen');
+
+    const nuevasImagenes = imagenes.map(img =>
+      this.imagenRepository.create({
+        url: img.url,
+        idExperiencia,
+      }),
+    );
+    await this.imagenRepository.save(nuevasImagenes);
   }
 
   findAll() {
