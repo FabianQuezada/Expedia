@@ -33,17 +33,23 @@
       <div class="row">
         <!-- Filters (Large screens only) -->
         <div class="d-none d-lg-block col-lg-4 col-xxl-3 mb-4 mb-lg-0">
-          <app-filters-panel></app-filters-panel>
+          <app-filters-panel
+            (filtrosCambiados)="aplicarFiltros($event)"
+          ></app-filters-panel>
         </div>
 
         <!-- Filters (Mobile only, toggled) -->
         <div class="d-lg-none col-12 mb-4" *ngIf="showMobileFilters">
-          <app-filters-panel></app-filters-panel>
+          <app-filters-panel
+            (filtrosCambiados)="aplicarFiltros($event)"
+          ></app-filters-panel>
         </div>
 
         <!-- Results -->
         <div class="col-12 col-lg-8 col-xxl-9">
-          <app-results-list></app-results-list>
+          <app-results-list
+            [experiencias]="experienciasFiltradas"
+          ></app-results-list>
         </div>
       </div>
     </div>
