@@ -7,7 +7,11 @@ import { User } from '../../services/user/user.service';
 })
 export class UserProfileComponent implements OnInit {
   user!: User;
+   seccionSeleccionada: string = 'perfil';
 
+    cerrarSesion() {
+    // lógica aquí
+  }
   ngOnInit(): void {
     // Datos de prueba
     this.user = {
