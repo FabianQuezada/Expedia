@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Experience } from '../models/experience.model';
+import { Experience } from '../../models/experience.model';
 
 @Injectable({ providedIn: 'root' })
 export class ExperienceService {

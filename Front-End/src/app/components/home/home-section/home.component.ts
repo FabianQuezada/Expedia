@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { CardVueloComponent } from 'src/app/components/card-vuelo/card-vuelo.component';
-import { CardHospedajeComponent } from 'src/app/components/card-hospedaje/card-hospedaje.component';
-import { CardActividadComponent } from 'src/app/components/card-actividad/card-actividad.component';
 
 @Component({
   selector: 'app-home',

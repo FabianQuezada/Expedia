@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Experience } from 'src/app/models/experience.model';
-import { ExperienceService } from 'src/app/services/experience.service';
+import { ExperienceService } from 'src/app/services/experience/experience.service';
 
 @Component({
   selector: 'app-experience-history',
