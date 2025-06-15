@@ -20,6 +20,10 @@
   background-color: #191e3c;
   color: white;
 }
+
+.card-md {
+  max-width: 18rem;
+}
 .poppins-medium {
   font-family: "Poppins", sans-serif;
   font-weight: 500;
