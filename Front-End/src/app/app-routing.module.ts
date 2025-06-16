@@ -5,7 +5,7 @@ import { SearchResultsComponent } from './components/filtro-busqueda/search-resu
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
-  {path:'results', component: SearchResultsComponent}
+  {path: 'resultados/:destino', component: SearchResultsComponent},
 ];
 
 @NgModule({
