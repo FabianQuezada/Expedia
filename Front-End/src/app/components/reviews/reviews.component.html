@@ -1,7 +1,6 @@
 <div class="container py-3 mt-5">
 
   <div class="d-flex mb-4 align-items-start">
-    
     <div style="flex: 0 0 32%;">
       <h2 class="fs-1">Reseñas</h2>
       <div class="d-flex align-items-center">
@@ -10,7 +9,6 @@
       </div>
     </div>
 
-    <!-- Derecha: resto del espacio -->
     <div style="flex: 1;">
       <label class="fw-semibold d-block mb-2">Ordenar Reseñas por:</label>
       <div class="d-flex flex-column align-items-start">
@@ -44,7 +42,6 @@
         </div>
     </div>
 
-      <!-- Lista de reseñas dentro de la columna derecha -->
     <div *ngFor="let review of reviews" class="mb-4">
     <div class="mb-1">
             <span class="fs-5">{{ review.score }}/10</span>
