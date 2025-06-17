@@ -142,7 +142,9 @@
 
       <!-- Opción Actividades -->
       <div *ngIf="selectedTab === 'actividades'" class="my-4">
-        <app-search-bar-activity></app-search-bar-activity>
+        <app-search-bar-activity
+          (destinoSeleccionado)="buscarDestino($event)"
+        ></app-search-bar-activity>
       </div>
     </div>
   </div>

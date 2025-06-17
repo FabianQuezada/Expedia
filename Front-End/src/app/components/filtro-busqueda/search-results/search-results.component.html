@@ -1,0 +1,60 @@
+<!-- Top Bar -->
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <!-- Main Content Area -->
+    <div class="col-12 col-md-10 col-lg-8 px-lg-5 px-sm-3">
+      <!-- Search Bar -->
+      <div class="py-4">
+        <app-search-bar-activity
+          [destinoBusqueda]="destino"
+          (destinoSeleccionado)="onBuscar($event)"
+        ></app-search-bar-activity>
+      </div>
+
+      <!-- Destination Info -->
+      <div class="row mb-3">
+        <div class="col-12 col-lg-3"></div>
+        <div class="col-12 col-lg-9">
+          <p class="ms-5 ms-xxl-2 fs-4 fw-semibold">{{ destino }}</p>
+          <p class="ms-5 ms-xxl-2">Mostrando x actividades</p>
+        </div>
+      </div>
+
+      <!-- Boton Filtros (Visible solo en mobil o viewport pequeño) -->
+      <div class="d-flex d-lg-none mb-3 ms-5">
+        <button
+          class="btn btn-outline-secondary"
+          (click)="toggleMobileFilters()"
+        >
+          <i class="bi bi-funnel"></i> Filtros
+        </button>
+      </div>
+
+      <!-- Main Layout -->
+      <div class="row">
+        <!-- Filters (Large screens only) -->
+        <div class="d-none d-lg-block col-lg-4 col-xxl-3 mb-4 mb-lg-0">
+          <app-filters-panel
+            (filtrosCambiados)="aplicarFiltros($event)"
+          ></app-filters-panel>
+        </div>
+
+        <!-- Filters (Mobile only, toggled) -->
+        <div class="d-lg-none col-12 mb-4" *ngIf="showMobileFilters">
+          <app-filters-panel
+            (filtrosCambiados)="aplicarFiltros($event)"
+          ></app-filters-panel>
+        </div>
+
+        <!-- Results -->
+        <div class="col-12 col-lg-8 col-xxl-9">
+          <app-results-list
+            [experiencias]="experienciasFiltradas"
+          ></app-results-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
