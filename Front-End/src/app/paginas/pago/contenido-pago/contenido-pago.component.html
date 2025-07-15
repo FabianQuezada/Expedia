@@ -64,36 +64,8 @@
         <li class="list-group-item">Experiencia: {{ datosRecibidos.titulo }}</li>
         <li class="list-group-item">Fecha: {{ datosRecibidos.fecha }}</li>
         <li class="list-group-item">Hora: {{ datosRecibidos.hora }}</li>
-
-        <!-- TOTAL EXPERIENCIA -->
         <li class="list-group-item fw-bold">
           Total experiencia: CLP {{ datosRecibidos.total }}
-        </li>
-
-        <!-- VUELO IDA -->
-        <li class="list-group-item">
-          <strong><i class="bi bi-airplane-engines me-2"></i>Vuelo de ida:</strong><br />
-          10/07/2025 — Arica a Santiago<br />
-          <span class="text-muted">Monto: CLP 45.000</span>
-        </li>
-
-        <!-- VUELO VUELTA -->
-        <li class="list-group-item">
-          <strong><i class="bi bi-airplane-engines me-2"></i>Vuelo de vuelta:</strong><br />
-          15/07/2025 — Santiago a Arica<br />
-          <span class="text-muted">Monto: CLP 40.000</span>
-        </li>
-
-        <!-- HOTEL -->
-        <li class="list-group-item">
-          <strong><i class="bi bi-building me-2"></i>Hotel:</strong><br />
-          2 noches en Hotel Playa del Mar<br />
-          <span class="text-muted">Monto: CLP 85.000</span>
-        </li>
-
-        <!-- TOTAL GENERAL -->
-        <li class="list-group-item bg-light fw-bold text-end">
-          Total general: CLP {{ datosRecibidos.total + 45000 + 40000 + 85000 }}
         </li>
       </ul>
     </section>
