@@ -11,6 +11,8 @@ import { ReservaModule } from './reserva/reserva.module';
 import { AuthModule } from './auth/auth.module';
 import { CaracteristicaModule } from './caracteristica/caracteristica.module';
 import { ImagenModule } from './imagen/imagen.module';
+import { CancelacionModule } from './cancelacion/cancelacion.module';
+import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -36,7 +38,9 @@ import { ImagenModule } from './imagen/imagen.module';
     ReservaModule,
     AuthModule,
     CaracteristicaModule,
-    ImagenModule
+    ImagenModule,
+    CancelacionModule,
+    ReprogramacionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

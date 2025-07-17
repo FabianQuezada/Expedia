@@ -7,9 +7,6 @@ export class Reprogramacion {
   @PrimaryGeneratedColumn({ name: "Id_Reprogramacion" })
   idReprogramacion: number;
 
-  @Column("text", { name: "Motivo" })
-  motivo: string;
-
   @Column("date", { name: "Nueva_Fecha" })
   nuevaFecha: Date;
 

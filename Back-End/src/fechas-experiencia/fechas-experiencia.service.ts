@@ -13,7 +13,6 @@ export class FechasExperienciaService {
   ) {}
 
   async agregarFechas(idExperiencia: number, createFechasExperienciaDto: CreateFechasExperienciaDto[]) {
-    if (!createFechasExperienciaDto?.length) throw new BadRequestException('Debes enviar al menos una fecha');
 
     const nuevasFechas = createFechasExperienciaDto.map(f =>
       this.fechasRepository.create({
