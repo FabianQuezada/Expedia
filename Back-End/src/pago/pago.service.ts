@@ -6,6 +6,7 @@ import { Pago } from './entities/pago.entity';
 import { Repository } from 'typeorm';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
 import { Reserva } from 'src/reserva/entities/reserva.entity';
+import { MetodoPago } from 'src/common/enums/metodoPago.enum';
 
 @Injectable()
 export class PagoService {
