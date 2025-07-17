@@ -1,5 +1,7 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Reserva } from "../../reserva/entities/reserva.entity";
+import { EstadoPago } from "src/common/enums/estadoPago.enum";
+import { MetodoPago } from "src/common/enums/metodoPago.enum";
 
 @Index("Id_Reserva", ["idReserva", "idUsuario"], {})
 @Entity("pago", { schema: "nest_bd" })
@@ -7,17 +9,17 @@ export class Pago {
   @PrimaryGeneratedColumn({ name: "Id_Pago" })
   idPago: number;
 
-  @Column("varchar", { name: "Metodo", length: 50 })
+  @Column({ type: 'enum', enum: MetodoPago, name: "Metodo"})
   metodo: string;
 
-  @Column("varchar", { name: "Estado_Pago", length: 20 })
-  estadoPago: string;
+  @Column({ type: 'enum', name: "Estado_Pago", enum: EstadoPago, default: EstadoPago.PENDIENTE })
+  estadoPago: EstadoPago;
 
-  @Column("date", { name: "Fecha_Pago" })
+  @CreateDateColumn({ name: "Fecha_Pago", type: "timestamp", precision: 0 })
   fechaPago: Date;
 
   @Column("decimal", { name: "Monto", precision: 10, scale: 2 })
-  monto: string;
+  monto: number;
 
   @Column("int", { name: "Id_Reserva" })
   idReserva: number;
@@ -34,4 +36,7 @@ export class Pago {
     { name: "ID_Usuario", referencedColumnName: "idUsuario" },
   ])
   reserva: Reserva;
+
+  @DeleteDateColumn()
+    deleteAt: Date;
 }

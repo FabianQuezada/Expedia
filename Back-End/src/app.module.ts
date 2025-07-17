@@ -13,6 +13,7 @@ import { CaracteristicaModule } from './caracteristica/caracteristica.module';
 import { ImagenModule } from './imagen/imagen.module';
 import { CancelacionModule } from './cancelacion/cancelacion.module';
 import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
+import { PagoModule } from './pago/pago.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -41,6 +42,7 @@ import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
     ImagenModule,
     CancelacionModule,
     ReprogramacionModule,
+    PagoModule
   ],
   controllers: [AppController],
   providers: [AppService],

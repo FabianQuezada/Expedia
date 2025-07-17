@@ -22,9 +22,15 @@ export class UsuarioService {
     return this.usuarioRepository.findOneBy({ correo })
   }
 
+  findByEmailWithPassword(correo: string) {
+    return this.usuarioRepository.findOne({
+      where: { correo },
+      select: ['idUsuario', 'nombre', 'correo', 'contraseña']
+    })
+  }
 
   findAll() {
-    return `This action returns all usuario`;
+    return this.usuarioRepository.find();
   }
 
   findOne(id: number) {

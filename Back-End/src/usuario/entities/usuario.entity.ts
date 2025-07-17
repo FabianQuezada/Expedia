@@ -27,7 +27,7 @@ export class Usuario {
   @Column("varchar", { name: "Correo", length: 100 })
   correo: string;
 
-  @Column("varchar", { name: "Contraseña", length: 255 })
+  @Column("varchar", { name: "Contraseña", length: 255, select: false })
   contraseña: string;
 
   @CreateDateColumn({ name: "Fecha_Registro", type: "timestamp" })
