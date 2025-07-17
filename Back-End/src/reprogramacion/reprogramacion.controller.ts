@@ -2,14 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ReprogramacionService } from './reprogramacion.service';
 import { CreateReprogramacionDto } from './dto/create-reprogramacion.dto';
 import { UpdateReprogramacionDto } from './dto/update-reprogramacion.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
 
+@Auth(Rol.USUARIO)
 @Controller('reprogramacion')
 export class ReprogramacionController {
   constructor(private readonly reprogramacionService: ReprogramacionService) {}
 
-  @Post()
-  create(@Body() createReprogramacionDto: CreateReprogramacionDto) {
-    return this.reprogramacionService.create(createReprogramacionDto);
+  @Post(':idReserva')
+  create(@Param('idReserva') idReserva: number,
+    @Body() createReprogramacionDto: CreateReprogramacionDto) {
+    return this.reprogramacionService.reprogramarReserva(+idReserva, createReprogramacionDto);
   }
 
   @Get()
