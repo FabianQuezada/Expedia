@@ -1,0 +1,26 @@
+<div
+  class="row g-2 d-flex justify-content-center align-items-center poppins-light"
+>
+  <div class="form-floating col-lg-6 col-11">
+    <input
+      type="text"
+      class="form-control"
+      id="floatingLocation"
+      placeholder="Destino"
+      [value]="destinoBusqueda"
+    />
+    <label for="floatingLocation">Destino</label>
+  </div>
+  <div class="form-floating col-lg-4 col-11">
+    <input type="date" class="form-control" id="fecha" placeholder="Fecha" />
+    <label for="fecha">Fecha</label>
+  </div>
+  <div class="col-lg-auto col-md-4 col-11 d-flex align-items-center">
+    <button
+      class="btn btn-primary btn-lg w-100 rounded-5 fs-6 fw-bold"
+      (click)="onBuscarClick()"
+    >
+      Buscar
+    </button>
+  </div>
+</div>
