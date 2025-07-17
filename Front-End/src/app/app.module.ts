@@ -15,6 +15,10 @@ import { ResultsListComponent } from './components/filtro-busqueda/results-list/
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
+import { ExpImagesComponent } from './components/exp-images/exp-images.component';
+import { ExpDescComponent } from './components/exp-desc/exp-desc.component';
+import { ExpDispComponent } from './components/exp-disp/exp-disp.component';
+import { ExpOtherComponent } from './components/exp-other/exp-other.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { SearchResultsComponent } from './components/filtro-busqueda/search-resu
     SearchBarActivityComponent,
     ResultsListComponent,
     FiltersPanelComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    ExpImagesComponent,
+    ExpDescComponent,
+    ExpDispComponent,
+    ExpOtherComponent
   ],
   imports: [
     BrowserModule,
