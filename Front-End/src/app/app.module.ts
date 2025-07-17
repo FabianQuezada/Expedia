@@ -5,14 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-<<<<<<< HEAD
-import { ExpImagesComponent } from './components/visualizar-experiencia/exp-images/exp-images.component';
-import { ExpDescComponent } from './components/visualizar-experiencia/exp-desc/exp-desc.component';
-import { ExpDispComponent } from './components/visualizar-experiencia/exp-disp/exp-disp.component';
-import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other/exp-other.component';
-import { ReviewsComponent } from './components/reviews/reviews.component';
-import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
-=======
 import { HomeComponent } from './components/home/home.component';
 import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component';
 import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
@@ -22,11 +14,12 @@ import { ResultsListComponent } from './components/filtro-busqueda/results-list/
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
 import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
-import { ExpImagesComponent } from './components/exp-images/exp-images.component';
-import { ExpDescComponent } from './components/exp-desc/exp-desc.component';
-import { ExpDispComponent } from './components/exp-disp/exp-disp.component';
-import { ExpOtherComponent } from './components/exp-other/exp-other.component';
->>>>>>> 15c265cc7c22ed79162f55ad3a0584d767b58ace
+import { ExpImagesComponent } from './components/visualizar-experiencia/exp-images/exp-images.component';
+import { ExpDescComponent } from './components/visualizar-experiencia/exp-desc/exp-desc.component';
+import { ExpDispComponent } from './components/visualizar-experiencia/exp-disp/exp-disp.component';
+import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other/exp-other.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +27,6 @@ import { ExpOtherComponent } from './components/exp-other/exp-other.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    AppComponent,
     HomeComponent,
     CardVueloComponent,
     CardHospedajeComponent,
@@ -55,14 +47,9 @@ import { ExpOtherComponent } from './components/exp-other/exp-other.component';
     AppRoutingModule,
     FormsModule
   ],
-<<<<<<< HEAD
   providers: [
     { provide: 'LOCALE_ID', useValue: 'es' } 
   ],
-  bootstrap: [AppComponent]
-=======
-  providers: [],
   bootstrap: [AppComponent],
->>>>>>> 15c265cc7c22ed79162f55ad3a0584d767b58ace
 })
 export class AppModule { }
