@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Experiencia } from 'src/app/models/experiencia';
 
 @Component({
   selector: 'app-exp-images',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./exp-images.component.css']
 })
 export class ExpImagesComponent {
+  @Input() experiencia: Experiencia | undefined;
 
 }

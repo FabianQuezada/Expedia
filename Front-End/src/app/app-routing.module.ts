@@ -8,7 +8,7 @@ import { ExperienceComponent } from './components/visualizar-experiencia/experie
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path: 'resultados/:destino', component: SearchResultsComponent},
-  { path: 'experiencia', component: ExperienceComponent },
+  { path: 'experiencia/:id', component: ExperienceComponent },
   { path: 'resenas', component: ReviewsComponent },
 ];
 

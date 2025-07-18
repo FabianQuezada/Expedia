@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Experiencia } from 'src/app/models/experiencia';
 
 @Component({
   selector: 'app-exp-desc',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./exp-desc.component.css']
 })
 export class ExpDescComponent {
-
+  @Input() experiencia: Experiencia | undefined;
 }

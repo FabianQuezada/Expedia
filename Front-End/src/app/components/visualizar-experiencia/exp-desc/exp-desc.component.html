@@ -6,15 +6,7 @@
       <div class="mb-4">
         <h2 class="fw-bold fs-2">Datos generales</h2>
         <ul class="fs-4 ps-3">
-          <!-- fs-4 ~ 24px, ps-3 = padding-start -->
-          <li>
-            Haz una parada en el valle de Curacaví para disfrutar de una
-            degustación gratuita de vino y aceite de oliva
-          </li>
-          <li>
-            Contempla las coloridas casas de la ciudad costera de Valparaíso
-          </li>
-          <li>Admira los parques y jardines de la popular Viña del Mar</li>
+          <li *ngFor="let dato of experiencia?.datosGenerales">{{ dato }}</li>
         </ul>
       </div>
 

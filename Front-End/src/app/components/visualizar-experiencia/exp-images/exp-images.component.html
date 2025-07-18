@@ -1,8 +1,9 @@
 <div class="container mt-4" style="max-width: 65%; padding: 0">
   <div class="mb-4">
     <h1 class="fs-2 fw-normal mb-3 lh-1">
-      <strong>Santiago:</strong><br />
-      <strong>Tour de Viña del Mar, Valparaíso, Casablanca y Reñaca</strong>
+      <strong>{{ experiencia?.ubicacion }}</strong
+      ><br />
+      <strong>{{ experiencia?.titulo }}</strong>
     </h1>
   </div>
 
@@ -10,7 +11,7 @@
     <!-- Imagen principal -->
     <div class="col-lg-7 col-12">
       <img
-        src="assets/images/vina.png"
+        src="{{ experiencia?.imagen }}"
         alt="Main image of Vina"
         class="img-fluid w-100 object-fit-cover"
         style="aspect-ratio: 4 / 3"
