@@ -1,30 +1,52 @@
-<app-navbar></app-navbar>
-
 <div class="container py-5">
-  <form *ngIf="formulario" [formGroup]="formulario" (ngSubmit)="reservar()" class="card shadow p-4">
-
+  <form
+    *ngIf="formulario"
+    [formGroup]="formulario"
+    (ngSubmit)="reservar()"
+    class="card shadow p-4"
+  >
     <!-- ENCARGADO DE LA RESERVA -->
     <section class="mb-5">
-      <h3 class="mb-4"><i class="bi bi-person-badge-fill me-2"></i>Encargado de la reserva</h3>
+      <h3 class="mb-4">
+        <i class="bi bi-person-badge-fill me-2"></i>Encargado de la reserva
+      </h3>
       <div [formGroup]="encargadoGroup" class="border rounded p-3">
         <div class="mb-3">
           <label>Nombre completo:</label>
-          <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Juan Pérez"
-            [class.is-invalid]="campoInvalido('encargado.nombre')" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Ej: Juan Pérez"
+            [class.is-invalid]="campoInvalido('encargado.nombre')"
+          />
           <div class="invalid-feedback">Solo letras. Obligatorio.</div>
         </div>
 
         <div class="mb-3">
           <label>Correo electrónico:</label>
-          <input type="email" class="form-control" formControlName="correo" placeholder="correo@ejemplo.com"
-            [class.is-invalid]="campoInvalido('encargado.correo')" />
+          <input
+            type="email"
+            class="form-control"
+            formControlName="correo"
+            placeholder="correo@ejemplo.com"
+            [class.is-invalid]="campoInvalido('encargado.correo')"
+          />
           <div class="invalid-feedback">Correo no válido.</div>
         </div>
 
         <div class="mb-3">
           <label>Teléfono:</label>
-          <input type="text" class="form-control" formControlName="telefono" placeholder="912345678" inputmode="numeric"
-            pattern="[0-9]*" (keydown)="soloNumeros($event)" [class.is-invalid]="campoInvalido('encargado.telefono')" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="telefono"
+            placeholder="912345678"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            (keydown)="soloNumeros($event)"
+            [class.is-invalid]="campoInvalido('encargado.telefono')"
+          />
         </div>
       </div>
 
@@ -58,10 +80,14 @@
 
     <!-- RESUMEN -->
     <section class="mb-4">
-      <h3 class="mb-3"><i class="bi bi-clipboard-check me-2"></i>Resumen de la experiencia</h3>
+      <h3 class="mb-3">
+        <i class="bi bi-clipboard-check me-2"></i>Resumen de la experiencia
+      </h3>
       <ul class="list-group">
         <li class="list-group-item">Ubicación: {{ datosRecibidos.ciudad }}</li>
-        <li class="list-group-item">Experiencia: {{ datosRecibidos.titulo }}</li>
+        <li class="list-group-item">
+          Experiencia: {{ datosRecibidos.titulo }}
+        </li>
         <li class="list-group-item">Fecha: {{ datosRecibidos.fecha }}</li>
         <li class="list-group-item">Hora: {{ datosRecibidos.hora }}</li>
         <li class="list-group-item fw-bold">
@@ -71,7 +97,11 @@
     </section>
 
     <!-- BOTÓN -->
-    <button type="submit" class="btn btn-primary w-100 fs-5" [disabled]="formulario.invalid">
+    <button
+      type="submit"
+      class="btn btn-primary w-100 fs-5"
+      [disabled]="formulario.invalid"
+    >
       <i class="bi bi-check-circle-fill me-2"></i>Reservar
     </button>
   </form>

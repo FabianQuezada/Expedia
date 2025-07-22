@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { PagoService } from '../../../servicios/pago.service'
+import { PagoService } from '../../../services/pago.service'
 
 @Component({
   selector: 'app-contenido-pago',

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-visualizar-experiencia',
-  templateUrl: './visualizar-experiencia.component.html',
-  styleUrls: ['./visualizar-experiencia.component.css']
+  selector: 'app-disponibilidad',
+  templateUrl: './disponibilidad.component.html',
+  styleUrls: ['./disponibilidad.component.css']
 })
-export class VisualizarExperienciaComponent implements OnInit {
+export class DisponibilidadComponent {
 
   experiencia: any;
   fechaSeleccionada: any = null;
