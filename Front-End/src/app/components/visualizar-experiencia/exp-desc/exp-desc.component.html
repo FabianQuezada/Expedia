@@ -1,0 +1,78 @@
+<div class="container mt-4" style="max-width: 65%; padding: 0">
+  <div class="row gx-5">
+    <!-- Columna izquierda -->
+    <div class="col-md-8">
+      <!-- Datos generales -->
+      <div class="mb-4">
+        <h2 class="fw-bold fs-2">Datos generales</h2>
+        <ul class="fs-4 ps-3">
+          <li *ngFor="let dato of experiencia?.datosGenerales">{{ dato }}</li>
+        </ul>
+      </div>
+
+      <!-- Características -->
+      <div>
+        <h2 class="fw-bold fs-2 mt-4">Características</h2>
+        <div
+          class="d-grid"
+          style="
+            grid-auto-flow: column;
+            grid-template-rows: repeat(3, auto);
+            gap: 12px 32px;
+            margin-top: 10px;
+          "
+        >
+          <div class="fs-4">
+            <i class="bi bi-check-lg me-2 fs-5"></i> Cancelación gratuita
+            disponible
+          </div>
+          <div class="fs-4">
+            <i class="bi bi-phone me-2 fs-5"></i> Voucher móvil
+          </div>
+          <div class="fs-4"><i class="bi bi-clock me-2 fs-5"></i> 10h</div>
+          <div class="fs-4">
+            <i class="bi bi-lightning-charge me-2 fs-5"></i> Confirmación
+            instantánea
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="col-md-4 d-flex flex-column align-items-end">
+      <!-- Estrellas -->
+      <div class="mb-3">
+        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
+        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
+        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
+        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
+        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
+      </div>
+
+      <!-- Rating -->
+      <div class="d-flex align-items-center gap-3 mb-3">
+        <a
+          [routerLink]="['/resenas']"
+          class="bg-success text-white fw-bold py-2 px-4 rounded text-decoration-none"
+          >8.0</a
+        >
+        <span class="fw-bold fs-3">Muy Bueno</span>
+      </div>
+
+      <!-- Mapa -->
+      <div class="w-100">
+        <iframe
+          width="100%"
+          height="200"
+          class="rounded shadow-sm mt-2"
+          style="border: 0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14926.709415676382!2d-71.5455171!3d-33.0245039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689dde1ad3aa93b%3A0xebbdfb7587bcf51a!2sVi%C3%B1a%20del%20Mar%2C%20Valpara%C3%ADso!5e0!3m2!1ses-419!2scl!4v1626898149471!5m2!1ses-419!2scl"
+        >
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
