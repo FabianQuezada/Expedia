@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { ContenidoPagoComponent } from './components/pago/contenido-pago/contenido-pago.component';
+import { MetodoPagoComponent } from './components/pago/metodo-pago/metodo-pago.component';
+import { DisponibilidadComponent } from './components/disponibilidad/disponibilidad.component';
+import { PagoComponent } from './components/pago/pago.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -40,7 +45,11 @@ import { ExperienceComponent } from './components/visualizar-experiencia/experie
     ExpDispComponent,
     ExpOtherComponent,
     ReviewsComponent,
-    ExperienceComponent
+    ExperienceComponent,
+    ContenidoPagoComponent,
+    MetodoPagoComponent,
+    DisponibilidadComponent,
+    PagoComponent
   ],
   imports: [
     BrowserModule,

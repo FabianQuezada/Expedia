@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-.html, body {
-  font-family: 'Poppins', sans-serif;
+.html,
+body {
+  font-family: "Poppins", sans-serif;
   font-weight: 400; /* Regular como valor base */
 }
 

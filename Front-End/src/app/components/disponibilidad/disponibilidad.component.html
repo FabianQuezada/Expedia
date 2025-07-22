@@ -1,0 +1,79 @@
+<div class="container py-5">
+  <h3>Disponibilidad</h3>
+  <div class="fechas">
+    <button
+      type="button"
+      class="btn btn-lg btn-light border border-secondary mx-2"
+      *ngFor="let fecha of experiencia.fechasDisponibles"
+      [class.active]="fecha === fechaSeleccionada"
+      (click)="seleccionarFecha(fecha)"
+    >
+      {{ fecha.fecha }}<br /><strong>CLP {{ fecha.precio }}</strong>
+    </button>
+  </div>
+  <div *ngIf="fechaSeleccionada" class="card p-3 mt-3 ms-2">
+    <div class="row">
+      <div class="col-md-4">
+        <p>
+          <strong>Desde Santiago:</strong> Viña del Mar, Valparaíso y Valle de
+          Casablanca
+        </p>
+        <!-- AGREGAR  -->
+
+        <p>⏱️ {{ experiencia.duracion }}</p>
+      </div>
+
+      <div class="col-md-4">
+        <p>👤 Personas</p>
+        <div class="d-flex gap-2">
+          <button
+            class="btn btn-sm btn-secondary me-2"
+            (click)="cambiarCantidad('adultos', -1)"
+            [disabled]="adultos <= 1"
+          >
+            <i class="bi bi-dash"></i>
+          </button>
+          <span>{{ adultos }} adulto{{ adultos > 1 ? "s" : "" }}</span>
+          <button
+            class="btn btn-sm btn-secondary ms-2"
+            (click)="cambiarCantidad('adultos', 1)"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+        <p class="mt-2">🧒 Niños</p>
+        <div class="d-flex gap-2">
+          <button
+            class="btn btn-sm btn-secondary me-2"
+            (click)="cambiarCantidad('ninos', -1)"
+            [disabled]="ninos <= 0"
+          >
+            <i class="bi bi-dash"></i>
+          </button>
+          <span>{{ ninos }} niño{{ ninos !== 1 ? "s" : "" }}</span>
+          <button
+            class="btn btn-sm btn-secondary ms-2"
+            (click)="cambiarCantidad('ninos', 1)"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <p>
+          CLP {{ fechaSeleccionada?.precio }} × {{ adultos }} adulto{{
+            adultos > 1 ? "s" : ""
+          }}
+        </p>
+        <p *ngIf="ninos > 0">
+          + CLP {{ 20000 }} × {{ ninos }} niño {{ ninos > 1 ? "s" : "" }}
+        </p>
+        <p class="fw-bold text-primary">Total: CLP {{ calcularTotal() }}</p>
+        <button type="button" class="btn btn-primary" (click)="irAPagar()">
+          Reservar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
