@@ -7,8 +7,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SearchBarActivityComponent {
   destino: string = '';
+  fecha: Date|undefined;
 
-  @Output() destinoSeleccionado = new EventEmitter<string>();
+  @Output() busquedaEmitida = new EventEmitter<{ destino: string, fecha: Date }>();
   @Input() destinoBusqueda: string = '';
 
 
@@ -30,11 +31,21 @@ export class SearchBarActivityComponent {
   }
 
   onBuscarClick() {
+    const fechaReal = this.fecha ? new Date(this.fecha) : undefined;
     const destinoFormateado = this.destino.trim().replace(/ /g, '-');
-    if (destinoFormateado) {
-      this.destinoSeleccionado.emit(destinoFormateado);
+    if (!destinoFormateado) {
+    alert('Por favor, ingresa un destino.');
+    return;
+    }
+
+    if (!fechaReal) {
+      alert('Por favor, selecciona una fecha.');
+      return;
+    }
+    if (destinoFormateado && fechaReal) {
+      this.busquedaEmitida.emit({ destino: destinoFormateado, fecha: fechaReal });
     } else {
-      console.warn('Destino vacío o inválido, no se emitió');
+      console.warn('Destino vacío o inválido, o fecha no definida, no se emitió');
     }  
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { PagoService } from '../../../services/pago.service'
+import { DateUtilsService } from 'src/app/services/date-utils.service';
 
 @Component({
   selector: 'app-contenido-pago',
@@ -24,23 +25,10 @@ export class ContenidoPagoComponent implements OnInit {
   mostrarFormulario = false;
   reservaExitosa: boolean = false;
 
-  constructor(private fb: FormBuilder, private pagoService: PagoService) {}
+  constructor(private fb: FormBuilder, private pagoService: PagoService, protected dateUtil: DateUtilsService) {}
 
   ngOnInit(): void {
     this.datosRecibidos = history.state;
-
-    if (!this.datosRecibidos?.adultos) {
-      this.datosRecibidos = {
-        ciudad: 'Santiago',
-        titulo: 'Tour de ejemplo',
-        fecha: 'mié. 23 de abr.',
-        hora: this.generarHora(),
-        precio: 37639,
-        adultos: 1,
-        ninos: 0,
-        total: 37639
-      };
-    }
 
     this.formulario = this.fb.group({
       encargado: this.fb.group({
@@ -141,14 +129,14 @@ export class ContenidoPagoComponent implements OnInit {
         }).subscribe((respuesta: any) => {
           if (respuesta.success) {
             this.reservaExitosa = true;
-            alert('✅ ¡Reserva realizada con éxito!');
+            alert('¡Reserva realizada con éxito!');
           }
         });
       });
     } else {
       this.formulario.markAllAsTouched();
       this.reservaExitosa = false;
-      alert('❌ Completa todos los campos correctamente.');
+      alert('Completa todos los campos correctamente.');
     }
   }
 }

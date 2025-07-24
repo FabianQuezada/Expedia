@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experiencia } from 'src/app/models/experiencia';
 import { Fecha } from 'src/app/models/Fecha';
+import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
   selector: 'app-exp-disp',
@@ -14,23 +15,8 @@ export class ExpDispComponent {
   adultos: number = 1;
   ninos: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, protected expService: ExperienceService) {}
 
-  getFechaString(fecha: Date): string {
-    const opciones: Intl.DateTimeFormatOptions = {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short',
-    };
-
-    let fechaFormateada = new Date(fecha).toLocaleDateString('es-CL', opciones);
-
-    fechaFormateada = fechaFormateada
-      .toLowerCase()
-      .replace(/(^|\s)([a-záéíóúüñ])/, (m) => m.toLowerCase());
-
-    return fechaFormateada;
-  }
 
   seleccionarFecha(fechaObj: any) {
     this.fechaSeleccionada = fechaObj;

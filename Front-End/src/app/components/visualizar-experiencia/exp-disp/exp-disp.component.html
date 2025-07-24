@@ -12,7 +12,7 @@
       [class.active]="fecha === fechaSeleccionada"
       (click)="seleccionarFecha(fecha)"
     >
-      {{ getFechaString(fecha.fecha) }}<br /><strong
+      {{ expService.getFechaString(fecha.fecha) }}<br /><strong
         >CLP {{ fecha.precio }}</strong
       >
     </button>
@@ -27,7 +27,7 @@
       </div>
 
       <div class="col-md-4">
-        <p>👤 Personas</p>
+        <p>Adultos</p>
         <div class="d-flex gap-2">
           <button
             class="btn btn-sm btn-secondary me-2"
@@ -45,7 +45,7 @@
             <i class="bi bi-plus"></i>
           </button>
         </div>
-        <p class="mt-2">🧒 Niños</p>
+        <p class="mt-2">Niños</p>
         <div class="d-flex gap-2">
           <button
             class="btn btn-sm btn-secondary me-2"
@@ -66,7 +66,7 @@
 
       <div class="col-md-4">
         <p>
-          CLP {{ fechaSeleccionada?.precio }} × {{ adultos }} adulto{{
+          CLP {{ fechaSeleccionada.precio }} × {{ adultos }} adulto{{
             adultos > 1 ? "s" : ""
           }}
         </p>

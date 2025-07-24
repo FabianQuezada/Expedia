@@ -12,7 +12,13 @@
     <label for="floatingLocation">Destino</label>
   </div>
   <div class="form-floating col-lg-4 col-11">
-    <input type="date" class="form-control" id="fecha" placeholder="Fecha" />
+    <input
+      type="date"
+      class="form-control"
+      id="fecha"
+      placeholder="Fecha"
+      [(ngModel)]="fecha"
+    />
     <label for="fecha">Fecha</label>
   </div>
   <div class="col-lg-auto col-md-4 col-11 d-flex align-items-center">

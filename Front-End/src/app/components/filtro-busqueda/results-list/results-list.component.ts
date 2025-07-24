@@ -7,9 +7,6 @@ import { Experiencia } from 'src/app/models/experiencia';
   styleUrls: ['./results-list.component.css']
 })
 export class ResultsListComponent {
-onExperienceClick(arg0: any) {
-throw new Error('Method not implemented.');
-}
   @Input() experiencias: Experiencia[] = [];
 
   onImageError(event: Event) {

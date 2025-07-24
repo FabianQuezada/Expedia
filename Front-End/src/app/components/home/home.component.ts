@@ -8,15 +8,21 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   selectedTab: string = 'vuelos';
-  personas: number = 1;
-
+  
   constructor(private router: Router) {}
 
   selectTab(tab: string): void {
     this.selectedTab = tab;}
 
-  buscarDestino(destino: string) {
-    const destinoParam = destino.trim().replace(/ /g, '-'); // ejemplo: Viña del Mar → Viña-del-Mar
-    this.router.navigate(['/resultados', destinoParam]);
+  buscarDestino(data: { destino: string, fecha: Date }) {
+    const destinoParam = data.destino.trim().replace(/ /g, '-');
+
+    const fechaParam = data.fecha.toISOString().split('T')[0];
+
+    this.router.navigate(['/resultados', destinoParam], {
+      queryParams: {
+        fecha: fechaParam
+      }
+    });
   }
 }
