@@ -17,7 +17,6 @@ import { CardActividadComponent } from './components/card-actividad/card-activid
 import { SearchBarActivityComponent } from './components/search-bar-activity/search-bar-activity.component';
 import { ResultsListComponent } from './components/filtro-busqueda/results-list/results-list.component';
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
-import { FormsModule } from '@angular/forms';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
 import { ExpImagesComponent } from './components/visualizar-experiencia/exp-images/exp-images.component';
 import { ExpDescComponent } from './components/visualizar-experiencia/exp-desc/exp-desc.component';
@@ -49,16 +48,10 @@ import { ExperienceComponent } from './components/visualizar-experiencia/experie
     ContenidoPagoComponent,
     MetodoPagoComponent,
     DisponibilidadComponent,
-    PagoComponent
+    PagoComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [
-    { provide: 'LOCALE_ID', useValue: 'es' } 
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  providers: [{ provide: 'LOCALE_ID', useValue: 'es' }],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

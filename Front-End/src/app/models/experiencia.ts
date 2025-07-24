@@ -1,3 +1,5 @@
+import { Fecha } from './Fecha';
+
 export interface Experiencia {
   idExperiencia: number;
   titulo: string;
@@ -10,4 +12,5 @@ export interface Experiencia {
   precio: number;
   puntuacion: number;
   imagen: string;
+  fechasExperiencia: Fecha[];
 }

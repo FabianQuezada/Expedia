@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  trigger,
-  transition,
-  style,
-  animate
-} from '@angular/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-pago',
@@ -15,20 +10,22 @@ import {
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(-10px)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+        animate(
+          '300ms ease-out',
+          style({ opacity: 1, transform: 'translateY(0)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class PagoComponent implements OnInit {
-
   formulario!: FormGroup;
   datosRecibidos: any;
   resumen: any;
   metodoSeleccionado: 'credito' | 'debito' | 'paypal' | null = null;
   mostrarFormulario = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.datosRecibidos = history.state;
@@ -42,27 +39,39 @@ export class PagoComponent implements OnInit {
         precio: 37639,
         adultos: 1,
         ninos: 0,
-        total: 37639
+        total: 37639,
       };
     }
 
     this.formulario = this.fb.group({
       encargado: this.fb.group({
-        nombre: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]],
+        nombre: [
+          '',
+          [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)],
+        ],
         correo: ['', [Validators.required, Validators.email]],
-        telefono: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]]
+        telefono: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       }),
       metodo: [''],
       pago: this.fb.group({
-        nombreTarjeta: ['', [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)]],
-        numeroTarjeta: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
-        vencimiento: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
-        cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]]
+        nombreTarjeta: [
+          '',
+          [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/)],
+        ],
+        numeroTarjeta: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{16}$/)],
+        ],
+        vencimiento: [
+          '',
+          [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)],
+        ],
+        cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]],
       }),
       paypal: this.fb.group({
         correoPaypal: ['', [Validators.required, Validators.email]],
-        contrasenaPaypal: ['', [Validators.required, Validators.minLength(6)]]
-      })
+        contrasenaPaypal: ['', [Validators.required, Validators.minLength(6)]],
+      }),
     });
   }
 
@@ -109,39 +118,51 @@ export class PagoComponent implements OnInit {
   }
   soloNumeros(event: KeyboardEvent): void {
     const tecla = event.key;
-    if (!/^\d$/.test(tecla) && tecla !== 'Backspace' && tecla !== 'Tab' && tecla !== 'ArrowLeft' && tecla !== 'ArrowRight') {
+    if (
+      !/^\d$/.test(tecla) &&
+      tecla !== 'Backspace' &&
+      tecla !== 'Tab' &&
+      tecla !== 'ArrowLeft' &&
+      tecla !== 'ArrowRight'
+    ) {
       event.preventDefault();
     }
   }
 
   soloNumerosYSlash(event: KeyboardEvent): void {
     const tecla = event.key;
-    if (!/^\d$/.test(tecla) && tecla !== '/' && tecla !== 'Backspace' && tecla !== 'Tab' && tecla !== 'ArrowLeft' && tecla !== 'ArrowRight') {
+    if (
+      !/^\d$/.test(tecla) &&
+      tecla !== '/' &&
+      tecla !== 'Backspace' &&
+      tecla !== 'Tab' &&
+      tecla !== 'ArrowLeft' &&
+      tecla !== 'ArrowRight'
+    ) {
       event.preventDefault();
     }
   }
 
-
-
   reservar(): void {
     if (this.formulario.valid) {
-      const datosPago = this.metodoSeleccionado === 'paypal'
-        ? this.paypalGroup.value
-        : this.pagoGroup.value;
+      const datosPago =
+        this.metodoSeleccionado === 'paypal'
+          ? this.paypalGroup.value
+          : this.pagoGroup.value;
 
       this.resumen = {
         ubicacion: this.datosRecibidos.ciudad,
         experiencia: this.datosRecibidos.titulo,
         fecha: this.datosRecibidos.fecha,
         hora: this.datosRecibidos.hora,
-        total: this.datosRecibidos.total
+        total: this.datosRecibidos.total,
       };
 
       console.log('✅ Reserva confirmada:', {
         encargado: this.encargadoGroup.value,
         metodo: this.metodoSeleccionado,
         datosPago,
-        resumen: this.resumen
+        resumen: this.resumen,
       });
 
       alert('✅ ¡Reserva realizada con éxito!');
