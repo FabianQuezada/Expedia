@@ -4,10 +4,10 @@ import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 
 @Index("ID_Usuario", ["idUsuario"], {})
 @Index("ID_Experiencia", ["idExperiencia"], {})
-@Entity("reseña", { schema: "nest_bd" })
-export class Reseña {
-  @Column("int", { primary: true, name: "ID_Reserva" })
-  idReseña: number;
+@Entity("resena", { schema: "nest_bd" })
+export class Resena {
+  @Column("int", { primary: true, name: "ID_Resena" })
+  idResena: number;
 
   @Column("int", { primary: true, name: "ID_Usuario" })
   idUsuario: number;
@@ -24,14 +24,14 @@ export class Reseña {
   @Column("int", { name: "ID_Experiencia" })
   idExperiencia: number;
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.reseñas, {
+  @ManyToOne(() => Usuario, (usuario) => usuario.resenas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })
   @JoinColumn([{ name: "ID_Usuario", referencedColumnName: "idUsuario" }])
   idUsuario2: Usuario;
 
-  @ManyToOne(() => Experiencia, (experiencia) => experiencia.reseñas, {
+  @ManyToOne(() => Experiencia, (experiencia) => experiencia.resenas, {
     onDelete: "RESTRICT",
     onUpdate: "RESTRICT",
   })

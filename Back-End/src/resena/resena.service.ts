@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { CreateReseñaDto } from './dto/create-reseña.dto';
-import { UpdateReseñaDto } from './dto/update-reseña.dto';
+import { CreateResenaDto } from './dto/create-resena.dto';
+import { UpdateResenaDto } from './dto/update-resena.dto';
 
 @Injectable()
-export class ReseñaService {
-  create(createReseñaDto: CreateReseñaDto) {
-    return 'This action adds a new reseña';
+export class ResenaService {
+
+  create(createResenaDto: CreateResenaDto) {
+    return `This action adds a new reseña`;
   }
 
   findAll() {
@@ -16,7 +17,7 @@ export class ReseñaService {
     return `This action returns a #${id} reseña`;
   }
 
-  update(id: number, updateReseñaDto: UpdateReseñaDto) {
+  update(id: number, updateResenaDto: UpdateResenaDto) {
     return `This action updates a #${id} reseña`;
   }
 

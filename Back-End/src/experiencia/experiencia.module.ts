@@ -13,6 +13,6 @@ import { FechasExperienciaModule } from 'src/fechas-experiencia/fechas-experienc
   ],
   controllers: [ExperienciaController],
   providers: [ExperienciaService],
-  exports: [ExperienciaService],
+  exports: [TypeOrmModule, ExperienciaService],
 })
 export class ExperienciaModule {}

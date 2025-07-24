@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Proveedor } from "../../proveedor/entities/proveedor.entity";
 import { FechasExperiencia } from "../../fechas-experiencia/entities/fechas-experiencia.entity";
-import { Reseña } from "../../reseña/entities/reseña.entity";
+import { Resena } from "../../resena/entities/resena.entity";
 import { Imagen } from "src/imagen/entities/imagen.entity";
 import { Caracteristica } from "src/caracteristica/entities/caracteristica.entity";
 
@@ -48,8 +48,8 @@ export class Experiencia {
   )
   fechasExperiencias: FechasExperiencia[];
 
-  @OneToMany(() => Reseña, (reseña) => reseña.idExperiencia2)
-  reseñas: Reseña[];
+  @OneToMany(() => Resena, (resena) => resena.idExperiencia2)
+  resenas: Resena[];
 
   @OneToMany(() => Imagen, (imagen) => imagen.experiencia, { cascade: true })
   imagenes: Imagen[];
