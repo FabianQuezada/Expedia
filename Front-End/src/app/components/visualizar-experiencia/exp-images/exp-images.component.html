@@ -11,8 +11,7 @@
     <!-- Imagen principal -->
     <div class="col-lg-7 col-12">
       <img
-        src="{{ experiencia?.imagen }}"
-        alt="Main image of Vina"
+        [src]="experiencia?.imagenes?.[0]?.url"
         class="img-fluid w-100 object-fit-cover"
         style="aspect-ratio: 4 / 3"
       />
@@ -22,24 +21,22 @@
     <div class="col-lg-5 col-12 d-flex flex-column gap-2">
       <div class="d-flex" style="gap: 0.5rem">
         <img
-          src="assets/images/playa.png"
-          alt="Image of Playa"
+          [src]="experiencia?.imagenes?.[1]?.url"
           class="img-fluid object-fit-cover"
           style="aspect-ratio: 1 / 1; width: calc(50% - 0.25rem)"
         />
         <img
-          src="assets/images/valpo-noche.png"
-          alt="Night view of Valparaiso"
+          [src]="experiencia?.imagenes?.[2]?.url"
           class="img-fluid object-fit-cover"
           style="aspect-ratio: 1 / 1; width: calc(50% - 0.25rem)"
         />
       </div>
       <img
-        src="assets/images/casa.png"
-        alt="Image of a house"
+        [src]="experiencia?.imagenes?.[3]?.url"
         class="img-fluid w-100 object-fit-cover"
         style="aspect-ratio: 16 / 8.7"
       />
     </div>
+    
   </div>
 </div>

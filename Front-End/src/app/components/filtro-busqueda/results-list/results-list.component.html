@@ -9,7 +9,7 @@
         class="text-decoration-none"
       >
         <img
-          [src]="experiencia.imagen"
+          [src]="experiencia?.imagenes?.[0]?.url"
           (error)="onImageError($event)"
           class="card-img-top img-fluid object-fit-cover"
           alt="{{ experiencia.titulo }}"

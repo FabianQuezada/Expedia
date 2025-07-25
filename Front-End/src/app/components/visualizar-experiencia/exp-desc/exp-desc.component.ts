@@ -9,3 +9,4 @@ import { Experiencia } from 'src/app/models/experiencia';
 export class ExpDescComponent {
   @Input() experiencia: Experiencia | undefined;
 }
+

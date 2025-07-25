@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateExperienciaDto } from './dto/create-experiencia.dto';
 import { UpdateExperienciaDto } from './dto/update-experiencia.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -9,7 +13,6 @@ import { FechasExperienciaService } from 'src/fechas-experiencia/fechas-experien
 
 @Injectable()
 export class ExperienciaService {
-  
   constructor(
     @InjectRepository(Experiencia)
     private experienciaRepository: Repository<Experiencia>,
@@ -18,17 +21,30 @@ export class ExperienciaService {
   ) {}
 
   async create(data: CreateExperienciaDto & { idProveedor: number }) {
-    const { imagenes, idCaracteristicas, fechas, categoria, ...experienciaData } = data;
+    const {
+      imagenes,
+      idCaracteristicas,
+      fechas,
+      categoria,
+      ...experienciaData
+    } = data;
 
     const experiencia = await this.experienciaRepository.save({
       ...experienciaData,
       categoria,
       idProveedor: data.idProveedor,
-      caracteristicas: idCaracteristicas?.map(id => ({ idCaracteristica: id })) || [],
+      caracteristicas:
+        idCaracteristicas?.map((id) => ({ idCaracteristica: id })) || [],
     });
-    
-    await this.imagenService.agregarImagenes(experiencia.idExperiencia, imagenes);
-    await this.fechasExperienciaService.agregarFechas(experiencia.idExperiencia, fechas);
+
+    await this.imagenService.agregarImagenes(
+      experiencia.idExperiencia,
+      imagenes,
+    );
+    await this.fechasExperienciaService.agregarFechas(
+      experiencia.idExperiencia,
+      fechas,
+    );
 
     return this.experienciaRepository.findOne({
       where: { idExperiencia: experiencia.idExperiencia },
@@ -43,7 +59,9 @@ export class ExperienciaService {
     });
 
     if (!experiencias.length) {
-      throw new NotFoundException(`El proveedor con ID ${idProveedor} no tiene experiencias registradas.`);
+      throw new NotFoundException(
+        `El proveedor con ID ${idProveedor} no tiene experiencias registradas.`,
+      );
     }
 
     return experiencias;
@@ -60,18 +78,31 @@ export class ExperienciaService {
     }
 
     if (experiencia.idProveedor !== idProveedor) {
-      throw new ForbiddenException('No tienes permisos para modificar esta experiencia');
+      throw new ForbiddenException(
+        'No tienes permisos para modificar esta experiencia',
+      );
     }
 
     return true;
   }
 
-  findAll() {
-    return `This action returns all experiencia`;
+  async findAll() {
+    return this.experienciaRepository.find({
+      relations: ['imagenes', 'caracteristicas', 'fechasExperiencias'],
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} experiencia`;
+  async findOne(id: number) {
+    const experiencia = await this.experienciaRepository.findOne({
+      where: { idExperiencia: id },
+      relations: ['imagenes', 'caracteristicas', 'fechasExperiencias'],
+    });
+
+    if (!experiencia) {
+      throw new NotFoundException(`No se encontró la experiencia con ID ${id}`);
+    }
+
+    return experiencia;
   }
 
   update(id: number, updateExperienciaDto: UpdateExperienciaDto) {

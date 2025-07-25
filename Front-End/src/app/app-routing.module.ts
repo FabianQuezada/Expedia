@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'experiencia/:id', component: ExperienceComponent },
   { path: 'resenas', component: ReviewsComponent },
   { path: 'pago', component: ContenidoPagoComponent },
+  
 ];
 
 @NgModule({
