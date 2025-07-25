@@ -35,8 +35,7 @@ Este sistema permite a turistas buscar, comparar y reservar actividades en desti
 | Angular        | NestJS         | Bootstrap 5      |
 | TypeScript     | Node.js        | JWT (Auth)       |
 | RxJS           | Express (API)  | PostgreSQL       |
-| HTML/CSS       | TypeORM        | PayPal API       |
-
+| HTML/CSS       | TypeORM        |
 ---
 
 ## 🚀 Instalación y Ejecución
@@ -51,5 +50,4 @@ Este sistema permite a turistas buscar, comparar y reservar actividades en desti
 ### ⚙️ Clonar Repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/expedia-reservas.git
-cd expedia-reservas
+git clone 
