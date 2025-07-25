@@ -1,4 +1,4 @@
-# 🌍 Sistema de Gestión de Reservas - Expedia
+# Sistema de Gestión de Reservas - Expedia
 
 > Proyecto universitario para la gestión y reserva de experiencias turísticas personalizadas, desarrollado con Angular (frontend) y NestJS (backend).
 
@@ -20,7 +20,7 @@ Este sistema permite a turistas buscar, comparar y reservar actividades en desti
 - Múltiples métodos de pago: tarjeta de crédito, débito y PayPal.
 - Cancelación y reprogramación de reservas.
 
-### 🏷Para proveedores
+### Para proveedores
 
 - Gestión de experiencias: crear, editar y eliminar.
 - Actualización en tiempo real de disponibilidad y precios.
