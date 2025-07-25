@@ -8,10 +8,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Proveedor } from "../../proveedor/entities/Proveedor";
-import { FechasExperiencia } from "../../fechas-experiencia/entities/FechasExperiencia";
-import { Notificacion } from "../../notificacion/entities/Notificacion";
-import { Usuario } from "../../usuario/entities/Usuario";
+import { Proveedor } from "../../proveedor/entities/proveedor.entity";
+import { FechasExperiencia } from "../../fechas-experiencia/entities/fechas-experiencia.entity";
+import { Notificacion } from "../../notificacion/entities/notificacion.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Index("ID_Proveedor", ["idProveedor"], {})
 @Entity("descuento", { schema: "nest_bd" })

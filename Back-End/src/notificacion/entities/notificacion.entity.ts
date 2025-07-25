@@ -8,8 +8,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Descuento } from "../../descuento/entities/Descuento";
-import { Usuario } from "../../usuario/entities/Usuario";
+import { Descuento } from "../../descuento/entities/descuento.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 @Index("ID_Descuento", ["idDescuento"], {})
 @Entity("notificacion", { schema: "nest_bd" })

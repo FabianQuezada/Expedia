@@ -8,8 +8,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Descuento } from "../../descuento/entities/Descuento";
-import { Experiencia } from "../../experiencia/entities/Experiencia";
+import { Descuento } from "../../descuento/entities/descuento.entity";
+import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 
 @Entity("proveedor", { schema: "nest_bd" })
 export class Proveedor {
@@ -22,13 +22,13 @@ export class Proveedor {
   @Column("text", { name: "Descripcion" })
   descripcion: string;
 
-  @Column("decimal", { name: "Calificacion", precision: 3, scale: 2 })
+  @Column("decimal", { name: "Calificacion", precision: 3, scale: 2, default: 5.0})
   calificacion: string;
 
-  @Column("varchar", { name: "Correo", length: 100 })
+  @Column("varchar", { name: "Correo", length: 100, unique: true})
   correo: string;
 
-  @Column("varchar", { name: "Contraseña", length: 255 })
+  @Column("varchar", { name: "Contraseña", length: 255, select: false })
   contraseña: string;
 
   @CreateDateColumn({ name: "Fecha_Registro", type: "timestamp" })

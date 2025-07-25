@@ -6,11 +6,11 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
-import { Cancelacion } from "../../cancelacion/entities/Cancelacion";
-import { Pago } from "../../pago/entities/Pago";
-import { Reprogramacion } from "../../reprogramacion/entities/Reprogramacion";
-import { Usuario } from "../../usuario/entities/Usuario"
-import { FechasExperiencia } from "../../fechas-experiencia/entities/FechasExperiencia";
+import { Cancelacion } from "../../cancelacion/entities/cancelacion.entity";
+import { Pago } from "../../pago/entities/pago.entity";
+import { Reprogramacion } from "../../reprogramacion/entities/reprogramacion.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity"
+import { FechasExperiencia } from "../../fechas-experiencia/entities/fechas-experiencia.entity";
 
 @Index("ID_Usuario", ["idUsuario"], {})
 @Index("Fecha", ["fecha", "idExperiencia"], {})
