@@ -1,15 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ImagenService } from './imagen.service';
 import { CreateImagenDto } from './dto/create-imagen.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
 
 @Controller('imagen')
 export class ImagenController {
   constructor(private readonly imagenService: ImagenService) {}
 
-  @Post()
-  create(@Body() createImagenDto: CreateImagenDto) {
-    return this.imagenService.create(createImagenDto);
+  @Post('agregar-imagenes/:idExperiencia')
+  @Auth(Rol.PROVEEDOR)
+  async agregarImagenes(
+    @Param('idExperiencia', ParseIntPipe) idExperiencia: number,
+    @Body() createImagenDto: CreateImagenDto[],
+  ) {
+    return this.imagenService.agregarImagenes(idExperiencia, createImagenDto);
   }
 
   @Get()

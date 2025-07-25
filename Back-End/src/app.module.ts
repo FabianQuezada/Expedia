@@ -11,7 +11,10 @@ import { ReservaModule } from './reserva/reserva.module';
 import { AuthModule } from './auth/auth.module';
 import { CaracteristicaModule } from './caracteristica/caracteristica.module';
 import { ImagenModule } from './imagen/imagen.module';
+import { CancelacionModule } from './cancelacion/cancelacion.module';
+import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
 import { PagoModule } from './pago/pago.module';
+import { ResenaModule } from './resena/resena.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -38,7 +41,10 @@ import { PagoModule } from './pago/pago.module';
     AuthModule,
     CaracteristicaModule,
     ImagenModule,
-    PagoModule
+    CancelacionModule,
+    ReprogramacionModule,
+    PagoModule,
+    ResenaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

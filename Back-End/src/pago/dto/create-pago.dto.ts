@@ -1,10 +1,12 @@
 import { Transform } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import { MetodoPago } from "src/common/enums/metodoPago.enum";
 
 export class CreatePagoDto {
     @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
     @IsString()
     @IsNotEmpty()
+    @IsEnum(MetodoPago, { message: "El método ingresado no es valido"})
     metodo: string;
 
     @Transform(({ value }) => typeof value === 'string' ? value.trim() : value)
