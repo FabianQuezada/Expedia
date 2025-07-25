@@ -1,0 +1,114 @@
+<div class="d-flex flex-column align-items-center">
+  <!-- BUSQUEDA -->
+  <div class="img-background w-75 rounded-bottom-4">
+    <div class="container-sm shadow border rounded-4 w-75 mt-5 bg-white">
+      <ul class="nav nav-underline m-3 justify-content-center poppins-regular">
+        <li class="nav-item d-flex justify-content-center align-items-center nav-link"
+          [class.active]="selectedTab === 'actividades'" (click)="selectTab('actividades')">
+          <i class="bi bi-car-front-fill m-1"></i>
+          <a class="custom-tab fs-6" href="#"> Actividades </a>
+        </li>
+      </ul>
+
+      <!-- Opción Actividades -->
+      <div *ngIf="selectedTab === 'actividades'" class="my-4">
+        <app-search-bar-activity></app-search-bar-activity>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Carrusel Actividades -->
+<div class="container-md text-white my-5 rounded w-75">
+  <div class="d-flex justify-content-between align-items-center mb-1">
+    <h3 class="mb-0 text-dark poppins-medium">Actividades Recomendadas</h3>
+    <button class="btn btn-link poppins-regular">Ver más</button>
+  </div>
+  <h6 class="mb-0 text-dark-emphasis poppins-regular mb-lg-4">
+    Elige entre nuestras actividades más populares y haz tu próxima experiencia
+    inolvidable
+  </h6>
+  <div id="carouselActividades" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+    <div class="carousel-inner">
+      <div *ngFor="let chunk of experienceChunks; let i = index" class="carousel-item" [class.active]="i === 0">
+        <div class="row gx-3">
+          <app-card-actividad *ngFor="let exp of chunk" class="col-12 col-sm-6 col-md-6 col-lg-3 mt-2" [experiencia]="exp">
+          </app-card-actividad>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev w-auto px-2 position-absolute top-50 start-0 translate-middle-y"
+      type="button" data-bs-target="#carouselActividades" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button
+      class="carousel-control-next w-auto px-2 position-absolute top-50 end-0 translate-middle-y"
+      type="button" data-bs-target="#carouselActividades" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</div>
+
+<!-- Informacion -->
+<div class="container py-5 mb-5 w-75">
+  <div class="d-flex flex-lg-row flex-column justify-content-between">
+    <div class="d-flex flex-column align-items-center pe-lg-5 mb-4 me-lg-5">
+      <img src="assets/images/voley_playa.webp" class="card-img-top rounded-5 shadow" alt="Adventure Image" />
+    </div>
+
+    <div class="d-flex flex-column align-items-start mb-4">
+      <h5 class="poppins-medium text-warning">¿Por qué elegirnos?</h5>
+      <h2 class="poppins-medium pe-4">
+        Explora las mejores actividades en cualquier zona
+      </h2>
+      <h6 class="poppins-light pe-4" style="text-align: justify">
+        Descubre y Reserva las mejores actividades en cualquier parte del mundo
+        En esta página encontrarás las mejores experiencias y actividades
+        recomendadas en cada zona que desees visitar. Ya sea para disfrutar de
+        aventuras extremas, paseos tranquilos o explorar la naturaleza, tenemos
+        todo lo que necesitas. ¡Prepárate para descubrir y vivir nuevas
+        experiencias únicas!
+      </h6>
+      <ul class="list-unstyled mt-4">
+        <li class="d-flex align-items-center mb-3">
+          <div class="icon-circle me-2">
+            <i class="bi bi-tree fs-2 text-white"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="activity-title">Senderismo en Montaña</h5>
+            <p class="activity-description">
+              Conoce los mejores senderos, sumérgete en la naturaleza y disfruta
+              de vistas impresionantes.
+            </p>
+          </div>
+        </li>
+        <li class="d-flex align-items-center mb-3">
+          <div class="icon-circle me-2">
+            <i class="bi bi-bicycle fs-2 text-white"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="activity-title">Ciclismo de Montaña</h5>
+            <p class="activity-description">
+              Explora los caminos más desafiantes y vive una experiencia llena
+              de adrenalina.
+            </p>
+          </div>
+        </li>
+        <li class="d-flex align-items-center mb-3">
+          <div class="icon-circle me-2">
+            <i class="bi bi-sun fs-2 text-white"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="activity-title">Vóley Playa</h5>
+            <p class="activity-description">
+              Diviértete bajo el sol jugando vóley en la arena, mientras
+              disfrutas de la brisa marina.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

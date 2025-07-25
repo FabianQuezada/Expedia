@@ -1,0 +1,23 @@
+<div class="card position-relative rounded-4 shadow"> 
+  <div class="position-relative">
+    <img [src]="experiencia.imagen" class="card-img-top rounded-top-4" alt="Tour Image">
+    <span class="position-absolute top-0 end-0 m-2 badge bg-light text-dark fw-semibold">
+      <i class="bi bi-star-fill me-1 text-danger"></i>
+      <small>{{experiencia.cantidadValoracion}}</small>
+    </span>
+  </div>
+  <div class="card-body d-flex flex-column"> 
+    <h6 class="card-title fw-bold content-flex-grow">{{experiencia.titulo}}</h6>
+    <div class="d-flex align-items-center text-info">
+      <i class="bi bi-geo-alt-fill me-1"></i>
+      <small>{{experiencia.ubicacion}}</small>
+    </div>
+    <div class="d-flex align-items-start mt-3 poppins-regular">
+      <h4 class="me-2">{{experiencia.precio | currency:'CLP ':'symbol':'1.0-0'}}</h4>
+      <h5 class="mb-0">c/u</h5>
+    </div>
+    <div class="mt-auto poppins-medium">
+      <a href="#" class="btn btn-outline-primary w-100 rounded-pill px-4 py-2 shadow-sm">Más Información</a>
+    </div>
+  </div>
+</div>
