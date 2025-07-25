@@ -4,31 +4,31 @@
 
 ---
 
-## 📌 Descripción
+## Descripción
 
 Este sistema permite a turistas buscar, comparar y reservar actividades en destinos turísticos. A su vez, permite a proveedores gestionar su oferta, disponibilidad y precios en tiempo real. El objetivo es mejorar la experiencia de viaje y la conexión entre operadores locales y viajeros.
 
 ---
 
-## 🧩 Funcionalidades
+## Funcionalidades
 
-### 👤 Para usuarios (viajeros)
+### Para usuarios (viajeros)
 
-- 🔍 Búsqueda de experiencias con filtros (ubicación, categoría, precio, valoraciones).
-- 💬 Visualización de reseñas y comentarios de otros viajeros.
-- 🛒 Proceso de reserva intuitivo, seguro y rápido.
-- 💳 Múltiples métodos de pago: tarjeta de crédito, débito y PayPal.
-- 🕒 Cancelación y reprogramación de reservas.
+- Búsqueda de experiencias con filtros (ubicación, categoría, precio, valoraciones).
+- Visualización de reseñas y comentarios de otros viajeros.
+- Proceso de reserva intuitivo, seguro y rápido.
+- Múltiples métodos de pago: tarjeta de crédito, débito y PayPal.
+- Cancelación y reprogramación de reservas.
 
-### 🏷️ Para proveedores
+### 🏷Para proveedores
 
-- 📦 Gestión de experiencias: crear, editar y eliminar.
-- 📆 Actualización en tiempo real de disponibilidad y precios.
-- 🎯 Aplicación automática de descuentos según la demanda.
+- Gestión de experiencias: crear, editar y eliminar.
+- Actualización en tiempo real de disponibilidad y precios.
+- Aplicación automática de descuentos según la demanda.
 
 ---
 
-## 🖥️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 | Frontend       | Backend        | Otros            |
 |----------------|----------------|------------------|
@@ -38,16 +38,16 @@ Este sistema permite a turistas buscar, comparar y reservar actividades en desti
 | HTML/CSS       | TypeORM        |
 ---
 
-## 🚀 Instalación y Ejecución
+## Instalación y Ejecución
 
-### 🧪 Requisitos
+### Requisitos
 
 - Node.js ≥ 18
 - Angular CLI
 - PostgreSQL (o el motor usado)
 - NestJS CLI
 
-### ⚙️ Clonar Repositorio
+### Clonar Repositorio
 
 ```bash
 git clone 
