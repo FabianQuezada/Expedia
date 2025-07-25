@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Experiencia } from 'src/app/models/experiencia';
 import { Fecha } from 'src/app/models/Fecha';
+import { DateUtilsService } from 'src/app/services/date-utils.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
@@ -9,14 +10,21 @@ import { ExperienceService } from 'src/app/services/experience.service';
   templateUrl: './exp-disp.component.html',
   styleUrls: ['./exp-disp.component.css'],
 })
-export class ExpDispComponent {
+export class ExpDispComponent implements OnChanges {
   @Input() experiencia: Experiencia | undefined;
+  @Input() fechaBusqueda: Date | undefined;
   fechaSeleccionada: Fecha | undefined;
+  fechasFiltradas: Fecha[] = [];
   adultos: number = 1;
   ninos: number = 0;
 
-  constructor(private router: Router, protected expService: ExperienceService) {}
+  constructor(private router: Router, protected expService: ExperienceService, protected dateUtilService: DateUtilsService) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+  if (this.experiencia && this.fechaBusqueda) {
+    this.filtrarFechaBusqueda();
+    }
+  }
 
   seleccionarFecha(fechaObj: any) {
     this.fechaSeleccionada = fechaObj;
@@ -61,4 +69,14 @@ export class ExpDispComponent {
     const minutos = Math.floor(Math.random() * 60);
     return `${hora}:${minutos.toString().padStart(2, '0')}`;
   }
-}
+
+  filtrarFechaBusqueda() {
+    const fechaRef = new Date(this.fechaBusqueda!.toISOString().split('T')[0]); 
+
+    this.fechasFiltradas = this.experiencia!.fechasExperiencia
+      .filter(f => new Date(f.fecha) >= fechaRef)
+      .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
+      .slice(0, 5); // máximo 5 fechas
+  }
+} 
+

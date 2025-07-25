@@ -17,7 +17,7 @@ export class SearchBarActivityComponent {
     const input = document.getElementById('floatingLocation') as HTMLInputElement;
 
     const autocomplete = new google.maps.places.Autocomplete(input, {
-      types: ['(regions)'], // Solo regiones (ciudades, países, etc.)
+      types: ['(regions)'],
       fields: ['name', 'geometry', 'place_id'],
       componentRestrictions: { country: 'cl' }
     });

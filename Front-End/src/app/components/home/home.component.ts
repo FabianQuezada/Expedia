@@ -16,12 +16,12 @@ export class HomeComponent {
 
   buscarDestino(data: { destino: string, fecha: Date }) {
     const destinoParam = data.destino.trim().replace(/ /g, '-');
-
     const fechaParam = data.fecha.toISOString().split('T')[0];
 
-    this.router.navigate(['/resultados', destinoParam], {
+    this.router.navigate(['/resultados'], {
       queryParams: {
-        fecha: fechaParam
+        location: destinoParam,
+        date: fechaParam
       }
     });
   }

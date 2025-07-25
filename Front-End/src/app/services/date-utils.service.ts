@@ -34,4 +34,9 @@ export class DateUtilsService {
       hour12: false
     });
   }
+
+  parseLocalDate(fechaStr: string): Date {
+    const [year, month, day] = fechaStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
 }

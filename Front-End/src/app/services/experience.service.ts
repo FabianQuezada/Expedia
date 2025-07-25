@@ -27,8 +27,8 @@ export class ExperienceService {
       puntuacion: 9.1,
       imagen: 'https://source.unsplash.com/featured/?valparaiso',
       fechasExperiencia: [
-        { fecha: new Date('2025-08-01'), precio: 35000 },
-        { fecha: new Date('2025-08-10'), precio: 37000 }
+        { fecha: new Date(2025,7,1), precio: 35000 },
+        { fecha: new Date(2025,7,10), precio: 37000 }
       ]
     },
     {
@@ -44,8 +44,8 @@ export class ExperienceService {
       puntuacion: 9.4,
       imagen: 'https://source.unsplash.com/featured/?maipo',
       fechasExperiencia: [
-        { fecha: new Date('2025-07-28'), precio: 40000 },
-        { fecha: new Date('2025-08-12'), precio: 42000 }
+        { fecha: new Date(2025,6,28), precio: 40000 },
+        { fecha: new Date(2025,7,12), precio: 42000 }
       ]
     },
     {
@@ -74,22 +74,6 @@ export class ExperienceService {
         experiencias.find((exp) => exp.idExperiencia === id)
       )
     );
-  }
-
-    getFechaString(fecha: Date): string {
-    const opciones: Intl.DateTimeFormatOptions = {
-      weekday: 'short',
-      day: 'numeric',
-      month: 'short',
-    };
-
-    let fechaFormateada = new Date(fecha).toLocaleDateString('es-CL', opciones);
-
-    fechaFormateada = fechaFormateada
-      .toLowerCase()
-      .replace(/(^|\s)([a-záéíóúüñ])/, (m) => m.toLowerCase());
-
-    return fechaFormateada;
   }
 
   generarExperienciasMock(): Experiencia[] {

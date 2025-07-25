@@ -20,22 +20,21 @@ export class SearchResultsComponent {
   constructor(private experienciaService: ExperienceService, private route: ActivatedRoute, private router: Router) {}
   
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      const destinoParam = params['destino'];
+    this.route.queryParams.subscribe(query => {
+      const destinoParam = query['location'];
+      const fechaParam = query['date'];
+
       if (destinoParam) {
-        this.destino = destinoParam.replace(/-/g, ' ');
+        this.destino = destinoParam;
       }
 
-      this.route.queryParams.subscribe((queryParams: Params) => {
-        const fechaQuery = queryParams['fecha'];
-        if (fechaQuery) {
-          this.fecha = new Date(fechaQuery);
-        }
+      if (fechaParam) {
+        this.fecha = new Date(fechaParam);
+      }
 
-        this.experienciaService.getExperiencias().subscribe((data) => {
-          this.experiencias = data;
-          this.filtrarExperiencias();
-        });
+      this.experienciaService.getExperiencias().subscribe(data => {
+        this.experiencias = data;
+        this.filtrarExperiencias();
       });
     });
   }
@@ -74,10 +73,18 @@ export class SearchResultsComponent {
   }
 
   onBuscar(data: { destino: string, fecha: Date }) {
-    const destinoParam = data.destino.trim().replace(/ /g, '-'); 
-    const fechaParam = data.fecha.toISOString().split('T')[0];
+    this.destino = data.destino;
+    this.fecha = data.fecha;
 
-    this.router.navigate(['/resultados', destinoParam],
-      {queryParams: { fecha: fechaParam } }
-    );  }
+    this.filtrarExperiencias();
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        location: this.destino,
+        date: this.fecha.toISOString().split('T')[0]
+      },
+      queryParamsHandling: 'merge'
+    });
+  }
 }
