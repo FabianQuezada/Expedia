@@ -15,6 +15,7 @@ import { UpdateExperienciaDto } from './dto/update-experiencia.dto';
 import { Request } from 'express';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 interface RequestWithUser extends Request {
   usuario: {
@@ -24,6 +25,8 @@ interface RequestWithUser extends Request {
   };
 }
 
+@ApiBearerAuth()
+@ApiTags('Experiencia')
 @Controller('experiencia')
 export class ExperienciaController {
   constructor(private readonly experienciaService: ExperienciaService) {}

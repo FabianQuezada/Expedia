@@ -4,7 +4,10 @@ import { CreateImagenDto } from './dto/create-imagen.dto';
 import { UpdateImagenDto } from './dto/update-imagen.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Imagen')
 @Controller('imagen')
 export class ImagenController {
   constructor(private readonly imagenService: ImagenService) {}

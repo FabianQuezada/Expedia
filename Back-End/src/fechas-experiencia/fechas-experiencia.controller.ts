@@ -13,7 +13,10 @@ import { CreateFechasExperienciaDto } from './dto/create-fechas-experiencia.dto'
 import { UpdateFechasExperienciaDto } from './dto/update-fechas-experiencia.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Fechas de experiencia')
 @Controller('fechas-experiencia')
 export class FechasExperienciaController {
   constructor(
