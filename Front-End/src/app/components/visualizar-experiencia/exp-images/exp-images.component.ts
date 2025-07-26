@@ -8,7 +8,7 @@ import { Experiencia } from 'src/app/models/experiencia';
 })
 export class ExpImagesComponent {
   @Input() experiencia: Experiencia | undefined;
-  
+
   get ciudadDesdeUbicacion(): string {
     if (!this.experiencia?.ubicacion) return '';
 
@@ -19,5 +19,11 @@ export class ExpImagesComponent {
 
     const ciudad = ciudadSegmento.split(' ').slice(1).join(' '); // elimina "1032065"
     return ciudad;
+  }
+  defaultImg: string = 'assets/images/default-image.jpg';
+
+  onImageError(event: Event): void {
+    const element = event.target as HTMLImageElement;
+    element.src = this.defaultImg;
   }
 }
