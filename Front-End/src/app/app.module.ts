@@ -23,6 +23,7 @@ import { ExpDispComponent } from './components/visualizar-experiencia/exp-disp/e
 import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other/exp-other.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,9 @@ import { ExperienceComponent } from './components/visualizar-experiencia/experie
     MetodoPagoComponent,
     PagoComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [{ provide: 'LOCALE_ID', useValue: 'es' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+

@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { CreatePagoDto } from '../models/createPago'; // Ajusta ruta si es distinta
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PagoService {
-  constructor() {}
+  private baseUrl = 'http://localhost:3000/pago'; // Ajusta si tu ruta es diferente
 
-  crearReserva(resumen: any): Observable<{ reserva_id: number }> {
-    console.log('📝 creando reserva:', resumen);
-    return of({ reserva_id: 123 }); // Simulación
-  }
+  constructor(private http: HttpClient) {}
 
-  crearPago(datos: any): Observable<{ success: boolean }> {
-    console.log('💳 creando pago:', datos);
-    return of({ success: true }); // Simulación
+  crearPago(pago: CreatePagoDto): Observable<{ success: boolean }> {
+    console.log('📡 Enviando pago al backend:', pago);
+    return this.http.post<{ success: boolean }>(this.baseUrl, pago);
   }
 }

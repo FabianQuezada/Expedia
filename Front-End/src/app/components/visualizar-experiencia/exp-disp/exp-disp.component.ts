@@ -4,6 +4,7 @@ import { Experiencia } from 'src/app/models/experiencia';
 import { Fecha } from 'src/app/models/Fecha';
 import { DateUtilsService } from 'src/app/services/date-utils.service';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { AuthStateService } from '../../../services/auth-state.service';
 
 @Component({
   selector: 'app-exp-disp',
@@ -18,13 +19,15 @@ export class ExpDispComponent implements OnChanges {
   adultos: number = 1;
   ninos: number = 0;
 
-  constructor(private router: Router, protected expService: ExperienceService, protected dateUtilService: DateUtilsService) {}
+
+  constructor(private router: Router, protected expService: ExperienceService, protected dateUtilService: DateUtilsService, private authStateService: AuthStateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
   if (this.experiencia && this.fechaBusqueda) {
     this.filtrarFechaBusqueda();
     }
   }
+
 
   seleccionarFecha(fechaObj: any) {
     this.fechaSeleccionada = fechaObj;
@@ -41,7 +44,7 @@ export class ExpDispComponent implements OnChanges {
   calcularTotal(): number {
     const precio =
       this.fechaSeleccionada?.precio ||
-      this.experiencia?.fechasExperiencia[0].precio;
+      this.experiencia?.fechasExperiencias[0].precio;
     return precio! * this.adultos + this.ninos * 20000;
   }
 
@@ -50,7 +53,13 @@ export class ExpDispComponent implements OnChanges {
       alert('Debes seleccionar una fecha.');
       return;
     }
+    const idUsuario = this.authStateService.getUserId();
 
+    if (!idUsuario) {
+      alert('No se pudo obtener la sesión del usuario');
+      return;
+    }
+    
     this.router.navigate(['/pago'], {
       state: {
         ciudad: this.experiencia?.ubicacion,
@@ -60,6 +69,8 @@ export class ExpDispComponent implements OnChanges {
         total: this.calcularTotal(),
         adultos: this.adultos,
         ninos: this.ninos,
+        idExperiencia: this.experiencia?.idExperiencia,
+        idUsuario: idUsuario,
       },
     });
   }

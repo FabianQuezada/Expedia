@@ -71,7 +71,7 @@ export class SearchResultsComponent {
     const coincideUbicacion = exp.ubicacion.toLowerCase() === this.destino.toLowerCase();
 
     // Buscar coincidencia exacta de fecha en el array de fechas
-    const coincideFecha = exp.fechasExperiencia.some((f) => {
+    const coincideFecha = exp.fechasExperiencias.some((f) => {
       const fechaExp = new Date(f.fecha).toISOString().split('T')[0];
       const fechaSeleccionadaStr = this.fecha!.toISOString().split('T')[0];
       return fechaExp === fechaSeleccionadaStr;

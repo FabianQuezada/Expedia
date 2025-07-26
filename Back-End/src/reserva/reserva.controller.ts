@@ -9,6 +9,7 @@ export class ReservaController {
 
   @Post()
   create(@Body() createReservaDto: CreateReservaDto) {
+    console.log('🟢 DTO recibido:', createReservaDto);
     return this.reservaService.create(createReservaDto);
   }
 
@@ -18,17 +19,22 @@ export class ReservaController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reservaService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.reservaService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReservaDto: UpdateReservaDto) {
-    return this.reservaService.update(+id, updateReservaDto);
+  @Patch(':idReserva/:idUsuario')
+  update(
+    @Param('idReserva') idReserva: number,
+    @Param('idUsuario') idUsuario: number,
+    @Body() updateReservaDto: UpdateReservaDto) {
+    return this.reservaService.update(idReserva, idUsuario, updateReservaDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reservaService.remove(+id);
+  @Delete(':idReserva/:idUsuario')
+  remove(
+    @Param('idReserva') idReserva: number,
+    @Param('idUsuario') idUsuario: number) {
+    return this.reservaService.remove(idReserva, idUsuario);
   }
 }

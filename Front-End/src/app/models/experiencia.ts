@@ -1,5 +1,10 @@
 import { Fecha } from './Fecha';
 
+export interface Imagen {
+  id?: number;
+  url: string;
+}
+
 export interface Experiencia {
   idExperiencia: number;
   titulo: string;
@@ -11,6 +16,7 @@ export interface Experiencia {
   datosGenerales: string[];
   precio: number;
   puntuacion: number;
-  imagen: string;
-  fechasExperiencia: Fecha[];
+  fechasExperiencias: Fecha[];
+  imagenes: Imagen[]; 
+  duracion: number;
 }
