@@ -43,12 +43,21 @@ export class SearchResultsComponent {
     this.showMobileFilters = !this.showMobileFilters;
   }
 
-  aplicarFiltros(filtros: { precioMax: number, puntuacionMin: number }) {
-    this.experienciasFiltradas = this.experiencias.filter(
-      (exp) =>
-        exp.precio <= filtros.precioMax &&
-        exp.puntuacion >= filtros.puntuacionMin
-    );
+  aplicarFiltros(filtros: { precioMax: number, puntuacionMin: number, categorias: string[] }) {
+    this.experienciasFiltradas = this.experiencias.filter((exp) => {
+      const coincideUbicacion = exp.ubicacion.toLowerCase() === this.destino.toLowerCase();
+      const coincideFecha = this.fecha
+        ? exp.fechasExperiencia.some((f) =>
+            new Date(f.fecha).toISOString().split('T')[0] === this.fecha!.toISOString().split('T')[0])
+        : true;
+
+      const cumplePrecio = exp.precio <= filtros.precioMax;
+      const cumplePuntuacion = exp.puntuacion >= filtros.puntuacionMin;
+      const cumpleCategoria =
+        filtros.categorias.length === 0 || filtros.categorias.includes(exp.categoria.toLowerCase());
+
+      return coincideUbicacion && coincideFecha && cumplePrecio && cumplePuntuacion && cumpleCategoria;
+    });
   }
 
   filtrarPrecio() {

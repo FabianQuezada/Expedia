@@ -14,57 +14,62 @@ export class ExperienceService {
   }
 
   getExperiencias(): Observable<Experiencia[]> {
-    const experienciasFijas = [ {
-      idExperiencia: 1,
-      titulo: 'Tour por Valparaíso y Viña',
-      descripcion: 'Explora los cerros de Valparaíso y relájate en las playas de Viña del Mar.',
-      ubicacion: 'Valparaíso',
-      estado: 'activa',
-      categoria: 'Cultural',
-      cuposDisponibles: 15,
-      datosGenerales: ['Guía local', 'Transporte', 'Degustación'],
-      precio: 35000,
-      puntuacion: 9.1,
-      imagen: 'https://source.unsplash.com/featured/?valparaiso',
-      fechasExperiencia: [
-        { fecha: new Date(2025,7,1), precio: 35000 },
-        { fecha: new Date(2025,7,10), precio: 37000 }
-      ]
-    },
-    {
-      idExperiencia: 2,
-      titulo: 'Trekking en el Cajón del Maipo',
-      descripcion: 'Caminata por senderos cordilleranos rodeados de naturaleza.',
-      ubicacion: 'Santiago',
-      estado: 'activa',
-      categoria: 'Aventura',
-      cuposDisponibles: 10,
-      datosGenerales: ['Guía', 'Snack', 'Seguro'],
-      precio: 40000,
-      puntuacion: 9.4,
-      imagen: 'https://source.unsplash.com/featured/?maipo',
-      fechasExperiencia: [
-        { fecha: new Date(2025,6,28), precio: 40000 },
-        { fecha: new Date(2025,7,12), precio: 42000 }
-      ]
-    },
-    {
-      idExperiencia: 3,
-      titulo: 'Ruta del vino en Colchagua',
-      descripcion: 'Recorrido por las mejores viñas del valle con degustación.',
-      ubicacion: 'Colchagua',
-      estado: 'activa',
-      categoria: 'Gastronomía',
-      cuposDisponibles: 12,
-      datosGenerales: ['Degustación', 'Almuerzo', 'Transporte'],
-      precio: 55000,
-      puntuacion: 8.9,
-      imagen: 'https://source.unsplash.com/featured/?wine',
-      fechasExperiencia: [
-        { fecha: new Date('2025-08-03'), precio: 55000 },
-        { fecha: new Date('2025-08-24'), precio: 58000 }
-      ]
-    }];
+    const experienciasFijas = [
+      {
+        idExperiencia: 1,
+        titulo: 'Tour por Valparaíso y Viña',
+        descripcion:
+          'Explora los cerros de Valparaíso y relájate en las playas de Viña del Mar.',
+        ubicacion: 'Valparaíso',
+        estado: 'activa',
+        categoria: 'cultural',
+        cuposDisponibles: 15,
+        datosGenerales: ['Guía local', 'Transporte', 'Degustación'],
+        precio: 35000,
+        puntuacion: 9.1,
+        imagen: 'https://source.unsplash.com/featured/?valparaiso',
+        fechasExperiencia: [
+          { fecha: new Date(2025, 7, 1), precio: 35000 },
+          { fecha: new Date(2025, 7, 10), precio: 37000 },
+        ],
+      },
+      {
+        idExperiencia: 2,
+        titulo: 'Trekking en el Cajón del Maipo',
+        descripcion:
+          'Caminata por senderos cordilleranos rodeados de naturaleza.',
+        ubicacion: 'Santiago',
+        estado: 'activa',
+        categoria: 'aventura',
+        cuposDisponibles: 10,
+        datosGenerales: ['Guía', 'Snack', 'Seguro'],
+        precio: 40000,
+        puntuacion: 9.4,
+        imagen: 'https://source.unsplash.com/featured/?maipo',
+        fechasExperiencia: [
+          { fecha: new Date(2025, 6, 28), precio: 40000 },
+          { fecha: new Date(2025, 7, 12), precio: 42000 },
+        ],
+      },
+      {
+        idExperiencia: 3,
+        titulo: 'Ruta del vino en Colchagua',
+        descripcion:
+          'Recorrido por las mejores viñas del valle con degustación.',
+        ubicacion: 'Colchagua',
+        estado: 'activa',
+        categoria: 'gastronomia',
+        cuposDisponibles: 12,
+        datosGenerales: ['Degustación', 'Almuerzo', 'Transporte'],
+        precio: 55000,
+        puntuacion: 8.9,
+        imagen: 'https://source.unsplash.com/featured/?wine',
+        fechasExperiencia: [
+          { fecha: new Date(2025, 7, 3), precio: 55000 },
+          { fecha: new Date(2025, 7, 24), precio: 58000 },
+        ],
+      },
+    ];
     const experienciasGeneradas = this.generarExperienciasMock();
     return of([...experienciasFijas, ...experienciasGeneradas]);  }
 
@@ -83,8 +88,13 @@ export class ExperienceService {
       'Valdivia', 'Punta Arenas', 'Coyhaique', 'Talca', 'Osorno', 'Copiapó', 'Curicó'
     ];
 
-    const categorias = ['Cultural', 'Aventura', 'Gastronomía', 'Naturaleza', 'Histórica'];
-
+    const categorias = [
+      'cultural',
+      'aventura',
+      'gastronomia',
+      'naturaleza',
+      'historica',
+    ];
     const experiencias: Experiencia[] = [];
 
     for (let i = 4; i <= 50; i++) {

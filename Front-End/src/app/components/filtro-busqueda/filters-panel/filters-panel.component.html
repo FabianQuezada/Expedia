@@ -1,4 +1,4 @@
-<div class="card border">
+<div class="card border mb-3">
   <div class="card-body">
     <p class="fs-5 fw-bold card-title">Filtrar por</p>
     <p class="fs-6 fw-semibold">Puntuación de los viajeros</p>
@@ -55,7 +55,7 @@
     <!-- Filtro Precio -->
     <div class="mt-4">
       <label for="priceRange" class="form-label d-flex justify-content-between">
-        <span>Precio máximo</span>
+        <span class="fw-bold">Precio máximo</span>
       </label>
 
       <input
@@ -76,15 +76,22 @@
     </div>
 
     <div>
-      <p class="">Categoría</p>
-      <div class="form-check">
+      <p class="fw-bold mt-3">Categoría</p>
+      <div *ngFor="let categoria of categorias" class="form-check">
         <input
           class="form-check-input"
           type="checkbox"
-          id="category1"
-          value="category1"
+          [id]="'cat-' + categoria"
+          [value]="categoria"
+          [checked]="categoriasSeleccionadas.has(categoria)"
+          (change)="onCategoriaChange(categoria, $event)"
         />
-        <label class="form-check-label" for="category1"> Category 1 </label>
+        <label
+          class="form-check-label text-capitalize"
+          [for]="'cat-' + categoria"
+        >
+          {{ categoria }}
+        </label>
       </div>
     </div>
   </div>
