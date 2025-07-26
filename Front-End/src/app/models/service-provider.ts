@@ -6,5 +6,6 @@ export interface ServiceProvider {
   ubicacion: string;
   precio: number;
   categoria: string;
-  datosGenerales: string;
+  caracteristicas: string[];
+  datosGenerales: string[];
 }

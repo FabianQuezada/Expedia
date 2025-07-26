@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400; /* Regular como valor base */
+}
+
 .btn-expedia-primary {
   background-color: #f7ba2a;
   color: black;
@@ -152,4 +157,62 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+
+.fixed-height-scroll {
+  position: relative;
+  height: 45rem;      /* o el alto que quieras */
+  background-color: white;
+  border-radius: 6px;
+  padding-right: 10px;  /* para que no quede pegado al scroll */
+}
+
+.service-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.scroll-fade-container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.scroll-content {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Edge */
+}
+
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), transparent);
+  z-index: 10;
+}
+
+.fade.visible {
+  opacity: 1;
+}
+
+.fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, white, transparent);
+}
+
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, white, transparent);
 }

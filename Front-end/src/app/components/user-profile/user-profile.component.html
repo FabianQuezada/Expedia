@@ -1,75 +1,112 @@
+<app-navbar></app-navbar>
 <div class="container my-4">
   <div class="row">
     <!-- PANEL IZQUIERDO -->
     <div class="col-md-3">
       <div class="left-panel">
         <div class="mb-3">
-          <h5 class="fw-semibold">{{ user?.nombre }}</h5>
-          <p class="text-muted small">{{ user?.correo }}</p>
-          <p class="small">Administra tu perfil y configuraciones en un solo lugar</p>
+          <h5 class="fw-semibold">{{ user.nombre }}</h5>
+          <p class="text-muted small">{{ user.correo }}</p>
+          <p class="small">
+            Administra tu perfil y configuraciones en un solo lugar
+          </p>
         </div>
 
         <div class="d-flex flex-column gap-3">
-
           <!-- PERFIL -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white" (click)="seccionSeleccionada = 'perfil'">
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="seccionSeleccionada = 'perfil'"
+            [ngClass]="{ active: seccionSeleccionada === 'perfil' }"
+            style="cursor: pointer"
+          >
             <i class="bi bi-person fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Perfil</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Ingresa tus datos personales y documentos de viaje</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Ingresa tus datos personales y documentos de viaje
+              </div>
             </div>
           </div>
 
-          <!-- MIS SERVICIOS -->
-          <button
-            *ngIf="user?.tipo === 'Proveedor'"
-            class="btn-opciones"
-            [ngClass]="{'active': seccionSeleccionada === 'servicios'}"
-            (click)="mostrarServicios()"
+          <!-- NOTIFICACIONES -->
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="seccionSeleccionada = 'notificaciones'"
+            [ngClass]="{ active: seccionSeleccionada === 'notificaciones' }"
+            style="cursor: pointer"
           >
-            <i class="bi bi-briefcase fs-4 mt-1"></i>
-            <div class="d-flex flex-column justify-content-center">
-              <div class="fw-semibold">Mis Servicios</div>
-              <div class="text-muted subtitulo">Gestiona las experiencias que ofreces</div>
-            </div>
-          </button>
-
-
-          <!-- OTROS -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
             <i class="bi bi-bell fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Notificaciones</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Elige las notificaciones que quieres recibir</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Elige las notificaciones que quieres recibir
+              </div>
             </div>
           </div>
 
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
+          <!-- AYUDA -->
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="seccionSeleccionada = 'ayuda'"
+            [ngClass]="{ active: seccionSeleccionada === 'ayuda' }"
+            style="cursor: pointer"
+          >
             <i class="bi bi-question-circle fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Ayuda y comentarios</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Obtén asistencia</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Obtén asistencia
+              </div>
             </div>
           </div>
 
-          <!-- CLIENTE -->
-          <div *ngIf="user?.tipo === 'Usuario'" class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
+          <!-- RESERVAS -->
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="seccionSeleccionada = 'reservas'"
+            [ngClass]="{ active: seccionSeleccionada === 'reservas' }"
+            style="cursor: pointer"
+          >
             <i class="bi bi-journal-text fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Mis Reservas</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Edita o cancela tus reservas</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Edita o cancela tus reservas
+              </div>
+            </div>
+          </div>
+
+          <!-- CUPONES -->
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="seccionSeleccionada = 'cupones'"
+            [ngClass]="{ active: seccionSeleccionada === 'cupones' }"
+            style="cursor: pointer"
+          >
+            <i class="bi bi-gift fs-4 me-3 mt-1"></i>
+            <div>
+              <div class="fw-semibold">Mis Cupones</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Administra tus cupones disponibles
+              </div>
             </div>
           </div>
 
           <!-- CERRAR SESIÓN -->
-          <div class="d-flex align-items-start p-3 border rounded shadow-sm bg-white">
+          <div
+            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+            (click)="cerrarSesion()"
+            style="cursor: pointer"
+          >
             <i class="bi bi-box-arrow-right fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Cerrar Sesión</div>
-              <div class="text-muted" style="font-size: 0.65rem;">Salir de tu cuenta de forma segura</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Salir de tu cuenta de forma segura
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -77,10 +114,11 @@
     <!-- PANEL DERECHO -->
     <div class="col-md-9">
       <div class="right-panel card p-4">
-
         <!-- PERFIL -->
-        <ng-container *ngIf="seccionSeleccionada === 'perfil'">
-          <h4 class="fw-bold">{{ user?.nombre }} {{ user?.apellido }}</h4>
+        <ng-container
+          *ngIf="seccionSeleccionada === 'perfil' || !seccionSeleccionada"
+        >
+          <h4 class="fw-bold">{{ user.nombre }} {{ user.apellido }}</h4>
           <hr class="mb-4" />
 
           <div class="d-flex justify-content-between align-items-center mb-2">
@@ -91,7 +129,7 @@
           <div class="row">
             <div class="col-md-6">
               <p><strong>Nombre</strong></p>
-              <p>{{ user?.nombre }} {{ user?.apellido }}</p>
+              <p>{{ user.nombre }} {{ user.apellido }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Descripción personal</strong></p>
@@ -102,18 +140,18 @@
           <div class="row">
             <div class="col-md-6">
               <p><strong>Fecha de nacimiento</strong></p>
-              <p>{{ user?.fechaNacimiento || 'Sin información' }}</p>
+              <p>{{ user.fechaNacimiento || "Sin información" }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Género</strong></p>
-              <p>{{ user?.genero || 'Sin información' }}</p>
+              <p>{{ user.genero || "Sin información" }}</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6">
               <p><strong>Correo</strong></p>
-              <p>{{ user?.correo }}</p>
+              <p>{{ user.correo }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Contraseña</strong></p>
@@ -121,7 +159,9 @@
             </div>
           </div>
 
-          <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+          <div
+            class="d-flex justify-content-between align-items-center mt-4 mb-2"
+          >
             <h5 class="fw-semibold">Datos de Contacto</h5>
             <a href="#" class="text-primary">Editar</a>
           </div>
@@ -129,7 +169,7 @@
           <div class="row">
             <div class="col-md-6">
               <p><strong>Número de celular</strong></p>
-              <p>{{ user?.numeroTelefono || 'Sin información' }}</p>
+              <p>{{ user.numeroTelefono || "Sin información" }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Contacto de emergencias</strong></p>
@@ -145,37 +185,28 @@
           </div>
         </ng-container>
 
-        <!-- MIS SERVICIOS -->
-        <ng-container *ngIf="seccionSeleccionada === 'servicios'">
-          <div class="servicios-header d-flex align-items-center justify-content-between mb-3">
-            <h4 class="fw-bold mb-3">Mis Servicios</h4>
-            <button class="btn-agregar-servicio">Añadir Servicio</button>
-          </div>
-          
-
-          <div *ngIf="(servicios?.length || 0) > 0; else sinServicios">
-            <div *ngFor="let servicio of servicios" class="servicio-card d-flex mb-3 shadow-sm rounded">
-              <div>
-                <img [src]="servicio.imagen" alt="Imagen del servicio" class="servicio-img" />
-              </div>
-              <div class="p-3 d-flex flex-column justify-content-between flex-grow-1">
-                <div>
-                  <h5 class="mb-1 fw-bold">{{ servicio.nombre }}</h5>
-                  <p class="mb-2">{{ servicio.descripcion }}</p>
-                </div>
-                <div class="precio-editar-container">
-                  <p class="mb-0 precio">CLP {{ servicio.precio.toLocaleString('es-CL') }}</p>
-                  <button class="btn-editar">Editar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <ng-template #sinServicios>
-            <p>No tienes servicios registrados aún.</p>
-          </ng-template>
+        <!-- NOTIFICACIONES -->
+        <ng-container *ngIf="seccionSeleccionada === 'notificaciones'">
+          <h4 class="fw-bold">Notificaciones</h4>
+          <p>Aquí irán las opciones de notificaciones.</p>
         </ng-container>
 
+        <!-- AYUDA -->
+        <ng-container *ngIf="seccionSeleccionada === 'ayuda'">
+          <h4 class="fw-bold">Ayuda y comentarios</h4>
+          <p>Sección de soporte y contacto. colocar componente</p>
+        </ng-container>
+
+        <!-- RESERVAS -->
+        <ng-container *ngIf="seccionSeleccionada === 'reservas'">
+          <h4 class="fw-bold">Mis Reservas</h4>
+          <p>Listado de tus reservas activas y pasadas. colocar componente</p>
+        </ng-container>
+
+        <!-- CUPONES -->
+        <ng-container *ngIf="seccionSeleccionada === 'cupones'">
+          <app-coupons-section></app-coupons-section>
+        </ng-container>
       </div>
     </div>
   </div>

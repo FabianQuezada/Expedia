@@ -1,23 +1,13 @@
-.custom-button {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid #dee2e6;
-  border-radius: 0.375rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-  background-color: #ffffff;
-  text-align: left;
+#alertaError {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  gap: 0.75rem;
-  line-height: 1.2;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.custom-button:hover {
-  background-color: #f8f9fa; /* Gris clarito */
-}
-
-.custom-button:active {
-  background-color: #e9ecef; /* Un gris más oscuro al hacer clic */
-  transform: scale(0.98); /* Efecto visual de "presionado" */
+  max-width: 600px;  /* Ajusta el máximo ancho para pantallas grandes */
+  margin: 0;
+  z-index: 9999;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
 }
