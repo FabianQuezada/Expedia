@@ -162,7 +162,7 @@ export class ContenidoPagoComponent implements OnInit {
           Number(this.datosRecibidos.ninos),
         totalPago: Number(this.datosRecibidos.total),
         fecha: this.datosRecibidos.fecha, // Se envía como Date sin hora,
-        idUsuario: Number(this.datosRecibidos.idUsuario ?? 1),
+        idUsuario: Number(this.datosRecibidos.idUsuario),
         idExperiencia: Number(this.datosRecibidos.idExperiencia),
       };
 

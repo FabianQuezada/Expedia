@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Experiencia } from 'src/app/models/experiencia';
 import { Fecha } from 'src/app/models/Fecha';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { AuthStateService } from '../../../services/auth-state.service';
 
 @Component({
   selector: 'app-exp-disp',
@@ -17,7 +18,8 @@ export class ExpDispComponent {
 
   constructor(
     private router: Router,
-    protected expService: ExperienceService
+    protected expService: ExperienceService,
+    private authStateService: AuthStateService
   ) {}
 
   seleccionarFecha(fechaObj: any) {
@@ -44,7 +46,13 @@ export class ExpDispComponent {
       alert('Debes seleccionar una fecha.');
       return;
     }
+    const idUsuario = this.authStateService.getUserId();
 
+    if (!idUsuario) {
+      alert('No se pudo obtener la sesión del usuario');
+      return;
+    }
+    
     this.router.navigate(['/pago'], {
       state: {
         ciudad: this.experiencia?.ubicacion,
@@ -55,7 +63,7 @@ export class ExpDispComponent {
         adultos: this.adultos,
         ninos: this.ninos,
         idExperiencia: this.experiencia?.idExperiencia,
-        idUsuario: 1,
+        idUsuario: idUsuario,
       },
     });
   }

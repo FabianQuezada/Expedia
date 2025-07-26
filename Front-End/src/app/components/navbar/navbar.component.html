@@ -1,6 +1,6 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid justify-content-center">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="/">
       <img
         src="assets/images/Logo-Expedia.png"
         alt="Logo"
@@ -8,16 +8,50 @@
         class="d-inline-block align-text-top"
       />
     </a>
+
     <button class="btn border-0 fw-semibold">Anunciar una propiedad</button>
     <button class="btn border-0 fw-semibold">Atención al cliente</button>
 
-    <!-- (WIP) Should only appear when logged in -->
-    <button class="btn border-0 fw-semibold">Mis Viajes</button>
+    <!-- Mostrar solo si el usuario está logueado -->
     <button
+      class="btn border-0 fw-semibold"
+      *ngIf="isLoggedIn"
+      routerLink="/viajes"
+    >
+      Mis Viajes
+    </button>
+
+    <!-- SI está logueado: botón con nombre -->
+    <div *ngIf="isLoggedIn" class="dropdown ms-4">
+      <button
+        class="btn border border-secondary rounded-pill fw-semibold d-flex align-items-center gap-2"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="bi bi-person-circle"></i>
+        {{ nombreUsuario || "Mi perfil" }}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
+        <li>
+          <button class="dropdown-item text-danger" (click)="logout()">
+            Cerrar sesión
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- SI NO está logueado -->
+    <button
+      *ngIf="!isLoggedIn"
       class="btn border border-secondary rounded-pill fw-semibold d-flex align-items-center gap-2 ms-4"
+      [routerLink]="['/login']"
     >
       <i class="bi bi-person-circle"></i>
       Iniciar Sesión
     </button>
   </div>
 </nav>
+
+<router-outlet></router-outlet>
