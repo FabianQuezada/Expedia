@@ -32,11 +32,9 @@ export class SearchResultsComponent {
 
       if (fechaParam) {
         this.fecha = new Date(fechaParam);
-        console.log('[DEBUG] Fecha desde queryParams:', this.fecha);
       }
 
       this.experienciaService.getExperiencias().subscribe(data => {
-        console.log('[DEBUG] Experiencias obtenidas:', data);
         this.experiencias = data;
         this.filtrarExperiencias();
       });
@@ -55,7 +53,6 @@ export class SearchResultsComponent {
   }
 
   aplicarFiltros(filtros: { precioMax: number, puntuacionMin: number, categorias: string[] }) {
-    console.log('[DEBUG] Filtros aplicados:', filtros);
     this.experienciasFiltradas = this.experiencias.filter((exp) => {
       const coincideUbicacion = exp.ubicacion.toLowerCase() === this.destino.toLowerCase();
       const coincideFecha = this.fecha
@@ -71,18 +68,9 @@ export class SearchResultsComponent {
 
       const resultado = coincideUbicacion && coincideFecha && cumplePrecio && cumplePuntuacion && cumpleCategoria;
 
-      console.log(`[DEBUG] Experiencia: ${exp.titulo}`);
-      console.log(`  → Ubicación: ${coincideUbicacion}`);
-      console.log(`  → Fecha: ${coincideFecha}`);
-      console.log(`  → Precio: ${cumplePrecio}`);
-      console.log(`  → Puntuación: ${cumplePuntuacion}`);
-      console.log(`  → Categoría: ${cumpleCategoria}`);
-      console.log(`  → Resultado: ${resultado}`);
-
       return resultado;
     });
 
-    console.log('[DEBUG] Experiencias filtradas por filtros:', this.experienciasFiltradas);
   }
 
   filtrarPrecio() {
@@ -92,7 +80,6 @@ export class SearchResultsComponent {
   }
 
 filtrarExperiencias() {
-  console.log('[DEBUG] Ejecutando filtrarExperiencias()');
 
   const normalizar = (str: string) =>
     str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -123,19 +110,13 @@ filtrarExperiencias() {
 
     const resultado = coincideUbicacion && coincideFecha;
 
-    console.log(`[DEBUG] Evaluando "${exp.titulo}"`);
-    console.log(`  → Ubicación válida: ${coincideUbicacion}`);
-    console.log(`  → Fecha válida: ${coincideFecha}`);
-    console.log(`  → Resultado final: ${resultado}`);
 
     return resultado;
   });
 
-  console.log('[DEBUG] Experiencias finales filtradas:', this.experienciasFiltradas);
 }
 
   onBuscar(data: { destino: string, fecha: Date }) {
-    console.log('[DEBUG] onBuscar() →', data);
     this.destino = data.destino;
     this.fecha = data.fecha;
 

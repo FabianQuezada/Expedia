@@ -6,8 +6,15 @@ import { Injectable } from '@angular/core';
 export class DateUtilsService {
   constructor() {}
 
-  getFechaCorta(fecha: Date): string {
-    return new Date(fecha).toLocaleDateString('es-CL', {
+  getFechaCorta(fechaInput: string | Date): string {
+    const fecha = new Date(fechaInput);
+    const fechaUTC = new Date(
+      fecha.getUTCFullYear(),
+      fecha.getUTCMonth(),
+      fecha.getUTCDate()
+    );
+
+    return fechaUTC.toLocaleDateString('es-CL', {
       weekday: 'short',
       day: 'numeric',
       month: 'short',
@@ -44,9 +51,10 @@ export class DateUtilsService {
   }
 
   esMismaFecha(a: Date, b: Date): boolean {
-    return a.getFullYear() === b.getFullYear() &&
-          a.getMonth() === b.getMonth() &&
-          a.getDate() === b.getDate();
+    return (
+      a.getFullYear() === b.getFullYear() &&
+      a.getMonth() === b.getMonth() &&
+      a.getDate() === b.getDate()
+    );
   }
-
 }

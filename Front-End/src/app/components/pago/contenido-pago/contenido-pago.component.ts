@@ -158,7 +158,6 @@ export class ContenidoPagoComponent implements OnInit {
       this.reservaService.crearReserva(reservaDTO).subscribe({
         next: (reserva: any) => {
           const reservaId = reserva.idReserva;
-
           const pagoDTO: CreatePagoDto = {
             metodo: this.metodoSeleccionado!,
             monto: Number(this.datosRecibidos.total),
@@ -168,7 +167,6 @@ export class ContenidoPagoComponent implements OnInit {
 
           this.pagoService.crearPago(pagoDTO).subscribe({
             next: (respuesta: any) => {
-              console.log('💬 Respuesta del backend (pago):', respuesta);
               if (respuesta && respuesta.idPago) {
                 this.reservaExitosa = true;
                 alert('¡Reserva realizada con éxito!');

@@ -9,7 +9,6 @@ export class ReservaController {
 
   @Post()
   create(@Body() createReservaDto: CreateReservaDto) {
-    console.log('🟢 DTO recibido:', createReservaDto);
     return this.reservaService.create(createReservaDto);
   }
 
