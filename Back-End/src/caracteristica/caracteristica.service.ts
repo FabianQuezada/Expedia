@@ -23,4 +23,5 @@ export class CaracteristicaService {
   remove(id: number) {
     return `This action removes a #${id} caracteristica`;
   }
+  
 }

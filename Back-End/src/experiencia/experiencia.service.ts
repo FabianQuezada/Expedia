@@ -10,6 +10,7 @@ import { Repository } from 'typeorm';
 import { Experiencia } from './entities/experiencia.entity';
 import { ImagenService } from 'src/imagen/imagen.service';
 import { FechasExperienciaService } from 'src/fechas-experiencia/fechas-experiencia.service';
+import { Caracteristica } from 'src/caracteristica/entities/caracteristica.entity';
 
 @Injectable()
 export class ExperienciaService {
@@ -111,5 +112,19 @@ export class ExperienciaService {
 
   remove(id: number) {
     return `This action removes a #${id} experiencia`;
+  }
+  async getCaracteristicasPorExperiencia(
+    id: number,
+  ): Promise<Caracteristica[]> {
+    const experiencia = await this.experienciaRepository.findOne({
+      where: { idExperiencia: id },
+      relations: ['caracteristicas'],
+    });
+
+    if (!experiencia) {
+      throw new NotFoundException('Experiencia no encontrada');
+    }
+
+    return experiencia.caracteristicas;
   }
 }

@@ -18,4 +18,5 @@ export interface Experiencia {
   puntuacion: number;
   fechasExperiencias: Fecha[];
   imagenes: Imagen[]; 
+  duracion: number;
 }
