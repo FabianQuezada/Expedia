@@ -42,4 +42,11 @@ export class DateUtilsService {
     const [year, month, day] = fechaStr.split('-').map(Number);
     return new Date(year, month - 1, day);
   }
+
+  esMismaFecha(a: Date, b: Date): boolean {
+    return a.getFullYear() === b.getFullYear() &&
+          a.getMonth() === b.getMonth() &&
+          a.getDate() === b.getDate();
+  }
+
 }

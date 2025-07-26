@@ -84,7 +84,7 @@ export class ExpDispComponent implements OnChanges {
   filtrarFechaBusqueda() {
     const fechaRef = new Date(this.fechaBusqueda!.toISOString().split('T')[0]); 
 
-    this.fechasFiltradas = this.experiencia!.fechasExperiencia
+    this.fechasFiltradas = this.experiencia!.fechasExperiencias
       .filter(f => new Date(f.fecha) >= fechaRef)
       .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
       .slice(0, 5); // máximo 5 fechas
