@@ -4,7 +4,10 @@ import { CreateCancelacionDto } from './dto/create-cancelacion.dto';
 import { UpdateCancelacionDto } from './dto/update-cancelacion.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Cancelación')
+@ApiBearerAuth()
 @Auth(Rol.USUARIO)
 @Controller('cancelacion')
 export class CancelacionController {
