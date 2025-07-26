@@ -5,6 +5,8 @@ import { PagoService } from '../../../services/pago.service';
 import { DateUtilsService } from 'src/app/services/date-utils.service';
 import { ReservaService } from 'src/app/services/reserva.service';
 import { CreateReservaDto } from 'src/app/models/reserva';
+import { CreatePagoDto } from 'src/app/models/createPago';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contenido-pago',
@@ -34,7 +36,8 @@ export class ContenidoPagoComponent implements OnInit {
     private fb: FormBuilder,
     private pagoService: PagoService,
     private reservaService: ReservaService,
-    protected dateUtil: DateUtilsService
+    protected dateUtil: DateUtilsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -139,56 +142,51 @@ export class ContenidoPagoComponent implements OnInit {
 
   reservar(): void {
     if (this.formulario.valid) {
-      const datosPago =
-        this.metodoSeleccionado === 'paypal'
-          ? this.paypalGroup.value
-          : this.pagoGroup.value;
-
-      this.resumen = {
-        ubicacion: this.datosRecibidos.ciudad,
-        experiencia: this.datosRecibidos.titulo,
-        fecha: this.datosRecibidos.fecha,
-        hora: this.datosRecibidos.hora,
-        total: this.datosRecibidos.total,
-      };
       const fechaOriginal = new Date(this.datosRecibidos.fecha);
-      fechaOriginal.setHours(0, 0, 0, 0); // Elimina la hora
-
-      console.log('ID experiencia: ', this.datosRecibidos.idUsuario);
+      fechaOriginal.setHours(0, 0, 0, 0); // limpiar hora
 
       const reservaDTO: CreateReservaDto = {
         cantidadPersonas:
           Number(this.datosRecibidos.adultos) +
           Number(this.datosRecibidos.ninos),
         totalPago: Number(this.datosRecibidos.total),
-        fecha: this.datosRecibidos.fecha, // Se envía como Date sin hora,
+        fecha: this.datosRecibidos.fecha,
         idUsuario: Number(this.datosRecibidos.idUsuario),
         idExperiencia: Number(this.datosRecibidos.idExperiencia),
       };
 
       this.reservaService.crearReserva(reservaDTO).subscribe({
         next: (reserva: any) => {
-          const reserva_id = reserva.idReserva;
+          const reservaId = reserva.idReserva;
 
-          this.pagoService
-            .crearPago({
-              metodo: this.metodoSeleccionado,
-              monto: this.resumen.total,
-              datosPago,
-              reserva_id,
-            })
-            .subscribe((respuesta: any) => {
-              if (respuesta.success) {
+          const pagoDTO: CreatePagoDto = {
+            metodo: this.metodoSeleccionado!,
+            monto: Number(this.datosRecibidos.total),
+            idReserva: reservaId,
+            idUsuario: Number(this.datosRecibidos.idUsuario),
+          };
+
+          this.pagoService.crearPago(pagoDTO).subscribe({
+            next: (respuesta: any) => {
+              console.log('💬 Respuesta del backend (pago):', respuesta);
+              if (respuesta && respuesta.idPago) {
                 this.reservaExitosa = true;
                 alert('¡Reserva realizada con éxito!');
+                this.router.navigate(['/home']); // 👈 redirección automática
+              } else {
+                alert('Error al registrar el pago.');
               }
-            });
+            },
+
+            error: (err) => {
+              console.error('Error al crear pago:', err);
+              alert('Error al procesar el pago.');
+            },
+          });
         },
         error: (err) => {
-          console.error('❌ Error al crear reserva:', err);
-          alert(
-            'Hubo un problema al registrar la reserva. Verifica los datos.'
-          );
+          console.error('Error al crear reserva:', err);
+          alert('Hubo un problema al registrar la reserva.');
         },
       });
     } else {
