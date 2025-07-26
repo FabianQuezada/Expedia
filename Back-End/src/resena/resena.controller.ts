@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, ParseIntPipe } from '@nestjs/common';
 import { ResenaService } from './resena.service';
 import { CreateResenaDto } from './dto/create-resena.dto';
 import { UpdateResenaDto } from './dto/update-resena.dto';
@@ -21,7 +21,7 @@ export class ResenaController {
   @Post(':idReserva')
   @Auth(Rol.USUARIO)
   create(
-    @Param('idReserva') idReserva: number,
+    @Param('idReserva', ParseIntPipe) idReserva: number,
     @Body() createResenaDto: CreateResenaDto,
     @Req() req: RequestWithUser
   ) {

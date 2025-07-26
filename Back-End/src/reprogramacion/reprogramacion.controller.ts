@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ReprogramacionService } from './reprogramacion.service';
 import { CreateReprogramacionDto } from './dto/create-reprogramacion.dto';
 import { UpdateReprogramacionDto } from './dto/update-reprogramacion.dto';
@@ -14,9 +14,9 @@ export class ReprogramacionController {
   constructor(private readonly reprogramacionService: ReprogramacionService) {}
 
   @Post(':idReserva')
-  create(@Param('idReserva') idReserva: number,
+  create(@Param('idReserva', ParseIntPipe) idReserva: number,
     @Body() createReprogramacionDto: CreateReprogramacionDto) {
-    return this.reprogramacionService.reprogramarReserva(+idReserva, createReprogramacionDto);
+    return this.reprogramacionService.reprogramarReserva(idReserva, createReprogramacionDto);
   }
 
   @Get()

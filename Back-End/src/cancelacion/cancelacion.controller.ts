@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { CancelacionService } from './cancelacion.service';
 import { CreateCancelacionDto } from './dto/create-cancelacion.dto';
 import { UpdateCancelacionDto } from './dto/update-cancelacion.dto';
@@ -14,9 +14,9 @@ export class CancelacionController {
   constructor(private readonly cancelacionService: CancelacionService) {}
 
   @Post(':idReserva')
-  cancelarReserva(@Param('idReserva') idReserva: number,
+  cancelarReserva(@Param('idReserva', ParseIntPipe) idReserva: number,
     @Body() createCancelacionDto: CreateCancelacionDto) {
-    return this.cancelacionService.cancelarReserva(+idReserva, createCancelacionDto);
+    return this.cancelacionService.cancelarReserva(idReserva, createCancelacionDto);
   }
 
   @Get()
