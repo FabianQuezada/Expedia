@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ExperienciaService } from './experiencia.service';
 import { CreateExperienciaDto } from './dto/create-experiencia.dto';
 import { UpdateExperienciaDto } from './dto/update-experiencia.dto';
@@ -21,9 +31,12 @@ interface RequestWithUser extends Request {
 export class ExperienciaController {
   constructor(private readonly experienciaService: ExperienciaService) {}
 
-  @Post("crear-experiencia")
+  @Post('crear-experiencia')
   @Auth(Rol.PROVEEDOR)
-  create(@Body() createExperienciaDto: CreateExperienciaDto, @Req() req: RequestWithUser) {
+  create(
+    @Body() createExperienciaDto: CreateExperienciaDto,
+    @Req() req: RequestWithUser,
+  ) {
     const idProveedor = req.usuario.id;
 
     return this.experienciaService.create({
@@ -32,7 +45,7 @@ export class ExperienciaController {
     });
   }
 
-  @Get("mis-experiencias")
+  @Get('mis-experiencias')
   @Auth(Rol.PROVEEDOR)
   findByProveedor(@Req() req: RequestWithUser) {
     const idProveedor = req.usuario.id;
@@ -51,7 +64,10 @@ export class ExperienciaController {
 
   @Patch(':id')
   @Auth(Rol.PROVEEDOR)
-  update(@Param('id') id: string, @Body() updateExperienciaDto: UpdateExperienciaDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateExperienciaDto: UpdateExperienciaDto,
+  ) {
     return this.experienciaService.update(+id, updateExperienciaDto);
   }
 
@@ -59,5 +75,9 @@ export class ExperienciaController {
   @Auth(Rol.PROVEEDOR)
   remove(@Param('id') id: string) {
     return this.experienciaService.remove(+id);
+  }
+  @Get(':id/caracteristicas')
+  getCaracteristicas(@Param('id') id: string) {
+    return this.experienciaService.getCaracteristicasPorExperiencia(+id);
   }
 }

@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { FechasExperienciaService } from './fechas-experiencia.service';
 import { CreateFechasExperienciaDto } from './dto/create-fechas-experiencia.dto';
 import { UpdateFechasExperienciaDto } from './dto/update-fechas-experiencia.dto';
@@ -10,7 +19,9 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('Fechas de experiencia')
 @Controller('fechas-experiencia')
 export class FechasExperienciaController {
-  constructor(private readonly fechasExperienciaService: FechasExperienciaService) {}
+  constructor(
+    private readonly fechasExperienciaService: FechasExperienciaService,
+  ) {}
 
   @Post('agregar-fechas/:idExperiencia')
   @Auth(Rol.PROVEEDOR)
@@ -18,8 +29,10 @@ export class FechasExperienciaController {
     @Param('idExperiencia', ParseIntPipe) idExperiencia: number,
     @Body() createFechasExperienciaDto: CreateFechasExperienciaDto[],
   ) {
-    
-    return this.fechasExperienciaService.agregarFechas(idExperiencia, createFechasExperienciaDto);
+    return this.fechasExperienciaService.agregarFechas(
+      idExperiencia,
+      createFechasExperienciaDto,
+    );
   }
 
   @Get()
@@ -27,14 +40,23 @@ export class FechasExperienciaController {
     return this.fechasExperienciaService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fechasExperienciaService.findOne(+id);
+  @Get(':fecha/:idExperiencia')
+  findOne(
+    @Param('fecha') fecha: Date,
+    @Param('idExperiencia', ParseIntPipe) idExperiencia: number
+  ) {
+    return this.fechasExperienciaService.findOne(new Date(fecha), +idExperiencia);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFechasExperienciaDto: UpdateFechasExperienciaDto) {
-    return this.fechasExperienciaService.update(+id, updateFechasExperienciaDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateFechasExperienciaDto: UpdateFechasExperienciaDto,
+  ) {
+    return this.fechasExperienciaService.update(
+      +id,
+      updateFechasExperienciaDto,
+    );
   }
 
   @Delete(':id')
