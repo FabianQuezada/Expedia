@@ -1,29 +1,21 @@
 <div class="border rounded-4 p-4 bg-white shadow-sm mb-4 position-relative d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
-  <!-- Información del cupón -->
   <div class="flex-grow-1">
-    <h2 class="fw-bold fs-4 mb-1 text-primary">{{ coupon.montoDescuento }}% DE DESCUENTO</h2>
+    <h2 class="fw-bold fs-4 mb-1 text-primary">{{ cupon.montoDescuento }}% DE DESCUENTO</h2>
     <p class="text-dark small mb-1">
-      En compras desde {{ coupon.minPurchase || 0 | currency:'CLP':'symbol':'1.0-0' }}
+      En compras desde {{ cupon.minPurchase || 0 | currency:'CLP':'symbol':'1.0-0' }}
     </p>
-    <p class="text-muted small mb-0">Válido hasta {{ coupon.fechaFinal }}</p>
+    <p class="text-muted small mb-0">Válido hasta {{ cupon.fechaFinal | date:'dd/MM/yyyy' }}</p>
   </div>
-
-  <!-- Botón y código -->
   <div class="d-flex flex-column align-items-md-end align-items-start gap-2">
     <button
       class="btn fw-bold py-1 px-3 rounded-pill text-uppercase small"
-      [ngClass]="copied 
-        ? 'btn-light text-dark border border-secondary shadow-sm' 
-        : 'btn-warning text-white'"
-      (click)="copyCode()"
-    >
+      [ngClass]="copied  ? 'btn-light text-dark border border-secondary shadow-sm': 'btn-warning text-white'" (click)="copyCode()" >
       {{ buttonText }}
     </button>
 
     <div
-      class="bg-light text-dark fw-bold py-1 px-3 rounded-pill small font-monospace user-select-all"
-    >
-      {{ coupon.code }}
+      class="bg-light text-dark fw-bold py-1 px-3 rounded-pill small font-monospace user-select-all">
+      {{ cupon.code }}
     </div>
   </div>
 </div>
