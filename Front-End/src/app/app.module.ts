@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -12,6 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CouponsSectionComponent } from './components/user-coupon/coupons-section/coupons-section.component';
 import { CardCouponComponent } from './components/user-coupon/card-coupon/card-coupon.component';
+import { ProviderProfileComponent } from './components/provider-profile/provider-profile.component';
+import { ViewServiceComponent } from './components/view-service/view-service.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,15 @@ import { CardCouponComponent } from './components/user-coupon/card-coupon/card-c
     NavbarComponent,
     UserProfileComponent,
     CouponsSectionComponent,
-    CardCouponComponent
+    CardCouponComponent,
+    ViewServiceComponent,
+    ProviderProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
