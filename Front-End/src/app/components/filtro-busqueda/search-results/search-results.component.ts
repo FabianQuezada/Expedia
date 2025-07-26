@@ -42,7 +42,14 @@ export class SearchResultsComponent {
       });
     });
   }
+  calcularPrecioPromedio(exp: Experiencia): number {
+  const precios = exp.fechasExperiencias?.map(f => f.precio) || [];
 
+  if (precios.length === 0) return 0;
+
+  const suma = precios.reduce((acc, curr) => acc + curr, 0);
+  return Math.round(suma / precios.length);
+}
   toggleMobileFilters() {
     this.showMobileFilters = !this.showMobileFilters;
   }
@@ -87,9 +94,12 @@ export class SearchResultsComponent {
 filtrarExperiencias() {
   console.log('[DEBUG] Ejecutando filtrarExperiencias()');
 
+  const normalizar = (str: string) =>
+    str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
   this.experienciasFiltradas = this.experiencias.filter((exp) => {
-    const ubicacionExp = exp.ubicacion.trim().toLowerCase();
-    const destinoBuscado = this.destino.trim().toLowerCase();
+    const ubicacionExp = normalizar(exp.ubicacion);
+    const destinoBuscado = normalizar(this.destino);
 
     const coincideUbicacion = ubicacionExp === destinoBuscado;
 
@@ -103,7 +113,9 @@ filtrarExperiencias() {
       const mismaFecha = this.fecha ? this.dateUtils.esMismaFecha(new Date(f.fecha), this.fecha) : true;
 
       if (this.fecha && mismaFecha) {
-        console.log(`[MATCH] Fecha válida para "${exp.titulo}" → ${f.fecha}`);
+        console.log(`[MATCH] Fecha válida para "${this.fecha}" → ${f.fecha}`);
+      } else {
+        console.log(`[No MATCH] Fecha válida para "${this.fecha}" != ${f.fecha}`);
       }
 
       return mismaFecha;

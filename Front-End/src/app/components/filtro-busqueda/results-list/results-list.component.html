@@ -5,7 +5,7 @@
   >
     <div class="card h-100 w-100">
       <a
-        [routerLink]="['/experiencias', experiencia.idExperiencia]"
+        [routerLink]="['/experiencia', experiencia.idExperiencia]"
         [queryParams]="{
           date: fechaSeleccionada
             ? fechaSeleccionada.toISOString().split('T')[0]
@@ -40,7 +40,7 @@
 
         <!-- Precio -->
         <p class="card-text fs-5 fw-bold mt-3 mb-0">
-          CLP {{ experiencia.precio | number }}
+          Desde CLP {{ obtenerPrecioMinimo(experiencia) | number }}
         </p>
       </div>
     </div>
