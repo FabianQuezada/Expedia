@@ -5,7 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-view-service',
   templateUrl: './view-service.component.html',
-  styleUrls: ['./view-service.component.scss']
+  styleUrls: ['./view-service.component.css']
 })
 export class ViewServiceComponent implements AfterViewInit {
   @Input() servicio!: ServiceProvider;

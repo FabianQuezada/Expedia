@@ -1,6 +1,7 @@
-import { Injectable, Provider } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUserById(id: number): Observable<Provider> {
-    return this.http.get<Provider>(`${this.apiUrl}/${id}`);
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 }
-export { Provider };
-

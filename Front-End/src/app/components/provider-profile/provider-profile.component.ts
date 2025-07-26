@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Provider } from '../../services/provider/provider.service';
+import { Provider } from 'src/app/models/provider';
 import { ProviderExperienceService } from '../../services/providerExperience/providerExperience.service';
 import { ServiceProvider } from 'src/app/models/service-provider';
 import { Validators } from '@angular/forms';

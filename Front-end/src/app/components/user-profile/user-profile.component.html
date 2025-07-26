@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container my-4">
   <div class="row">
     <!-- PANEL IZQUIERDO -->
@@ -6,7 +7,9 @@
         <div class="mb-3">
           <h5 class="fw-semibold">{{ user.nombre }}</h5>
           <p class="text-muted small">{{ user.correo }}</p>
-          <p class="small">Administra tu perfil y configuraciones en un solo lugar</p>
+          <p class="small">
+            Administra tu perfil y configuraciones en un solo lugar
+          </p>
         </div>
 
         <div class="d-flex flex-column gap-3">
@@ -20,7 +23,9 @@
             <i class="bi bi-person fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Perfil</div>
-              <div class="text-muted" style="font-size: 0.65rem">Ingresa tus datos personales y documentos de viaje</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Ingresa tus datos personales y documentos de viaje
+              </div>
             </div>
           </div>
 
@@ -34,7 +39,9 @@
             <i class="bi bi-bell fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Notificaciones</div>
-              <div class="text-muted" style="font-size: 0.65rem">Elige las notificaciones que quieres recibir</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Elige las notificaciones que quieres recibir
+              </div>
             </div>
           </div>
 
@@ -48,7 +55,9 @@
             <i class="bi bi-question-circle fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Ayuda y comentarios</div>
-              <div class="text-muted" style="font-size: 0.65rem">Obtén asistencia</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Obtén asistencia
+              </div>
             </div>
           </div>
 
@@ -62,7 +71,9 @@
             <i class="bi bi-journal-text fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Mis Reservas</div>
-              <div class="text-muted" style="font-size: 0.65rem">Edita o cancela tus reservas</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Edita o cancela tus reservas
+              </div>
             </div>
           </div>
 
@@ -76,7 +87,9 @@
             <i class="bi bi-gift fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Mis Cupones</div>
-              <div class="text-muted" style="font-size: 0.65rem">Administra tus cupones disponibles</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Administra tus cupones disponibles
+              </div>
             </div>
           </div>
 
@@ -89,7 +102,9 @@
             <i class="bi bi-box-arrow-right fs-4 me-3 mt-1"></i>
             <div>
               <div class="fw-semibold">Cerrar Sesión</div>
-              <div class="text-muted" style="font-size: 0.65rem">Salir de tu cuenta de forma segura</div>
+              <div class="text-muted" style="font-size: 0.65rem">
+                Salir de tu cuenta de forma segura
+              </div>
             </div>
           </div>
         </div>
@@ -99,9 +114,10 @@
     <!-- PANEL DERECHO -->
     <div class="col-md-9">
       <div class="right-panel card p-4">
-
         <!-- PERFIL -->
-        <ng-container *ngIf="seccionSeleccionada === 'perfil' || !seccionSeleccionada">
+        <ng-container
+          *ngIf="seccionSeleccionada === 'perfil' || !seccionSeleccionada"
+        >
           <h4 class="fw-bold">{{ user.nombre }} {{ user.apellido }}</h4>
           <hr class="mb-4" />
 
@@ -124,11 +140,11 @@
           <div class="row">
             <div class="col-md-6">
               <p><strong>Fecha de nacimiento</strong></p>
-              <p>{{ user.fechaNacimiento || 'Sin información' }}</p>
+              <p>{{ user.fechaNacimiento || "Sin información" }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Género</strong></p>
-              <p>{{ user.genero || 'Sin información' }}</p>
+              <p>{{ user.genero || "Sin información" }}</p>
             </div>
           </div>
 
@@ -143,7 +159,9 @@
             </div>
           </div>
 
-          <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+          <div
+            class="d-flex justify-content-between align-items-center mt-4 mb-2"
+          >
             <h5 class="fw-semibold">Datos de Contacto</h5>
             <a href="#" class="text-primary">Editar</a>
           </div>
@@ -151,7 +169,7 @@
           <div class="row">
             <div class="col-md-6">
               <p><strong>Número de celular</strong></p>
-              <p>{{ user.numeroTelefono || 'Sin información' }}</p>
+              <p>{{ user.numeroTelefono || "Sin información" }}</p>
             </div>
             <div class="col-md-6">
               <p><strong>Contacto de emergencias</strong></p>
@@ -176,24 +194,19 @@
         <!-- AYUDA -->
         <ng-container *ngIf="seccionSeleccionada === 'ayuda'">
           <h4 class="fw-bold">Ayuda y comentarios</h4>
-          <p>Sección de soporte y contacto.
-            colocar componente
-          </p>
+          <p>Sección de soporte y contacto. colocar componente</p>
         </ng-container>
 
         <!-- RESERVAS -->
         <ng-container *ngIf="seccionSeleccionada === 'reservas'">
           <h4 class="fw-bold">Mis Reservas</h4>
-          <p>Listado de tus reservas activas y pasadas.
-            colocar componente
-          </p>
+          <p>Listado de tus reservas activas y pasadas. colocar componente</p>
         </ng-container>
 
         <!-- CUPONES -->
         <ng-container *ngIf="seccionSeleccionada === 'cupones'">
           <app-coupons-section></app-coupons-section>
         </ng-container>
-
       </div>
     </div>
   </div>
