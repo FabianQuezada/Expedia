@@ -43,13 +43,13 @@ html, body {
 }
 
 .btn-opciones.active {
-  background-color: #1E1E1E;
+  background-color: #1e1e1e;
   color: white;
   transform: scale(1.02);
 }
 
 .btn-opciones.active .subtitulo {
-  color:white !important
+  color: white !important;
 }
 
 .subtitulo {
@@ -100,7 +100,7 @@ html, body {
 }
 
 .btn-agregar-servicio {
-  background-color: #0799FE; /* azul Bootstrap */
+  background-color: #0799fe; /* azul Bootstrap */
   border: none;
   border-radius: 30px;
   padding: 6px 15px;
@@ -113,6 +113,50 @@ html, body {
 .btn-agregar-servicio:hover {
   background-color: #0056b3; /* azul más oscuro al hover */
 }
+
+.img-upload-btn {
+  display: block;
+  background-color: #dee2e6;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5rem;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  padding-top: 100px;
+}
+
+.img-upload-btn:hover {
+  filter: brightness(1.05);
+}
+
+.auto-expand {
+  overflow: hidden;
+  resize: none; /* evita que el usuario lo estire manualmente */
+
+  /* Estilo input-like */
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+}
+
+input.form-control {
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.input-group-text {
+  background-color: white;
+  border: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 
 .fixed-height-scroll {
   position: relative;

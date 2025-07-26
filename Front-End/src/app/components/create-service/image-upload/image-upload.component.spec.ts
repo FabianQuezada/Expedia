@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarComponent } from './navbar.component';
+import { ImageUploadComponent } from './image-upload.component';
 
-describe('NavbarComponent', () => {
-  let component: NavbarComponent;
-  let fixture: ComponentFixture<NavbarComponent>;
+describe('ImageUploadComponent', () => {
+  let component: ImageUploadComponent;
+  let fixture: ComponentFixture<ImageUploadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavbarComponent ]
+      declarations: [ ImageUploadComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavbarComponent);
+    fixture = TestBed.createComponent(ImageUploadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -21,5 +21,3 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-
-
