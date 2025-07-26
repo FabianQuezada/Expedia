@@ -10,6 +10,5 @@ export class CardActividadComponent implements OnInit {
   @Input() experiencia!: Experiencia;
 
   ngOnInit(): void {
-    console.log('Experiencia recibida en hijo:', this.experiencia);
   }
 }

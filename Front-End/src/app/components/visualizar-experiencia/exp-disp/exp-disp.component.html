@@ -8,7 +8,7 @@
     <button
       type="button"
       class="btn btn-lg btn-light border border-secondary me-1"
-      *ngFor="let fecha of experiencia?.fechasExperiencia"
+      *ngFor="let fecha of experiencia?.fechasExperiencias"
       [class.active]="fecha === fechaSeleccionada"
       (click)="seleccionarFecha(fecha)"
     >

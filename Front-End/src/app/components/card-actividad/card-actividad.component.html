@@ -1,11 +1,16 @@
-<a [routerLink]="['/experiencia', experiencia.idExperiencia]"
-   class="rounded-3 d-block position-relative overflow-hidden ratio ratio-21x9 shadow-sm text-decoration-none">
-  
-  <img [src]="experiencia.imagenes?.[0]?.url"
-       alt="Imagen de experiencia"
-       class="w-100 h-100 object-fit-cover">
+<a
+  [routerLink]="['/experiencia', experiencia.idExperiencia]"
+  class="rounded-3 d-block position-relative overflow-hidden ratio ratio-21x9 shadow-sm text-decoration-none"
+>
+  <img
+    [src]="experiencia.imagenes?.[0]?.url"
+    alt="Imagen de experiencia"
+    class="w-100 h-100 object-fit-cover"
+  />
 
-  <div class="position-absolute top-0 w-100 h-100 d-flex align-items-center justify-content-center card-degraded">
+  <div
+    class="position-absolute top-0 w-100 h-100 d-flex align-items-center justify-content-center card-degraded"
+  >
     <h3 class="text-white text-center m-3 poppins-medium">
       {{ experiencia.titulo }}
     </h3>

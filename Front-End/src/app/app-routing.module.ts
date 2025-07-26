@@ -7,11 +7,11 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 
 const routes: Routes = [
-  {path:'', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'resultados/:destino', component: SearchResultsComponent},
-  { path: 'experiencia/:id', component: ExperienceComponent },
-  { path: 'resenas', component: ReviewsComponent },
-  { path: 'pago', component: ContenidoPagoComponent },
+  {path: 'experiencia/:id', component: ExperienceComponent },
+  {path: 'resenas', component: ReviewsComponent },
+  {path: 'pago', component: ContenidoPagoComponent },
   
 ];
 

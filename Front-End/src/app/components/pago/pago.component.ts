@@ -143,7 +143,9 @@ export class PagoComponent implements OnInit {
     }
   }
 
+
   reservar(): void {
+    
     if (this.formulario.valid) {
       const datosPago =
         this.metodoSeleccionado === 'paypal'

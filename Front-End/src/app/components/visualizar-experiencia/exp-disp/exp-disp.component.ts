@@ -15,8 +15,10 @@ export class ExpDispComponent {
   adultos: number = 1;
   ninos: number = 0;
 
-  constructor(private router: Router, protected expService: ExperienceService) {}
-
+  constructor(
+    private router: Router,
+    protected expService: ExperienceService
+  ) {}
 
   seleccionarFecha(fechaObj: any) {
     this.fechaSeleccionada = fechaObj;
@@ -33,7 +35,7 @@ export class ExpDispComponent {
   calcularTotal(): number {
     const precio =
       this.fechaSeleccionada?.precio ||
-      this.experiencia?.fechasExperiencia[0].precio;
+      this.experiencia?.fechasExperiencias[0].precio;
     return precio! * this.adultos + this.ninos * 20000;
   }
 
@@ -52,6 +54,8 @@ export class ExpDispComponent {
         total: this.calcularTotal(),
         adultos: this.adultos,
         ninos: this.ninos,
+        idExperiencia: this.experiencia?.idExperiencia,
+        idUsuario: 1,
       },
     });
   }

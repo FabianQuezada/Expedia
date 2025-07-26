@@ -16,6 +16,6 @@ export interface Experiencia {
   datosGenerales: string[];
   precio: number;
   puntuacion: number;
-  fechasExperiencia: Fecha[];
+  fechasExperiencias: Fecha[];
   imagenes: Imagen[]; 
 }
