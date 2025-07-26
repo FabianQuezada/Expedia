@@ -13,6 +13,7 @@ export class ExperienceService {
 
   // Obtener todas las experiencias
   getExperiencias(): Observable<Experiencia[]> {
+    
     return this.http.get<Experiencia[]>(this.apiUrl);
   }
 
@@ -33,5 +34,6 @@ export class ExperienceService {
     return fechaFormateada
       .toLowerCase()
       .replace(/(^|\s)([a-záéíóúüñ])/, (m) => m.toLowerCase());
+
   }
 }

@@ -10,6 +10,7 @@ import { ExperienceService } from 'src/app/services/experience.service';
 })
 export class ExperienceComponent {
   experiencia: Experiencia | undefined;
+  fechaSeleccionada: Date | undefined;
   
   constructor(
     private experienciaService: ExperienceService, 
@@ -17,15 +18,17 @@ export class ExperienceComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
+      this.experienciaService.getExperienciaPorId(id).subscribe(data => {
+        this.experiencia = data;
+      });
+    });
 
-    this.experienciaService.getExperienciaPorId(id).subscribe(
-      (experiencia) => {
-        this.experiencia = experiencia;
-      },
-      (error) => {
-        console.error('Error al cargar la experiencia', error);
+    this.route.queryParams.subscribe(params => {
+      if (params['date']) {
+        this.fechaSeleccionada = new Date(params['date']);
       }
-    );
+    });
   }  
 }

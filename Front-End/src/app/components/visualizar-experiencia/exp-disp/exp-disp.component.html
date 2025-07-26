@@ -12,7 +12,7 @@
       [class.active]="fecha === fechaSeleccionada"
       (click)="seleccionarFecha(fecha)"
     >
-      {{ expService.getFechaString(fecha.fecha) }}<br /><strong
+      {{ dateUtilService.getFechaCorta(fecha.fecha) }}<br /><strong
         >CLP {{ fecha.precio }}</strong
       >
     </button>

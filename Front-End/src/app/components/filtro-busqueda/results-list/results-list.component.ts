@@ -8,6 +8,7 @@ import { Experiencia } from 'src/app/models/experiencia';
 })
 export class ResultsListComponent {
   @Input() experiencias: Experiencia[] = [];
+  @Input() fechaSeleccionada: Date | undefined;
 
   onImageError(event: Event) {
     const img = event.target as HTMLImageElement;

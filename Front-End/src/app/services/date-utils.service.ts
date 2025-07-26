@@ -37,4 +37,9 @@ export class DateUtilsService {
       minute: '2-digit',
     });
   }
+
+  parseLocalDate(fechaStr: string): Date {
+    const [year, month, day] = fechaStr.split('-').map(Number);
+    return new Date(year, month - 1, day);
+  }
 }
