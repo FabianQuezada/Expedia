@@ -22,10 +22,14 @@ import { ContenidoPagoComponent } from './components/pago/contenido-pago/conteni
 import { MetodoPagoComponent } from './components/pago/metodo-pago/metodo-pago.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { HomeComponent } from './components/home/home.component';
-import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component';
-import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
-import { CardActividadComponent } from './components/card-actividad/card-actividad.component';
+import { CardVueloComponent } from './components/home/card-vuelo/card-vuelo.component';
+import { CardHospedajeComponent } from './components/home/card-hospedaje/card-hospedaje.component';
+import { CardActividadComponent } from './components/home/card-actividad/card-actividad.component';
 import { SearchBarActivityComponent } from './components/search-bar-activity/search-bar-activity.component';
+import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
+import { CarouselExperiencesComponent } from './components/experience-history/carousel-experiences/carousel-experiences.component';
+import { CardExperienceComponent } from './components/experience-history/card-experience/card-experience.component';
+
 import { ResultsListComponent } from './components/filtro-busqueda/results-list/results-list.component';
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
@@ -61,6 +65,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     CardHospedajeComponent,
     CardActividadComponent,
     SearchBarActivityComponent,
+    ExperienceHistoryComponent,
+    CarouselExperiencesComponent,
+    CardExperienceComponent,
     ResultsListComponent,
     FiltersPanelComponent,
     SearchResultsComponent,
@@ -73,15 +80,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
-
   ],
-  imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule],
-
-  providers: [{
-      provide: HTTP_INTERCEPTORS,
+  imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule
+  ],
+  providers: [{provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
-    }],
+      multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
