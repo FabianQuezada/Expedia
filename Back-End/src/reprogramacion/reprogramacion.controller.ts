@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ReprogramacionService } from './reprogramacion.service';
 import { CreateReprogramacionDto } from './dto/create-reprogramacion.dto';
 import { UpdateReprogramacionDto } from './dto/update-reprogramacion.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('Reprogramación')
+@Auth(Rol.USUARIO)
 @Controller('reprogramacion')
 export class ReprogramacionController {
   constructor(private readonly reprogramacionService: ReprogramacionService) {}
 
-  @Post()
-  create(@Body() createReprogramacionDto: CreateReprogramacionDto) {
-    return this.reprogramacionService.create(createReprogramacionDto);
+  @Post(':idReserva')
+  create(@Param('idReserva', ParseIntPipe) idReserva: number,
+    @Body() createReprogramacionDto: CreateReprogramacionDto) {
+    return this.reprogramacionService.reprogramarReserva(idReserva, createReprogramacionDto);
   }
 
   @Get()

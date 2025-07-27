@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Descuento } from "../../descuento/entities/descuento.entity";
 import { Notificacion } from "../../notificacion/entities/notificacion.entity";
-import { Reseña } from "../../reseña/entities/reseña.entity";
+import { Resena } from "../../resena/entities/resena.entity";
 import { Reserva } from "../../reserva/entities/reserva.entity";
 
 @Entity("usuario", { schema: "nest_bd" })
@@ -27,7 +27,7 @@ export class Usuario {
   @Column("varchar", { name: "Correo", length: 100 })
   correo: string;
 
-  @Column("varchar", { name: "Contraseña", length: 255 })
+  @Column("varchar", { name: "Contraseña", length: 255, select: false })
   contraseña: string;
 
   @CreateDateColumn({ name: "Fecha_Registro", type: "timestamp" })
@@ -47,8 +47,8 @@ export class Usuario {
   @ManyToMany(() => Notificacion, (notificacion) => notificacion.usuarios)
   notificacions: Notificacion[];
 
-  @OneToMany(() => Reseña, (reseña) => reseña.idUsuario2)
-  reseñas: Reseña[];
+  @OneToMany(() => Resena, (resena) => resena.idUsuario2)
+  resenas: Resena[];
 
   @OneToMany(() => Reserva, (reserva) => reserva.idUsuario2)
   reservas: Reserva[];

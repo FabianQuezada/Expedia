@@ -1,17 +1,11 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-} from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 import { Descuento } from "../../descuento/entities/descuento.entity";
 import { Reserva } from "../../reserva/entities/reserva.entity";
 
 @Index("ID_Experiencia", ["idExperiencia"], {})
 @Index("ID_Descuento", ["idDescuento"], {})
+@Index(['fecha', 'idExperiencia'], { unique: true })
 @Entity("fechas_experiencia", { schema: "nest_bd" })
 export class FechasExperiencia {
   @Column("date", { primary: true, name: "Fecha" })
@@ -21,7 +15,10 @@ export class FechasExperiencia {
   idExperiencia: number;
 
   @Column("decimal", { name: "Precio", precision: 10, scale: 2 })
-  precio: string;
+  precio: number;
+
+  @Column("decimal", { name: "Descuento", precision: 4, scale: 2, nullable: true })
+  descuento?: number;
 
   @Column("int", { name: "Vistas" })
   vistas: number;
@@ -29,10 +26,12 @@ export class FechasExperiencia {
   @Column("int", { name: "ID_Descuento", nullable: true })
   idDescuento: number | null;
 
+  @Column('int', { name: 'Cupos_Disponibles' })
+  cuposDisponibles: number;
   @ManyToOne(
     () => Experiencia,
     (experiencia) => experiencia.fechasExperiencias,
-    { onDelete: "RESTRICT", onUpdate: "RESTRICT" }
+    { onDelete: "CASCADE", onUpdate: "RESTRICT" }
   )
   @JoinColumn([
     { name: "ID_Experiencia", referencedColumnName: "idExperiencia" },

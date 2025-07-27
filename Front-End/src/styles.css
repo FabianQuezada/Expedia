@@ -217,4 +217,53 @@ input[type="number"] {
 .fade-bottom {
   bottom: 0;
   background: linear-gradient(to top, white, transparent);
+
+.order-options {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  border-bottom: 2px solid #ccc; /* línea gris base extendida */
+  width: 100%;
+  max-width: none;
+}
+
+.order-option {
+  color: #666;
+  padding-bottom: 6px;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.order-option.active {
+  color: #0d6efd;
+}
+
+.order-line-active {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: #0d6efd;
+  border-radius: 1px;
+  transition: transform 0.3s ease, width 0.3s ease;
+  will-change: transform, width;
+}
+
+.card-md {
+  max-width: 18rem;
+}
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
