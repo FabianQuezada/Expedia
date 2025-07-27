@@ -28,17 +28,17 @@
 
 ## Tabla de Contenidos
 
-- [Descripción General](#-descripción-general)
-- [Comenzando](#-comenzando)
-  - [Requisitos Previos](#-requisitos-previos)
-  - [Instalación](#-instalación)
-  - [Pruebas](#-pruebas)
-  - [Uso](#-uso)
-- [Funcionalidades](#-funcionalidades)
-- [Roles del Equipo](#-roles-del-equipo)
-- [Arquitectura del Proyecto](#-arquitectura-del-proyecto)
-- [Despliegue](#-despliegue)
-- [Licencia](#-licencia)
+- Descripción General
+- Comenzando
+  - Requisitos Previos
+  - Instalación
+  - Pruebas
+  - Uso
+- Funcionalidades
+- Roles del Equipo
+- Arquitectura del Proyecto
+- Despliegue
+- Licencia
 
 ---
 
