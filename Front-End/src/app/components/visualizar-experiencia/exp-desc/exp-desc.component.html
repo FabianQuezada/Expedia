@@ -48,22 +48,22 @@
     <!-- Columna derecha -->
     <div class="col-md-4 d-flex flex-column align-items-end">
       <!-- Estrellas -->
-      <div class="mb-3">
-        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
-        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
-        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
-        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
-        <i class="bi bi-star-fill text-dark fs-1 me-1"></i>
-      </div>
 
+      <div class="mb-3">
+        <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+          <i [ngClass]="getCustomStarClass(i)" class="fs-1 me-1"></i>
+        </ng-container>
+      </div>
       <!-- Rating -->
       <div class="d-flex align-items-center gap-3 mb-3">
         <a
           [routerLink]="['/resenas']"
+          [queryParams]="{ idExperiencia: experiencia?.idExperiencia }"
           class="bg-success text-white fw-bold py-2 px-4 rounded text-decoration-none"
-          >8.0</a
         >
-        <span class="fw-bold fs-3">Muy Bueno</span>
+          {{ experiencia?.puntuacionPromedio ?? "0.0" }}
+        </a>
+        <span class="fw-bold fs-3">Calificación</span>
       </div>
 
       <!-- Mapa -->

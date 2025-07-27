@@ -25,6 +25,7 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
+    
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [{ provide: 'LOCALE_ID', useValue: 'es' }],

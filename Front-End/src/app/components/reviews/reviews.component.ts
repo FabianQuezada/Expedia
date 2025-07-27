@@ -1,56 +1,51 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, QueryList, ViewChildren } from '@angular/core';
-
-interface Review {
-  score: number;
-  author: string;
-  text: string;
-  date: Date; 
-  // podrías agregar date?: Date para ordenar por fecha si quieres
-}
+import { Component, ElementRef, AfterViewInit, ViewChild, ViewChildren, QueryList, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Review } from 'src/app/models/review';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html'
 })
-export class ReviewsComponent implements AfterViewInit {
-  selectedOrder: 'recientes' | 'positivas' | 'negativas' = 'recientes'; // valor por defecto
-  reviews: Review[] = [
-    {
-      score: 7,
-      author: 'Don Francisco',
-      text: 'muy lindo besos',
-      date: new Date(2025, 5, 1)
-    },
-    {
-      score: 2,
-      author: 'Ricardo Valdivia',
-      text: 'muy feo',
-      date: new Date(2025, 4, 31)
-    },
-    {
-      score: 10,
-      author: 'Héctor Ossandón',
-      text: 'perfecto',
-      date: new Date(2024, 3, 11)
-    },
-  ];
+export class ReviewsComponent implements OnInit, AfterViewInit {
+  selectedOrder: 'recientes' | 'positivas' | 'negativas' = 'recientes';
+  reviews: Review[] = [];
 
-  // Referencia al contenedor de las opciones
   @ViewChild('orderOptionsContainer') orderOptionsContainer!: ElementRef<HTMLDivElement>;
-
-  // Referencias a cada opción para medir ancho y posición
   @ViewChildren('orderOptionRecientes, orderOptionPositivas, orderOptionNegativas', { read: ElementRef })
   orderOptions!: QueryList<ElementRef<HTMLSpanElement>>;
 
-  // Estilos para la línea azul activa
   lineStyle = {
     width: '0px',
     transform: 'translateX(0px)'
   };
 
-  ngAfterViewInit() {
-    // Inicializa la posición de la línea después de que la vista esté lista
-    this.updateLine();
+  idExperiencia!: number;
+
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.idExperiencia = Number(this.route.snapshot.queryParamMap.get('idExperiencia') ?? 1); // fallback id 1
+    this.cargarResenas();
+  }
+
+  cargarResenas(): void {
+    this.http.get<Review[]>(`http://localhost:3000/resena/experiencia/${this.idExperiencia}`)
+      .subscribe({
+        next: (data) => {
+          this.reviews = data.map(r => ({
+            ...r,
+            date: new Date(r.date)
+          }));
+          this.ordenar(this.selectedOrder);
+        },
+        error: (err) => {
+          console.error('❌ Error al cargar reseñas:', err);
+        }
+      });
   }
 
   selectOrder(order: 'recientes' | 'positivas' | 'negativas') {
@@ -60,14 +55,14 @@ export class ReviewsComponent implements AfterViewInit {
   }
 
   ordenar(criterio: string) {
-  if (criterio === 'recientes') {
-    this.reviews.sort((a, b) => (b.date?.getTime() || 0) - (a.date?.getTime() || 0));
-  } else if (criterio === 'positivas') {
-    this.reviews.sort((a, b) => b.score - a.score);
-  } else if (criterio === 'negativas') {
-    this.reviews.sort((a, b) => a.score - b.score);
+    if (criterio === 'recientes') {
+      this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    } else if (criterio === 'positivas') {
+      this.reviews.sort((a, b) => b.score - a.score);
+    } else if (criterio === 'negativas') {
+      this.reviews.sort((a, b) => a.score - b.score);
+    }
   }
-}
 
   get ratingScore(): number {
     if (this.reviews.length === 0) return 0;
@@ -77,6 +72,10 @@ export class ReviewsComponent implements AfterViewInit {
 
   get reviewsCount(): number {
     return this.reviews.length;
+  }
+
+  ngAfterViewInit() {
+    this.updateLine();
   }
 
   updateLine() {

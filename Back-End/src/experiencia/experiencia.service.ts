@@ -11,6 +11,9 @@ import { Experiencia } from './entities/experiencia.entity';
 import { ImagenService } from 'src/imagen/imagen.service';
 import { FechasExperienciaService } from 'src/fechas-experiencia/fechas-experiencia.service';
 import { Caracteristica } from 'src/caracteristica/entities/caracteristica.entity';
+import { Resena } from 'src/resena/entities/resena.entity';
+import { ExperienciaResponseDto } from './dto/salida-experiencia.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class ExperienciaService {
@@ -19,6 +22,8 @@ export class ExperienciaService {
     private experienciaRepository: Repository<Experiencia>,
     private imagenService: ImagenService,
     private fechasExperienciaService: FechasExperienciaService,
+    @InjectRepository(Resena)
+    private resenaRepository: Repository<Resena>,
   ) {}
 
   async create(data: CreateExperienciaDto & { idProveedor: number }) {
@@ -87,25 +92,56 @@ export class ExperienciaService {
     return true;
   }
 
-  async findAll() {
-    return this.experienciaRepository.find({
+  async findAll(): Promise<ExperienciaResponseDto[]> {
+    const experiencias = await this.experienciaRepository.find({
       relations: ['imagenes', 'caracteristicas', 'fechasExperiencias'],
     });
+
+    const resultados: ExperienciaResponseDto[] = [];
+    console.log('✔️ Experiencias enviadas:', resultados);
+    for (const exp of experiencias) {
+      const result = await this.resenaRepository
+        .createQueryBuilder('resena')
+        .select('AVG(resena.puntuacion)', 'avg')
+        .where('resena.idExperiencia = :id', { id: exp.idExperiencia })
+        .getRawOne();
+
+      const puntuacionPromedio = parseFloat(result.avg) || 0;
+
+      resultados.push(
+        plainToInstance(ExperienciaResponseDto, {
+          ...exp,
+          puntuacionPromedio: parseFloat(puntuacionPromedio.toFixed(1)),
+        }),
+      );
+    }
+
+    return resultados;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<ExperienciaResponseDto> {
     const experiencia = await this.experienciaRepository.findOne({
       where: { idExperiencia: id },
       relations: ['imagenes', 'caracteristicas', 'fechasExperiencias'],
     });
 
     if (!experiencia) {
-      throw new NotFoundException(`No se encontró la experiencia con ID ${id}`);
+      throw new NotFoundException('Experiencia no encontrada');
     }
 
-    return experiencia;
-  }
+    const result = await this.resenaRepository
+      .createQueryBuilder('resena')
+      .select('AVG(resena.puntuacion)', 'avg')
+      .where('resena.idExperiencia = :id', { id })
+      .getRawOne();
 
+    const puntuacionPromedio = parseFloat(result.avg) || 0;
+
+    return plainToInstance(ExperienciaResponseDto, {
+      ...experiencia,
+      puntuacionPromedio: parseFloat(puntuacionPromedio.toFixed(1)),
+    });
+  }
   update(id: number, updateExperienciaDto: UpdateExperienciaDto) {
     return `This action updates a #${id} experiencia`;
   }
