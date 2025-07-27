@@ -77,4 +77,18 @@ export class ResenaService {
   remove(id: number) {
     return `This action removes a #${id} reseña`;
   }
+  async findByExperiencia(idExperiencia: number) {
+  const reseñas = await this.resenaRepository.find({
+    where: { idExperiencia },
+    relations: ['idUsuario2'], // trae datos del autor
+    order: { fecha: 'DESC' },
+  });
+
+  return reseñas.map((r) => ({
+    score: Number(r.puntuacion),
+    author: r.idUsuario2?.nombre || 'Usuario',
+    text: r.comentario,
+    date: r.fecha,
+  }));
+}
 }

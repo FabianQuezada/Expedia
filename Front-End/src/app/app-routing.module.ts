@@ -18,6 +18,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
   {path: 'home', component: HomeComponent },
+  {path: 'resenas/:idExperiencia', component: ReviewsComponent },
+  {path: 'resenas/:id', component: ReviewsComponent}
 
 ];
 

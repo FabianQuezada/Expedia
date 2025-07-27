@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ResenaService } from './resena.service';
 import { CreateResenaDto } from './dto/create-resena.dto';
 import { UpdateResenaDto } from './dto/update-resena.dto';
@@ -23,7 +33,7 @@ export class ResenaController {
   create(
     @Param('idReserva', ParseIntPipe) idReserva: number,
     @Body() createResenaDto: CreateResenaDto,
-    @Req() req: RequestWithUser
+    @Req() req: RequestWithUser,
   ) {
     const idUsuario = req.usuario.id;
     return this.resenaService.create(idReserva, createResenaDto, idUsuario);
@@ -47,5 +57,12 @@ export class ResenaController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.resenaService.remove(+id);
+  }
+
+  @Get('experiencia/:idExperiencia')
+  findByExperiencia(
+    @Param('idExperiencia', ParseIntPipe) idExperiencia: number,
+  ) {
+    return this.resenaService.findByExperiencia(idExperiencia);
   }
 }
