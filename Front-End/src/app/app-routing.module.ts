@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'provider-profile', component: ProviderProfileComponent},
   {path: 'add-service', component: NewServiceComponent},
   {path: 'perfil', component: UserProfileComponent},
-  {path:' historialExperiencia', component: ExperienceHistoryComponent},
+  {path: 'historialExperiencia', component: ExperienceHistoryComponent},
 ];
 
 @NgModule({

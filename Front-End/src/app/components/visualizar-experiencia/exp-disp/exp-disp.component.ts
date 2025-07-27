@@ -59,7 +59,7 @@ export class ExpDispComponent implements OnChanges {
     
     this.router.navigate(['/pago'], {
       state: {
-        ciudad: this.experiencia?.ubicacion,
+        ciudad: this.ciudad,
         titulo: this.experiencia?.titulo,
         fecha: this.fechaSeleccionada.fecha,
         hora: this.generarHora(),

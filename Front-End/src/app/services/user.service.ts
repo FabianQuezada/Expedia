@@ -16,7 +16,8 @@ export class UserService {
   getUserProfile(): Observable<User> {
     return this.http.get<User>(`${this.baseUrl}/usuario/mi-perfil`);
   }
-   updateUserProfile(user: Partial<updateUser>): Observable<updateUser> {
+
+  updateUserProfile(user: Partial<updateUser>): Observable<updateUser> {
     return this.http.patch<updateUser>(`${this.baseUrl}/usuario/mi-perfil`, user);
   }
 }
