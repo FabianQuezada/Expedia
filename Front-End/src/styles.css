@@ -1,1 +1,220 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400; /* Regular como valor base */
+}
+
+.btn-expedia-primary {
+  background-color: #f7ba2a;
+  color: black;
+  border: none;
+  border-radius: 30px;
+}
+
+.btn-expedia-primary:hover {
+  background-color: #e0a922;
+}
+
+.btn-expedia-secondary {
+  background-color: #191e3c;
+  color: white;
+  border: none;
+  border-radius: 30px;
+}
+
+.btn-expedia-secondary:hover {
+  background-color: #191e3c;
+  color: white;
+}
+
+.btn-opciones {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  background-color: #ffffff;
+  text-align: left;
+  width: 100%;
+  gap: 0.75rem;
+  line-height: 1.5;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-opciones.active {
+  background-color: #1e1e1e;
+  color: white;
+  transform: scale(1.02);
+}
+
+.btn-opciones.active .subtitulo {
+  color: white !important;
+}
+
+.subtitulo {
+  font-size: 0.65rem;
+}
+
+.servicio-card {
+  border: 1px solid #dee2e6;
+  border-radius: 10px !important;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.servicio-img {
+  width: 297px;
+  height: 235px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.precio-editar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px; /* espacio vertical entre precio y botón */
+}
+
+.precio {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.btn-editar {
+  background-color: #ffc107; /* amarillo Bootstrap */
+  border: none;
+  border-radius: 30px;
+  padding: 6px 20px;
+  color: #212529; /* texto oscuro */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-editar:hover {
+  background-color: #e0a800; /* un amarillo más oscuro al pasar el mouse */
+}
+
+.btn-agregar-servicio {
+  background-color: #0799fe; /* azul Bootstrap */
+  border: none;
+  border-radius: 30px;
+  padding: 6px 15px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-agregar-servicio:hover {
+  background-color: #0056b3; /* azul más oscuro al hover */
+}
+
+.img-upload-btn {
+  display: block;
+  background-color: #dee2e6;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.5rem;
+  border: 2px dashed rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: filter 0.2s ease;
+  padding-top: 100px;
+}
+
+.img-upload-btn:hover {
+  filter: brightness(1.05);
+}
+
+.auto-expand {
+  overflow: hidden;
+  resize: none; /* evita que el usuario lo estire manualmente */
+
+  /* Estilo input-like */
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+}
+
+input.form-control {
+  border-width: 1px;
+  border-radius: 10px;
+}
+
+.input-group-text {
+  background-color: white;
+  border: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.fixed-height-scroll {
+  position: relative;
+  height: 45rem; /* o el alto que quieras */
+  background-color: white;
+  border-radius: 6px;
+  padding-right: 10px; /* para que no quede pegado al scroll */
+}
+
+.service-image {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.scroll-fade-container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.scroll-content {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.scroll-content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), transparent);
+  z-index: 10;
+}
+
+.fade.visible {
+  opacity: 1;
+}
+
+.fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, white, transparent);
+}
+
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, white, transparent);
+}

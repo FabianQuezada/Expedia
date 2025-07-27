@@ -1,0 +1,7 @@
+.fixed-height-scroll {
+  height: 600px;       /* o la altura que prefieras */
+  overflow-y: auto;    /* para que aparezca scroll interno */
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}

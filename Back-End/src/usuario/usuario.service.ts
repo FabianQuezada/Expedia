@@ -1,12 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Usuario } from './entities/usuario.entity';
+import { Repository } from 'typeorm';
+
 
 @Injectable()
 export class UsuarioService {
+
+  constructor(
+    @InjectRepository(Usuario)
+    private readonly usuarioRepository: Repository<Usuario>,
+  ) {}
+
   create(createUsuarioDto: CreateUsuarioDto) {
-    return 'This action adds a new usuario';
+    return this.usuarioRepository.save(createUsuarioDto);
   }
+
+  findOneByEmail(correo: string) {
+    return this.usuarioRepository.findOneBy({ correo })
+  }
+
 
   findAll() {
     return `This action returns all usuario`;
