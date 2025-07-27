@@ -35,7 +35,17 @@ export class FechasExperienciaController {
     );
   }
 
-  @Get()
+  @Get('descuentos')
+  async getFechasConDescuento() {
+    return this.fechasExperienciaService.findAllConDescuento();
+  }
+
+  @Get('descuento-prueba')
+  async prueba() {
+    return this.fechasExperienciaService.aplicarDescuentoMensual();
+  }
+
+  @Get('all')
   findAll() {
     return this.fechasExperienciaService.findAll();
   }
