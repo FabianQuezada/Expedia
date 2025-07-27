@@ -1,0 +1,46 @@
+<div class="container mt-4" style="max-width: 65%; padding: 0">
+  <div class="mb-4">
+    <h1 class="fs-2 fw-normal mb-3 lh-1">
+      <strong>{{ ciudadDesdeUbicacion }}</strong>
+      <br />
+      <strong>{{ experiencia?.titulo }}</strong>
+    </h1>
+  </div>
+
+  <div class="row g-2">
+    <!-- Imagen principal -->
+    <div class="col-lg-7 col-12">
+      <img
+        [src]="experiencia?.imagenes?.[0]?.url || defaultImg"
+        (error)="onImageError($event)"
+        class="img-fluid w-100 object-fit-cover"
+        style="aspect-ratio: 4 / 3"
+      />
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="col-lg-5 col-12 d-flex flex-column gap-2">
+      <div class="d-flex" style="gap: 0.5rem">
+        <img
+          [src]="experiencia?.imagenes?.[1]?.url || defaultImg"
+          (error)="onImageError($event)"
+          class="img-fluid object-fit-cover"
+          style="aspect-ratio: 1 / 1; width: calc(50% - 0.25rem)"
+        />
+        <img
+          [src]="experiencia?.imagenes?.[2]?.url || defaultImg"
+          (error)="onImageError($event)"
+          class="img-fluid object-fit-cover"
+          style="aspect-ratio: 1 / 1; width: calc(50% - 0.25rem)"
+        />
+      </div>
+      <img
+        [src]="experiencia?.imagenes?.[3]?.url || defaultImg"
+        (error)="onImageError($event)"
+        class="img-fluid w-100 object-fit-cover"
+        style="aspect-ratio: 16 / 8.7"
+      />
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,57 @@
+<div class="container py-3 mt-5">
+
+  <div class="d-flex mb-4 align-items-start">
+    <div style="flex: 0 0 32%;">
+      <h2 class="fs-1">Reseñas</h2>
+      <div class="d-flex align-items-center">
+        <span class="h3 me-3">{{ ratingScore }}/10</span>
+        <small class="text-primary" style="opacity: 0.75;">{{ reviewsCount }} opiniones</small>
+      </div>
+    </div>
+
+    <div style="flex: 1;">
+      <label class="fw-semibold d-block mb-2">Ordenar Reseñas por:</label>
+      <div class="d-flex flex-column align-items-start">
+        <div class="d-flex gap-4 order-options mb-4" #orderOptionsContainer>
+            <span 
+                #orderOptionRecientes
+                class="order-option" 
+                [class.active]="selectedOrder === 'recientes'"
+                (click)="selectOrder('recientes')">
+                Recientes
+            </span>
+            <span 
+                #orderOptionPositivas
+                class="order-option" 
+                [class.active]="selectedOrder === 'positivas'"
+                (click)="selectOrder('positivas')">
+                Positivas
+            </span>
+            <span 
+                #orderOptionNegativas
+                class="order-option" 
+                [class.active]="selectedOrder === 'negativas'"
+                (click)="selectOrder('negativas')">
+                Negativas
+            </span>
+
+            <div 
+                class="order-line-active"
+                [ngStyle]="{'width': lineStyle.width, 'transform': lineStyle.transform}">
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let review of reviews" class="mb-4">
+    <div class="mb-1">
+            <span class="fs-5">{{ review.score }}/10</span>
+        </div>
+        <div class="mb-1">
+            <strong>{{ review.author }}</strong>
+        </div>
+        <small class="text-muted d-block mb-2">{{ review.date | date:'d MMM. y' }}</small>
+        <p class="mb-2">{{ review.text }}</p>
+        <hr>
+    </div>
+  </div>
+</div>

@@ -26,6 +26,8 @@ export class FechasExperiencia {
   @Column("int", { name: "ID_Descuento", nullable: true })
   idDescuento: number | null;
 
+  @Column('int', { name: 'Cupos_Disponibles' })
+  cuposDisponibles: number;
   @ManyToOne(
     () => Experiencia,
     (experiencia) => experiencia.fechasExperiencias,
