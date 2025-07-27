@@ -38,8 +38,8 @@ import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from './services/interceptors/jwt.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [

@@ -1,23 +1,37 @@
-// src/app/services/user.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user';
-import { updateUser} from '../models/User/updateUser';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthStateService } from './auth-state.service'; // ✅ importa correctamente según tu estructura
+import { User } from '../models/user'; // ajusta si aplica
+import { updateUser } from '../models/User/updateUser'; // ajusta si aplica
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:3000'; // Ajusta si usas proxy o dominio
+  private baseUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authState: AuthStateService // ✅ inyectamos tu servicio
+  ) {}
 
   getUserProfile(): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/usuario/mi-perfil`);
+    const token = localStorage.getItem('token'); // o this.authState.getToken() si lo tienes
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<User>(`${this.baseUrl}/auth/profile`, { headers });
   }
 
   updateUserProfile(user: Partial<updateUser>): Observable<updateUser> {
-    return this.http.patch<updateUser>(`${this.baseUrl}/usuario/mi-perfil`, user);
+    console.log(user)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.patch<updateUser>(`${this.baseUrl}/usuario/mi-perfil`, user, { headers });
   }
 }

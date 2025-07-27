@@ -17,6 +17,8 @@ import { ProveedorModule } from 'src/proveedor/proveedor.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+  ],
 })
 export class AuthModule {}
