@@ -10,7 +10,6 @@ export interface Experiencia {
   estado: string;
   categoria: string;
   cuposDisponibles: number;
-  datosGenerales: string[];
   precio: number;
   puntuacion: number;
   fechasExperiencias: Fecha[];

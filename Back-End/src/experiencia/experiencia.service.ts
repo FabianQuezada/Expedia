@@ -23,7 +23,7 @@ export class ExperienciaService {
     private imagenService: ImagenService,
     private fechasExperienciaService: FechasExperienciaService,
     @InjectRepository(Resena)
-    private resenaRepository: Repository<Resena>,
+    private resenaRepository: Repository<Resena>
   ) {}
 
   async create(data: CreateExperienciaDto & { idProveedor: number }) {
@@ -162,5 +162,8 @@ export class ExperienciaService {
     }
 
     return experiencia.caracteristicas;
+  }
+  async contarResenasPorExperiencia(idExperiencia: number): Promise<number> {
+    return this.resenaRepository.count({ where: { idExperiencia } });
   }
 }

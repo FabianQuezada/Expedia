@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { Experiencia } from 'src/app/models/experiencia';
 
 @Component({
@@ -6,21 +7,40 @@ import { Experiencia } from 'src/app/models/experiencia';
   templateUrl: './exp-images.component.html',
   styleUrls: ['./exp-images.component.css'],
 })
-export class ExpImagesComponent {
+export class ExpImagesComponent implements OnInit {
   @Input() experiencia: Experiencia | undefined;
+  ciudad: string = '...';
 
-  get ciudadDesdeUbicacion(): string {
-    if (!this.experiencia?.ubicacion) return '';
+  constructor(private http: HttpClient) {}
 
-    const partes = this.experiencia.ubicacion.split(',');
-    const ciudadSegmento = partes[1]?.trim(); // "1032065 Arica"
-
-    if (!ciudadSegmento) return '';
-
-    const ciudad = ciudadSegmento.split(' ').slice(1).join(' '); // elimina "1032065"
-    return ciudad;
+  ngOnInit(): void {
+    if (this.experiencia?.ubicacion) {
+      this.obtenerCiudadDesdeUbicacion(this.experiencia.ubicacion);
+    }
   }
-  defaultImg: string = 'assets/images/default-image.jpg';
+
+  obtenerCiudadDesdeUbicacion(ubicacion: string): void {
+    const [lat, lon] = ubicacion.split(',').map((val) => val.trim());
+    if (!lat || !lon) return;
+
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+    this.http.get<any>(url).subscribe({
+      next: (data) => {
+        this.ciudad =
+          data?.address?.city ||
+          data?.address?.town ||
+          data?.address?.village ||
+          'Desconocido';
+      },
+      error: (err) => {
+        console.error('No se pudo traducir lat/lon a ciudad ❌', err);
+        this.ciudad = 'Desconocido';
+      },
+    });
+  }
+
+  defaultImg: string = '/assets/images/default-image.jpg';
 
   onImageError(event: Event): void {
     const element = event.target as HTMLImageElement;

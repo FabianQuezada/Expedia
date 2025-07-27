@@ -46,7 +46,6 @@ import { ResenaModule } from './resena/resena.module';
     CancelacionModule,
     ReprogramacionModule,
     ScheduleModule.forRoot(),
-    PagoModule
     PagoModule,
     ResenaModule,
 

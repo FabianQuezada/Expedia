@@ -25,16 +25,6 @@ export class CreateExperienciaDto {
     @IsEnum(CategoriaExperiencia, { message: 'La categoría debe ser una opción válida' })
     categoria: CategoriaExperiencia;
 
-    @IsNumber()
-    @IsPositive()
-    @Min(1)
-    cuposDisponibles: number;
-
-    @IsArray()
-    @IsString({ each: true })
-    @ArrayMinSize(1)
-    datosGenerales: string[];
-
     @IsArray()
     @IsNumber({}, { each: true })
     @ArrayMinSize(1)

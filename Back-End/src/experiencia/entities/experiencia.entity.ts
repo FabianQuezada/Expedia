@@ -36,9 +36,6 @@ export class Experiencia {
   @Column('varchar', { name: 'Categoria', length: 50 })
   categoria: string;
 
-  @Column('simple-array', { name: 'Datos_Generales' })
-  datosGenerales: string[];
-
   @Column('int', { name: 'ID_Proveedor' })
   idProveedor: number;
 

@@ -80,4 +80,8 @@ export class ExperienciaController {
   getCaracteristicas(@Param('id') id: string) {
     return this.experienciaService.getCaracteristicasPorExperiencia(+id);
   }
+  @Get(':id/resenas/count')
+  async countResenas(@Param('id', ParseIntPipe) id: number) {
+    return this.experienciaService.contarResenasPorExperiencia(id);
+  }
 }
