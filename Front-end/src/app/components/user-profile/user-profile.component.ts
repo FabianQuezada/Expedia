@@ -4,6 +4,8 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 import { AuthStateService } from 'src/app/services/auth-state.service';
 import { updateUser } from 'src/app/models/User/updateUser';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -17,9 +19,11 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authState: AuthStateService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
+    
   ) {}
-
+  
   ngOnInit(): void {
     this.userService.getUserProfile().subscribe({
       next: (data) => {
@@ -31,7 +35,9 @@ export class UserProfileComponent implements OnInit {
       },
     });
   }
-
+  irAHistorial(): void {
+  this.router.navigate(['/historialExperiencia']);
+}
   initForm(): void {
     this.formPerfil = this.fb.group({
       nombre: [this.user.nombre, Validators.required],
