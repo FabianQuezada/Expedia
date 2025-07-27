@@ -24,9 +24,12 @@ export class ExpDispComponent implements OnChanges {
   constructor(private router: Router, protected expService: ExperienceService, protected dateUtilService: DateUtilsService, private authStateService: AuthStateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-  if (this.experiencia && this.fechaBusqueda) {
-    this.filtrarFechaBusqueda();
-    }
+    console.log('Fecha de búsqueda recibida:', this.fechaBusqueda);
+    this.fechaBusqueda ??= new Date();
+    if (this.experiencia && this.fechaBusqueda) {
+      this.filtrarFechaBusqueda();
+      }
+
   }
 
 
@@ -79,7 +82,7 @@ export class ExpDispComponent implements OnChanges {
 
   filtrarFechaBusqueda() {
     const fechaRef = new Date(this.fechaBusqueda!.toISOString().split('T')[0]); 
-
+    console.log('Fecha de referencia para filtrado:', fechaRef);
     this.fechasFiltradas = this.experiencia!.fechasExperiencias
       .filter(f => new Date(f.fecha) >= fechaRef)
       .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())

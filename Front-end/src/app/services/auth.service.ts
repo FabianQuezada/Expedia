@@ -42,8 +42,8 @@ export class AuthService {
       tap((response) => {
         const token = response.token;
         if (token) {
-          localStorage.setItem('token', token); // ✅ Guardar en localStorage
-          this.authState.loginSuccess(token);    // ✅ Notificar al AuthStateService
+          localStorage.setItem('token', token);
+          this.authState.loginSuccess(token);
         }
       })
     );

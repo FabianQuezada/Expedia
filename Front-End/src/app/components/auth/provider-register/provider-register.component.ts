@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-provider-register',
@@ -6,20 +7,37 @@ import { Component } from '@angular/core';
   styleUrls: ['./provider-register.component.css']
 })
 export class ProviderRegisterComponent {
-  formSubmitted = false;
+  registerForm!: FormGroup;
+  submitted = false;
   formData = {
     empresa: '',
     email: '',
     password: ''
   };
 
-  onSubmit() {
-    const { empresa, email, password } = this.formData;
-    console.log('Datos del formulario:', this.formData);
+  constructor(private fb: FormBuilder) {}
+  
 
-    if (!empresa || !email || !password) {
-      alert('Por favor completa todos los campos');
+  ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      empresa: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  get f() {
+    return this.registerForm.controls;
+  }
+
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
       return;
     }
+
+    // Aquí puedes enviar los datos al backend
+    console.log('Datos del formulario:', this.registerForm.value);
   }
 }
