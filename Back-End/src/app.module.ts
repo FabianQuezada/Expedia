@@ -14,6 +14,7 @@ import { ImagenModule } from './imagen/imagen.module';
 import { CancelacionModule } from './cancelacion/cancelacion.module';
 import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
 import { PagoModule } from './pago/pago.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -42,6 +43,7 @@ import { PagoModule } from './pago/pago.module';
     ImagenModule,
     CancelacionModule,
     ReprogramacionModule,
+    ScheduleModule.forRoot(),
     PagoModule
   ],
   controllers: [AppController],

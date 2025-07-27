@@ -67,7 +67,7 @@ export class ExperienciaService {
   }
 
   findAll() {
-    return `This action returns all experiencia`;
+    return this.experienciaRepository.find();
   }
 
   findOne(id: number) {

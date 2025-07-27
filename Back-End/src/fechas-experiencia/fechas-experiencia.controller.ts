@@ -19,7 +19,17 @@ export class FechasExperienciaController {
     return this.fechasExperienciaService.agregarFechas(idExperiencia, createFechasExperienciaDto);
   }
 
-  @Get()
+  @Get('descuentos')
+  async getFechasConDescuento() {
+    return this.fechasExperienciaService.findAllConDescuento();
+  }
+
+  @Get('descuento-prueba')
+  async prueba() {
+    return this.fechasExperienciaService.aplicarDescuentoMensual();
+  }
+
+  @Get('all')
   findAll() {
     return this.fechasExperienciaService.findAll();
   }

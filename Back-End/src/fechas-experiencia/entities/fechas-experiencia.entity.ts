@@ -17,6 +17,9 @@ export class FechasExperiencia {
   @Column("decimal", { name: "Precio", precision: 10, scale: 2 })
   precio: number;
 
+  @Column("decimal", { name: "Descuento", precision: 4, scale: 2, nullable: true })
+  descuento?: number;
+
   @Column("int", { name: "Vistas" })
   vistas: number;
 
