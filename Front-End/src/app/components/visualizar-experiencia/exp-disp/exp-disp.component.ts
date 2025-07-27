@@ -14,6 +14,7 @@ import { AuthStateService } from '../../../services/auth-state.service';
 export class ExpDispComponent implements OnChanges {
   @Input() experiencia: Experiencia | undefined;
   @Input() fechaBusqueda: Date | undefined;
+  @Input() ciudad: string = '...';
   fechaSeleccionada: Fecha | undefined;
   fechasFiltradas: Fecha[] = [];
   adultos: number = 1;
