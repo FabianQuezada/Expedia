@@ -26,7 +26,7 @@ interface LoginDto {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = 'http://localhost:3000/auth';
+  private readonly apiUrl = 'https://expedia-3kpb.onrender.com/auth';
 
   constructor(private http: HttpClient) {}
 

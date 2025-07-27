@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PagoService {
-  private baseUrl = 'http://localhost:3000/pago'; // Ajusta si tu ruta es diferente
+  private baseUrl = 'https://expedia-3kpb.onrender.com/pago'; // Ajusta si tu ruta es diferente
 
   constructor(private http: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ReservaService {
-  private baseUrl = 'http://localhost:3000/reserva';
+  private baseUrl = 'https://expedia-3kpb.onrender.com/reserva';
 
   constructor(private http: HttpClient) {}
 
