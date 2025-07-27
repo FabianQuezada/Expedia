@@ -40,6 +40,7 @@ import { ExperienceComponent } from './components/visualizar-experiencia/experie
 import { HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './services/interceptors/jwt.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
+    ProviderRegisterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule
   ],

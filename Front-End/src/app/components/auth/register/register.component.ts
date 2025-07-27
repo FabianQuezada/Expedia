@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  @ViewChild('inputNames') inputNames!: ElementRef;
-  @ViewChild('inputSurnames') inputSurnames!: ElementRef;
-  @ViewChild('inputEmail') inputEmail!: ElementRef;
-  @ViewChild('inputPassword') inputPassword!: ElementRef;
+  formData = {
+    name: '',
+    surname: '',
+    email: '',
+    password: ''
+  };
 
   constructor(
     private authService: AuthService,
@@ -25,20 +27,15 @@ export class RegisterComponent {
     }
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
+  onSubmit() {
+    const { name, surname, email, password } = this.formData;
 
-    const nombre = (document.getElementById('inputNames') as HTMLInputElement)?.value.trim();
-    const apellido = (document.getElementById('inputSurnames') as HTMLInputElement)?.value.trim();
-    const correo = (document.getElementById('inputEmail') as HTMLInputElement)?.value.trim();
-    const contraseña = (document.getElementById('inputPassword') as HTMLInputElement)?.value.trim();
-
-    if (!nombre || !apellido || !correo || !contraseña) {
+    if (!name || !surname || !email || !password) {
       alert('Por favor completa todos los campos ❗');
       return;
     }
 
-    this.authService.register({ nombre, apellido, correo, contraseña }).subscribe({
+    this.authService.register({ nombre: name, apellido: surname, correo: email, contraseña: password }).subscribe({
       next: (res) => {
         console.log('Registro exitoso ✔️', res);
         alert('Usuario registrado correctamente');

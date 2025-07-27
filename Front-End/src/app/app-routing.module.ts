@@ -11,6 +11,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ProviderProfileComponent } from './components/provider-profile/provider-profile.component';
 import { NewServiceComponent } from './components/create-service/new-service/new-service.component';
 import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
+import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'add-service', component: NewServiceComponent},
   {path: 'perfil', component: UserProfileComponent},
   {path: 'historialExperiencia', component: ExperienceHistoryComponent},
+  {path: 'provider-register', component: ProviderRegisterComponent},
 ];
 
 @NgModule({
