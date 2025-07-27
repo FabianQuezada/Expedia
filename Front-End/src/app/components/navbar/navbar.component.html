@@ -33,7 +33,7 @@
         {{ nombreUsuario || "Mi perfil" }}
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" routerLink="/profile">Mi perfil</a></li>
+        <li><a class="dropdown-item" [routerLink]="['/perfil']" routerLink="/profile">Mi perfil </a></li>
         <li>
           <button class="dropdown-item text-danger" (click)="logout()">
             Cerrar sesión

@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsuarioService } from 'src/usuario/usuario.service';
 import { registerDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
@@ -13,7 +17,7 @@ export class AuthService {
   constructor(
     private readonly usuarioService: UsuarioService,
     private readonly proveedorService: ProveedorService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async register({ nombre, apellido, correo, contraseña }: registerDto) {
@@ -32,8 +36,8 @@ export class AuthService {
 
     return {
       nombre,
-      correo
-    }
+      correo,
+    };
   }
 
   async registerProveedor({ nombreEmpresa, correo, contraseña }: registerPDto) {
@@ -51,36 +55,49 @@ export class AuthService {
 
     return {
       nombreEmpresa,
-      correo
-    }
+      correo,
+    };
   }
 
   async login({ correo, contraseña }: LoginDto) {
-    let usuario: any = await this.usuarioService.findByEmailWithPassword(correo);
+    let usuario: any =
+      await this.usuarioService.findByEmailWithPassword(correo);
     let rol = Rol.USUARIO;
 
     if (!usuario) {
-        usuario = await this.proveedorService.findByEmailWithPassword(correo);
-        rol = Rol.PROVEEDOR;
+      usuario = await this.proveedorService.findByEmailWithPassword(correo);
+      rol = Rol.PROVEEDOR;
     }
 
     if (!usuario) {
-        throw new UnauthorizedException('El correo no está registrado');
+      throw new UnauthorizedException('El correo no está registrado');
     }
 
-    const contraseñaValida = await bcrypt.compare(contraseña, usuario.contraseña);
+    const contraseñaValida = await bcrypt.compare(
+      contraseña,
+      usuario.contraseña,
+    );
     if (!contraseñaValida) {
-        throw new UnauthorizedException('La contraseña es incorrecta');
+      throw new UnauthorizedException('La contraseña es incorrecta');
     }
 
-    const payload = { correo: usuario.correo, rol,id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor };
+    const payload = {
+      sub: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor,
+      correo: usuario.correo,
+      rol,
+    };
+
     const token = await this.jwtService.signAsync(payload);
-    
-    return { token, correo: usuario.correo, rol, id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor };
-    }
-  
-  async profile({correo, rol}: {correo: string, rol: string}) {
-    return await this.usuarioService.findOneByEmail(correo);
+
+    return {
+      token,
+      correo: usuario.correo,
+      rol,
+      id: payload.sub,
+    };
   }
 
+  async profile({ correo, rol }: { correo: string; rol: string }) {
+    return await this.usuarioService.findOneByEmail(correo);
+  }
 }

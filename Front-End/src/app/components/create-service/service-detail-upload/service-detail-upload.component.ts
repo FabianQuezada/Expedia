@@ -1,5 +1,5 @@
 import { Component, EventEmitter, NgZone, Output } from '@angular/core';
-
+import { GoogleMapsModule } from '@angular/google-maps';
 @Component({
   selector: 'app-service-detail-upload',
   templateUrl: './service-detail-upload.component.html',

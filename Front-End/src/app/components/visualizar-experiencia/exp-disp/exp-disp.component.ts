@@ -55,10 +55,6 @@ export class ExpDispComponent implements OnChanges {
     }
     const idUsuario = this.authStateService.getUserId();
 
-    if (!idUsuario) {
-      alert('No se pudo obtener la sesión del usuario');
-      return;
-    }
     
     this.router.navigate(['/pago'], {
       state: {
@@ -70,7 +66,6 @@ export class ExpDispComponent implements OnChanges {
         adultos: this.adultos,
         ninos: this.ninos,
         idExperiencia: this.experiencia?.idExperiencia,
-        idUsuario: idUsuario,
       },
     });
   }

@@ -1,213 +1,244 @@
 <app-navbar></app-navbar>
-<div class="container my-4">
-  <div class="row">
-    <!-- PANEL IZQUIERDO -->
-    <div class="col-md-3">
-      <div class="left-panel">
-        <div class="mb-3">
-          <h5 class="fw-semibold">{{ user.nombre }}</h5>
-          <p class="text-muted small">{{ user.correo }}</p>
-          <p class="small">
-            Administra tu perfil y configuraciones en un solo lugar
-          </p>
-        </div>
 
-        <div class="d-flex flex-column gap-3">
-          <!-- PERFIL -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="seccionSeleccionada = 'perfil'"
-            [ngClass]="{ active: seccionSeleccionada === 'perfil' }"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-person fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Perfil</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Ingresa tus datos personales y documentos de viaje
-              </div>
-            </div>
+<ng-container *ngIf="user; else cargando">
+  <div class="container my-4">
+    <div class="row">
+      <!-- PANEL IZQUIERDO -->
+      <div class="col-md-3">
+        <div class="left-panel">
+          <div class="mb-3">
+            <h5 class="fw-semibold">{{ user.nombre }}</h5>
+            <p class="text-muted small">{{ user.correo }}</p>
+            <p class="small">
+              Administra tu perfil y configuraciones en un solo lugar
+            </p>
           </div>
 
-          <!-- NOTIFICACIONES -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="seccionSeleccionada = 'notificaciones'"
-            [ngClass]="{ active: seccionSeleccionada === 'notificaciones' }"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-bell fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Notificaciones</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Elige las notificaciones que quieres recibir
+          <div class="d-flex flex-column gap-3">
+            <!-- MENÚ -->
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="seccionSeleccionada = 'perfil'"
+              [ngClass]="{ active: seccionSeleccionada === 'perfil' }"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-person fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Perfil</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Ingresa tus datos personales y documentos de viaje
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- AYUDA -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="seccionSeleccionada = 'ayuda'"
-            [ngClass]="{ active: seccionSeleccionada === 'ayuda' }"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-question-circle fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Ayuda y comentarios</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Obtén asistencia
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="seccionSeleccionada = 'notificaciones'"
+              [ngClass]="{ active: seccionSeleccionada === 'notificaciones' }"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-bell fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Notificaciones</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Elige las notificaciones que quieres recibir
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- RESERVAS -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="seccionSeleccionada = 'reservas'"
-            [ngClass]="{ active: seccionSeleccionada === 'reservas' }"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-journal-text fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Mis Reservas</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Edita o cancela tus reservas
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="seccionSeleccionada = 'ayuda'"
+              [ngClass]="{ active: seccionSeleccionada === 'ayuda' }"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-question-circle fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Ayuda y comentarios</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Obtén asistencia
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- CUPONES -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="seccionSeleccionada = 'cupones'"
-            [ngClass]="{ active: seccionSeleccionada === 'cupones' }"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-gift fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Mis Cupones</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Administra tus cupones disponibles
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="seccionSeleccionada = 'reservas'"
+              [ngClass]="{ active: seccionSeleccionada === 'reservas' }"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-journal-text fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Mis Reservas</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Edita o cancela tus reservas
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- CERRAR SESIÓN -->
-          <div
-            class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
-            (click)="cerrarSesion()"
-            style="cursor: pointer"
-          >
-            <i class="bi bi-box-arrow-right fs-4 me-3 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Cerrar Sesión</div>
-              <div class="text-muted" style="font-size: 0.65rem">
-                Salir de tu cuenta de forma segura
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="seccionSeleccionada = 'cupones'"
+              [ngClass]="{ active: seccionSeleccionada === 'cupones' }"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-gift fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Mis Cupones</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Administra tus cupones disponibles
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="d-flex align-items-start p-3 border rounded shadow-sm bg-white"
+              (click)="cerrarSesion()"
+              style="cursor: pointer"
+            >
+              <i class="bi bi-box-arrow-right fs-4 me-3 mt-1"></i>
+              <div>
+                <div class="fw-semibold">Cerrar Sesión</div>
+                <div class="text-muted" style="font-size: 0.65rem">
+                  Salir de tu cuenta de forma segura
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- PANEL DERECHO -->
-    <div class="col-md-9">
-      <div class="right-panel card p-4">
-        <!-- PERFIL -->
-        <ng-container
-          *ngIf="seccionSeleccionada === 'perfil' || !seccionSeleccionada"
-        >
-          <h4 class="fw-bold">{{ user.nombre }} {{ user.apellido }}</h4>
-          <hr class="mb-4" />
+      <!-- PANEL DERECHO -->
+      <div class="col-md-9">
+        <div class="right-panel card p-4">
+          <!-- PERFIL -->
+          <ng-container *ngIf="seccionSeleccionada === 'perfil'">
+            <h4 class="fw-bold">{{ user.nombre }} {{ user.apellido }}</h4>
+            <hr class="mb-4" />
 
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h5 class="fw-semibold">Información Básica</h5>
-            <a href="#" class="text-primary">Editar</a>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <p><strong>Nombre</strong></p>
-              <p>{{ user.nombre }} {{ user.apellido }}</p>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="fw-semibold">Información Personal</h5>
+              <button class="btn btn-link p-0" (click)="editarPerfil = !editarPerfil">
+                {{ editarPerfil ? 'Cancelar' : 'Editar' }}
+              </button>
             </div>
-            <div class="col-md-6">
-              <p><strong>Descripción personal</strong></p>
-              <p>Sin información</p>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <p><strong>Fecha de nacimiento</strong></p>
-              <p>{{ user.fechaNacimiento || "Sin información" }}</p>
-            </div>
-            <div class="col-md-6">
-              <p><strong>Género</strong></p>
-              <p>{{ user.genero || "Sin información" }}</p>
-            </div>
-          </div>
+            <form *ngIf="editarPerfil; else verPerfil" [formGroup]="formPerfil">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Nombre</strong></label>
+                  <input class="form-control" formControlName="nombre" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Apellido</strong></label>
+                  <input class="form-control" formControlName="apellido" />
+                </div>
+              </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <p><strong>Correo</strong></p>
-              <p>{{ user.correo }}</p>
-            </div>
-            <div class="col-md-6">
-              <p><strong>Contraseña</strong></p>
-              <p>********</p>
-            </div>
-          </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Fecha de Nacimiento</strong></label>
+                  <input type="date" class="form-control" formControlName="fechaNacimiento" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Género</strong></label>
+                  <select class="form-select" formControlName="genero">
+                    <option value="">Seleccionar</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                  </select>
+                </div>
+              </div>
 
-          <div
-            class="d-flex justify-content-between align-items-center mt-4 mb-2"
-          >
-            <h5 class="fw-semibold">Datos de Contacto</h5>
-            <a href="#" class="text-primary">Editar</a>
-          </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Correo</strong></label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    [value]="user.correo"
+                    readonly
+                    disabled
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label"><strong>Teléfono</strong></label>
+                  <input class="form-control" formControlName="numeroTelefono" />
+                </div>
+              </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <p><strong>Número de celular</strong></p>
-              <p>{{ user.numeroTelefono || "Sin información" }}</p>
-            </div>
-            <div class="col-md-6">
-              <p><strong>Contacto de emergencias</strong></p>
-              <p>Sin información</p>
-            </div>
-          </div>
+              <div class="mt-4">
+                <button type="button" class="btn btn-primary me-2" (click)="guardarPerfil()" [disabled]="formPerfil.invalid">
+                  Guardar
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="editarPerfil = false">Cancelar</button>
+              </div>
+            </form>
 
-          <div class="row">
-            <div class="col-md-6">
-              <p><strong>Dirección</strong></p>
-              <p>Sin información</p>
-            </div>
-          </div>
-        </ng-container>
+            <ng-template #verPerfil>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Nombre</strong></p>
+                  <p>{{ user.nombre }} {{ user.apellido }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Género</strong></p>
+                  <p>{{ user.genero || 'Sin información' }}</p>
+                </div>
+              </div>
 
-        <!-- NOTIFICACIONES -->
-        <ng-container *ngIf="seccionSeleccionada === 'notificaciones'">
-          <h4 class="fw-bold">Notificaciones</h4>
-          <p>Aquí irán las opciones de notificaciones.</p>
-        </ng-container>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Fecha de nacimiento</strong></p>
+                  <p>{{ user.fechaNacimiento || 'Sin información' }}</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Correo</strong></p>
+                  <p>{{ user.correo }}</p>
+                </div>
+              </div>
 
-        <!-- AYUDA -->
-        <ng-container *ngIf="seccionSeleccionada === 'ayuda'">
-          <h4 class="fw-bold">Ayuda y comentarios</h4>
-          <p>Sección de soporte y contacto. colocar componente</p>
-        </ng-container>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Teléfono</strong></p>
+                  <p>{{ user.numeroTelefono || 'Sin información' }}</p>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
 
-        <!-- RESERVAS -->
-        <ng-container *ngIf="seccionSeleccionada === 'reservas'">
-          <h4 class="fw-bold">Mis Reservas</h4>
-          <p>Listado de tus reservas activas y pasadas. colocar componente</p>
-        </ng-container>
+          <!-- NOTIFICACIONES -->
+          <ng-container *ngIf="seccionSeleccionada === 'notificaciones'">
+            <h4 class="fw-bold">Notificaciones</h4>
+            <p>Aquí irán las opciones de notificaciones.</p>
+          </ng-container>
 
-        <!-- CUPONES -->
-        <ng-container *ngIf="seccionSeleccionada === 'cupones'">
-          <app-coupons-section></app-coupons-section>
-        </ng-container>
+          <!-- AYUDA -->
+          <ng-container *ngIf="seccionSeleccionada === 'ayuda'">
+            <h4 class="fw-bold">Ayuda y comentarios</h4>
+            <p>Sección de soporte y contacto.</p>
+          </ng-container>
+
+          <!-- RESERVAS -->
+          <ng-container *ngIf="seccionSeleccionada === 'reservas'">
+            <h4 class="fw-bold">Mis Reservas</h4>
+            <p>Listado de tus reservas activas y pasadas.</p>
+          </ng-container>
+
+          <!-- CUPONES -->
+          <ng-container *ngIf="seccionSeleccionada === 'cupones'">
+            <app-coupons-section></app-coupons-section>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #cargando>
+  <div class="container py-5 text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3">Cargando perfil de usuario...</p>
+  </div>
+</ng-template>

@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 interface DecodedToken {
-  sub: number; // ID del usuario (viene como "sub" por convención JWT)
-  nombre: string;
+  sub: number;
   correo: string;
+  rol: string;
 }
 
 @Injectable({
@@ -35,7 +35,7 @@ export class AuthStateService {
 
     try {
       const decoded: DecodedToken = jwtDecode(token);
-      return decoded.nombre || null;
+      return decoded.correo || null; // <- usa el campo correcto
     } catch (e) {
       return null;
     }
@@ -53,14 +53,15 @@ export class AuthStateService {
     this.isLoggedInSubject.next(false);
     this.nombreSubject.next(null);
   }
+
   getUserId(): number | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
 
     try {
-      const decoded: any = jwtDecode(token);
-      console.log('ID extraído del token:', decoded.id);
-      return decoded.id;
+      const decoded: DecodedToken = jwtDecode(token);
+      console.log('ID extraído del token:', decoded.sub); // ✅ CAMBIO AQUÍ
+      return decoded.sub;
     } catch (error) {
       console.error('Error al decodificar token:', error);
       return null;

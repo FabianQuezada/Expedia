@@ -1,17 +1,22 @@
+// src/app/services/user.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { updateUser} from '../models/User/updateUser';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private baseUrl = 'http://localhost:3000'; // Ajusta si usas proxy o dominio
 
   constructor(private http: HttpClient) {}
 
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`);
+  getUserProfile(): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/usuario/mi-perfil`);
+  }
+   updateUserProfile(user: Partial<updateUser>): Observable<updateUser> {
+    return this.http.patch<updateUser>(`${this.baseUrl}/usuario/mi-perfil`, user);
   }
 }

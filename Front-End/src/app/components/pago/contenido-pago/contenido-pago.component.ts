@@ -7,6 +7,7 @@ import { ReservaService } from 'src/app/services/reserva.service';
 import { CreateReservaDto } from 'src/app/models/reserva';
 import { CreatePagoDto } from 'src/app/models/createPago';
 import { Router } from '@angular/router';
+import { AuthStateService } from 'src/app/services/auth-state.service';
 
 @Component({
   selector: 'app-contenido-pago',
@@ -16,10 +17,7 @@ import { Router } from '@angular/router';
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(-10px)' }),
-        animate(
-          '300ms ease-out',
-          style({ opacity: 1, transform: 'translateY(0)' })
-        ),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
       ]),
     ]),
   ],
@@ -27,21 +25,30 @@ import { Router } from '@angular/router';
 export class ContenidoPagoComponent implements OnInit {
   formulario!: FormGroup;
   datosRecibidos: any;
-  resumen: any;
   metodoSeleccionado: 'credito' | 'debito' | 'paypal' | null = null;
   mostrarFormulario = false;
   reservaExitosa: boolean = false;
+  userId!: number;
 
   constructor(
     private fb: FormBuilder,
     private pagoService: PagoService,
     private reservaService: ReservaService,
     protected dateUtil: DateUtilsService,
-    private router: Router
+    private router: Router,
+    private authState: AuthStateService // ✅ Inyectar servicio
   ) {}
 
   ngOnInit(): void {
     this.datosRecibidos = history.state;
+
+    const userId = this.authState.getUserId(); // ✅ Usar servicio
+    if (userId) {
+      this.userId = userId;
+    } else {
+      console.error('No se pudo obtener el ID del usuario desde el token');
+      return;
+    }
 
     this.formulario = this.fb.group({
       encargado: this.fb.group({
@@ -141,17 +148,14 @@ export class ContenidoPagoComponent implements OnInit {
   }
 
   reservar(): void {
-    if (this.formulario.valid) {
-      const fechaOriginal = new Date(this.datosRecibidos.fecha);
-      fechaOriginal.setHours(0, 0, 0, 0); // limpiar hora
-
+    if (this.formulario.valid && this.userId) {
       const reservaDTO: CreateReservaDto = {
         cantidadPersonas:
           Number(this.datosRecibidos.adultos) +
           Number(this.datosRecibidos.ninos),
         totalPago: Number(this.datosRecibidos.total),
         fecha: this.datosRecibidos.fecha,
-        idUsuario: Number(this.datosRecibidos.idUsuario),
+        idUsuario: this.userId, // ✅ seguro
         idExperiencia: Number(this.datosRecibidos.idExperiencia),
       };
 
@@ -162,7 +166,7 @@ export class ContenidoPagoComponent implements OnInit {
             metodo: this.metodoSeleccionado!,
             monto: Number(this.datosRecibidos.total),
             idReserva: reservaId,
-            idUsuario: Number(this.datosRecibidos.idUsuario),
+            idUsuario: this.userId, // ✅ seguro
           };
 
           this.pagoService.crearPago(pagoDTO).subscribe({
@@ -170,12 +174,11 @@ export class ContenidoPagoComponent implements OnInit {
               if (respuesta && respuesta.idPago) {
                 this.reservaExitosa = true;
                 alert('¡Reserva realizada con éxito!');
-                this.router.navigate(['/home']); // 👈 redirección automática
+                this.router.navigate(['/home']);
               } else {
                 alert('Error al registrar el pago.');
               }
             },
-
             error: (err) => {
               console.error('Error al crear pago:', err);
               alert('Error al procesar el pago.');

@@ -26,6 +26,7 @@ const routes: Routes = [
   {path: 'user-profile', component: UserProfileComponent},
   {path: 'provider-profile', component: ProviderProfileComponent},
   {path: 'add-service', component: NewServiceComponent},
+  {path: 'perfil', component: UserProfileComponent},
 
 ];
 

@@ -36,7 +36,8 @@ import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { JwtInterceptor } from './services/interceptors/jwt.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -72,10 +73,15 @@ import { HttpClientModule } from '@angular/common/http';
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
+
   ],
   imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 
-  providers: [{ provide: 'LOCALE_ID', useValue: 'es' }],
+  providers: [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

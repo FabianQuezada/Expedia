@@ -1,29 +1,75 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
-
+import { UserService } from 'src/app/services/user.service';
+import { AuthStateService } from 'src/app/services/auth-state.service';
+import { updateUser } from 'src/app/models/User/updateUser';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
 })
 export class UserProfileComponent implements OnInit {
   user!: User;
-   seccionSeleccionada: string = 'perfil';
+  formPerfil!: FormGroup;
+  editarPerfil = false;
+  seccionSeleccionada: string = 'perfil';
 
-    cerrarSesion() {
-    // lógica aquí
-  }
+  constructor(
+    private userService: UserService,
+    private authState: AuthStateService,
+    private fb: FormBuilder
+  ) {}
+
   ngOnInit(): void {
-    // Datos de prueba
-    this.user = {
-      idUsuario: 1,
-      nombre: 'Valentina',
-      apellido: 'Ramírez',
-      genero: 'Femenino',
-      fechaNacimiento: '1998-05-14',
-      numeroTelefono: '+56912345678',
-      correo: 'valentina.ramirez@email.com',
-      contrasena: '********',
-      fechaRegistro: '2024-01-01',
+    this.userService.getUserProfile().subscribe({
+      next: (data) => {
+        this.user = data;
+        this.initForm();
+      },
+      error: (err) => {
+        console.error('Error al obtener perfil de usuario', err);
+      },
+    });
+  }
+
+  initForm(): void {
+    this.formPerfil = this.fb.group({
+      nombre: [this.user.nombre, Validators.required],
+      apellido: [this.user.apellido, Validators.required],
+      genero: [this.user.genero],
+      fechaNacimiento: [this.user.fechaNacimiento],
+      numeroTelefono: [
+        this.user.numeroTelefono,
+        [Validators.pattern(/^\+?\d{7,15}$/)],
+      ],
+    });
+  }
+
+guardarPerfil(): void {
+  if (this.formPerfil.valid) {
+    const datosFormulario: updateUser = {
+      nombre: this.formPerfil.value.nombre,
+      apellido: this.formPerfil.value.apellido,
+      genero: this.formPerfil.value.genero,
+      fechaNacimiento: this.formPerfil.value.fechaNacimiento,
+      numeroTelefono: this.formPerfil.value.numeroTelefono,
+
     };
+
+    this.userService.updateUserProfile(datosFormulario).subscribe({
+      next: (data) => {
+        this.user = { ...this.user, ...datosFormulario };
+        this.editarPerfil = false;
+        console.log('Perfil actualizado exitosamente');
+      },
+      error: (err) => {
+        console.error('Error al actualizar perfil', err);
+      }
+    });
+  }
+}
+
+  cerrarSesion(): void {
+    this.authState.logout();
   }
 }
