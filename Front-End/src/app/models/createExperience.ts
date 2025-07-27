@@ -2,7 +2,7 @@ import { Fecha } from './Fecha';
 import { Imagen } from './Imagen';
 
 
-export interface Experiencia {
+export interface CrearExperiencia {
   idExperiencia: number;
   titulo: string;
   descripcion: string;

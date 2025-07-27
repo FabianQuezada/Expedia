@@ -3,7 +3,7 @@
   class="rounded-3 d-block position-relative overflow-hidden ratio ratio-21x9 shadow-sm text-decoration-none"
 >
   <img
-    [src]="experiencia.imagenes?.[0]?.url || defaultImg"
+    [src]="experiencia.imagenes[0].url || defaultImg"
     (error)="onImageError($event)"
     alt="Imagen de experiencia"
     class="w-100 h-100 object-fit-cover"
