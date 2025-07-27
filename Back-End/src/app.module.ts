@@ -8,7 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FechasExperienciaModule } from './fechas-experiencia/fechas-experiencia.module';
 import { ReservaModule } from './reserva/reserva.module';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -24,15 +23,14 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [__dirname + '/**/*.entity.{ts,js}'],
+        entities: [__dirname ], // 
         synchronize: true,
         autoLoadEntities: true,
       }),
       inject: [ConfigService],
     }),
     FechasExperienciaModule,
-    ReservaModule,
-    AuthModule
+    ReservaModule
   ],
   controllers: [AppController],
   providers: [AppService],
