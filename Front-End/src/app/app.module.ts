@@ -5,8 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
-import { HomepageComponent } from './components/home/homepage/homepage.component';
-import { SearchbarComponent } from './components/home/searchbar/searchbar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NewServiceComponent } from './components/create-service/new-service/new-service.component';
@@ -48,8 +46,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomepageComponent,
-    SearchbarComponent,
     NavbarComponent,
     UserProfileComponent,
     NewServiceComponent,
