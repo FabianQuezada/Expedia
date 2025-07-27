@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthStateService } from '../../services/auth-state.service';
 import { Router } from '@angular/router';
+import { AuthStateService } from '../../services/auth-state.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-
 export class NavbarComponent implements OnInit {
   isLoggedIn = false;
   nombreUsuario: string | null = null;
@@ -30,5 +29,11 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     this.authStateService.logout();
     this.router.navigate(['/login']);
+  }
+
+  goToPerfil(): void {
+    const rol = this.authStateService.getUserRole();
+    const ruta = rol === 'proveedor' ? '/provider-profile' : '/perfil';
+    this.router.navigate([ruta]);
   }
 }
