@@ -13,7 +13,6 @@ import { NewServiceComponent } from './components/create-service/new-service/new
 import { ImageUploadComponent } from './components/create-service/image-upload/image-upload.component';
 import { ServiceDetailUploadComponent } from './components/create-service/service-detail-upload/service-detail-upload.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { FormsModule } from '@angular/forms';
 import { ServiceAddDatesComponent } from './components/create-service/service-add-dates/service-add-dates.component';
 import { CouponsSectionComponent } from './components/user-coupon/coupons-section/coupons-section.component';
 import { CardCouponComponent } from './components/user-coupon/card-coupon/card-coupon.component';

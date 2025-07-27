@@ -51,10 +51,10 @@
               class="form-check-input"
               type="checkbox"
               value=""
-              id="checkConfirmacion"
+              id="checkTraslado"
             />
-            <label class="form-check-label" for="checkConfirmacion">
-              Confirmación instantánea
+            <label class="form-check-label" for="checkTraslado">
+              Traslado de hoteles seleccionados
             </label>
           </div>
           <div class="form-check">
@@ -62,15 +62,25 @@
               class="form-check-input"
               type="checkbox"
               value=""
-              id="checkTraslado"
+              id="checkAccesibilidad"
             />
-            <label class="form-check-label" for="checkTraslado">
-              Traslado de hoteles seleccionados
+            <label class="form-check-label" for="checkAccesibilidad">
+              Accesible para personas con movilidad reducida
             </label>
           </div>
         </div>
-
         <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="checkConfirmacion"
+            />
+            <label class="form-check-label" for="checkConfirmacion">
+              Confirmación instantánea
+            </label>
+          </div>
           <div class="form-check">
             <input
               class="form-check-input"
@@ -109,13 +119,74 @@
         ></map-marker>
       </google-map>
 
-      <div class="d-flex align-items-center gap-3 mt-4">
-        <p class="fs-3 fw-semibold mt-3">CLP</p>
-        <input
-          type="number"
-          class="form-control w-50"
-          [(ngModel)]="nuevaExperiencia.precio"
-        />
+      <p class="fs-3 fw-semibold mt-3">Categoría</p>
+      <div class="row">
+        <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categoria"
+              id="radioAventura"
+              [(ngModel)]="nuevaExperiencia.categoria"
+              [value]="'Aventura'"
+            />
+            <label class="form-check-label" for="radioAventura">Aventura</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categoria"
+              id="radioCultural"
+              [(ngModel)]="nuevaExperiencia.categoria"
+              [value]="'Cultural'"
+            />
+            <label class="form-check-label" for="radioCultural">Cultural</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categoria"
+              id="radioGastronomia"
+              [(ngModel)]="nuevaExperiencia.categoria"
+              [value]="'Gastronomía'"
+            />
+            <label class="form-check-label" for="radioGastronomia"
+              >Gastronomía</label
+            >
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categoria"
+              id="radioNaturaleza"
+              [(ngModel)]="nuevaExperiencia.categoria"
+              [value]="'Naturaleza'"
+            />
+            <label class="form-check-label" for="radioNaturaleza"
+              >Naturaleza</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="categoria"
+              id="radioHistorica"
+              [(ngModel)]="nuevaExperiencia.categoria"
+              [value]="'Histórica'"
+            />
+            <label class="form-check-label" for="radioHistorica"
+              >Histórica</label
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>

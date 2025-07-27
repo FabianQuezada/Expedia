@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, EventEmitter, NgZone, Output } from '@angular/core';
 
 @Component({
   selector: 'app-service-detail-upload',
@@ -14,8 +14,8 @@ export class ServiceDetailUploadComponent {
   nuevaExperiencia = {
   titulo: '',
   descripcion: '',
-  precio: null,
-  direccion: ''
+  ubicacion: null as google.maps.LatLngLiteral | null,
+  categoria: ''
   };
 
   zoom = 14;
@@ -103,6 +103,33 @@ export class ServiceDetailUploadComponent {
     });
   }
   
-  
+  getDetails() {
+    this.nuevaExperiencia.ubicacion = this.markerPosition;
+
+    const experienciaFinal = {
+      ...this.nuevaExperiencia,
+      caracteristicas: this.obtenerCaracteristicas()
+    };
+
+    return experienciaFinal;
+  }
+
+  obtenerCaracteristicas(): number[] {
+    const opciones: { id: string, label: string, value: number }[] = [
+      { id: 'checkCancelacion', label: 'Cancelación gratuita disponible', value: 1 },
+      { id: 'checkVoucher', label: 'Voucher móvil', value: 2 },
+      { id: 'checkTraslado', label: 'Traslado de hoteles seleccionados', value: 3 },
+      { id: 'checkAccesibilidad' , label: 'Accesible para personas con movilidad reducida', value: 4 },
+      { id: 'checkConfirmacion', label: 'Confirmación instantánea', value: 5 },
+      { id: 'checkIdiomas', label: 'Varios idiomas', value: 6 }
+    ];
+
+    return opciones
+      .filter(op => {
+        const input = document.getElementById(op.id) as HTMLInputElement;
+        return input && input.checked;
+      })
+      .map(op => op.value);
+  }
 }
 

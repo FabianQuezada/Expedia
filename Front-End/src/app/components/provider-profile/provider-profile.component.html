@@ -250,7 +250,12 @@
             class="servicios-header d-flex align-items-center justify-content-between mb-3"
           >
             <h4 class="fw-bold mb-3">Mis Servicios</h4>
-            <button class="btn-agregar-servicio">Añadir Servicio</button>
+            <button
+              class="btn-agregar-servicio"
+              [routerLink]="['/add-service']"
+            >
+              Añadir Servicio
+            </button>
           </div>
 
           <div *ngIf="(servicios?.length || 0) > 0; else sinServicios">
