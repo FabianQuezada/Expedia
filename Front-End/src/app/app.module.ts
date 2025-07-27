@@ -18,11 +18,9 @@ import { CouponsSectionComponent } from './components/user-coupon/coupons-sectio
 import { CardCouponComponent } from './components/user-coupon/card-coupon/card-coupon.component';
 import { ProviderProfileComponent } from './components/provider-profile/provider-profile.component';
 import { ViewServiceComponent } from './components/view-service/view-service.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ContenidoPagoComponent } from './components/pago/contenido-pago/contenido-pago.component';
 import { MetodoPagoComponent } from './components/pago/metodo-pago/metodo-pago.component';
 import { PagoComponent } from './components/pago/pago.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardVueloComponent } from './components/card-vuelo/card-vuelo.component';
 import { CardHospedajeComponent } from './components/card-hospedaje/card-hospedaje.component';
