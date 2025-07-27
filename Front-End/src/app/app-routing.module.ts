@@ -7,6 +7,9 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProviderProfileComponent } from './components/provider-profile/provider-profile.component';
+import { NewServiceComponent } from './components/create-service/new-service/new-service.component';
 
 const routes: Routes = [
   
@@ -19,12 +22,17 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent },
   {path: 'home', component: HomeComponent },
   {path: 'resenas/:idExperiencia', component: ReviewsComponent },
-  {path: 'resenas/:id', component: ReviewsComponent}
+  {path: 'resenas/:id', component: ReviewsComponent},
+  {path: 'user-profile', component: UserProfileComponent},
+  {path: 'provider-profile', component: ProviderProfileComponent},
+  {path: 'add-service', component: NewServiceComponent},
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
+  
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}

@@ -1,0 +1,95 @@
+<div class="container my-5" style="max-width: 1450px">
+  <p class="fs-3 fw-semibold my-4 ms-5">Agregar Servicio</p>
+
+  <div class="row g-3 px-0 px-md-5">
+    <!-- IZQUIERDA: Imagen grande (cuadrada) -->
+    <div class="col-12 col-md-7">
+      <div class="ratio ratio-4x3 h-100">
+        <label
+          class="img-upload-btn"
+          [ngStyle]="{ 'background-image': getBackground(0) }"
+          for="img0"
+          aria-label="Imagen 1"
+        >
+          <i
+            class="bi bi-image fs-1 text-white position-absolute top-50 start-50 translate-middle"
+            *ngIf="!imagePreviews[0]"
+          ></i>
+        </label>
+        <input
+          type="file"
+          id="img0"
+          class="d-none"
+          (change)="onImageSelected($event, 0)"
+        />
+      </div>
+    </div>
+
+    <!-- DERECHA: 2 cuadradas arriba, 1 horizontal abajo -->
+    <div class="col-12 col-md-5 d-flex flex-column gap-2">
+      <!-- ARRIBA -->
+      <div class="d-flex gap-2">
+        <div class="ratio ratio-1x1 w-50">
+          <label
+            class="img-upload-btn"
+            [ngStyle]="{ 'background-image': getBackground(1) }"
+            for="img1"
+            aria-label="Imagen 2"
+          >
+            <i
+              class="bi bi-image fs-1 text-white position-absolute top-50 start-50 translate-middle"
+              *ngIf="!imagePreviews[1]"
+            ></i>
+          </label>
+          <input
+            type="file"
+            id="img1"
+            class="d-none"
+            (change)="onImageSelected($event, 1)"
+          />
+        </div>
+
+        <div class="ratio ratio-1x1 w-50">
+          <label
+            class="img-upload-btn"
+            [ngStyle]="{ 'background-image': getBackground(2) }"
+            for="img2"
+            aria-label="Imagen 3"
+          >
+            <i
+              class="bi bi-image fs-1 text-white position-absolute top-50 start-50 translate-middle"
+              *ngIf="!imagePreviews[2]"
+            ></i>
+          </label>
+          <input
+            type="file"
+            id="img2"
+            class="d-none"
+            (change)="onImageSelected($event, 2)"
+          />
+        </div>
+      </div>
+
+      <!-- ABAJO -->
+      <div class="ratio ratio-16x9 w-100">
+        <label
+          class="img-upload-btn"
+          [ngStyle]="{ 'background-image': getBackground(3) }"
+          for="img3"
+          aria-label="Imagen 4"
+        >
+          <i
+            class="bi bi-image fs-1 text-white position-absolute top-50 start-50 translate-middle"
+            *ngIf="!imagePreviews[3]"
+          ></i>
+        </label>
+        <input
+          type="file"
+          id="img3"
+          class="d-none"
+          (change)="onImageSelected($event, 3)"
+        />
+      </div>
+    </div>
+  </div>
+</div>
