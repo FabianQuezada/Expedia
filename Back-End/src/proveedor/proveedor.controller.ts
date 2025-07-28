@@ -37,10 +37,10 @@ export class ProveedorController {
 
     @Body() updateUsuarioDto: UpdateProveedorDto,
   ) {
-    // 🧩 Consolas de diagnóstico
-    console.log('🧩 PATCH req.usuario:', req.usuario);
-    console.log('🧩 typeof req.usuario.id:', typeof req.usuario.id);
-    console.log('🧩 valor de req.usuario.id:', req.usuario.id);
+    // Consolas de diagnóstico
+    console.log('PATCH req.usuario:', req.usuario);
+    console.log('typeof req.usuario.id:', typeof req.usuario.id);
+    console.log('valor de req.usuario.id:', req.usuario.id);
 
     return this.proveedorService.update(req.usuario.id, updateUsuarioDto);
   }
