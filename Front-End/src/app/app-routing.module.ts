@@ -35,7 +35,7 @@ const routes: Routes = [
   {path: 'provider-register', component: ProviderRegisterComponent},
   {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
 
-
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
