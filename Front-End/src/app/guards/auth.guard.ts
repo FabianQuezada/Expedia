@@ -22,9 +22,20 @@ export class AuthGuard implements CanActivate {
 
     const userRole = this.authState.getUserRole();
 
-    // Bloquear acceso a /perfil si es proveedor
-    if (state.url.startsWith('/perfil') && userRole === 'proveedor') {
-      return this.router.createUrlTree(['/perfil-proveedor']);
+    const rutasRestringidasParaProveedor = [
+      '/perfil',
+      '/historialExperiencia',
+      '/pago'
+    ];
+
+    // Si el proveedor intenta acceder a una ruta restringida -> redirigir
+    if (userRole === 'proveedor') {
+      const intento = rutasRestringidasParaProveedor.some((ruta) =>
+        state.url.startsWith(ruta)
+      );
+      if (intento) {
+        return this.router.createUrlTree(['/home']);
+      }
     }
 
     return true;

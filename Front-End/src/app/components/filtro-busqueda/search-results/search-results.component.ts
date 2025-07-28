@@ -41,6 +41,7 @@ export class SearchResultsComponent {
       });
     });
   }
+  
   calcularPrecioPromedio(exp: Experiencia): number {
   const precios = exp.fechasExperiencias?.map(f => f.precio) || [];
 

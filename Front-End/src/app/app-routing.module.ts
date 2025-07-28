@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: 'perfil-proveedor', component: ProviderProfileComponent, canActivate: [RoleGuard]},
   {path: 'add-service', component: NewServiceComponent, canActivate: [RoleGuard]},
   {path: 'perfil', component: UserProfileComponent, canActivate: [AuthGuard]},
-  {path: 'historialExperiencia', component: ExperienceHistoryComponent},
+  {path: 'historialExperiencia', component: ExperienceHistoryComponent, canActivate: [AuthGuard]},
   {path: 'registro-proveedor', component: ProviderRegisterComponent},
   {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
 
