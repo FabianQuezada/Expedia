@@ -61,7 +61,9 @@ export class ReservaController {
     return this.reservaService.remove(idReserva, idUsuario);
   }
   
-    @Get('mis-reservas')
+  @ApiBearerAuth()
+  @Auth(Rol.USUARIO)
+  @Get('mis-reservas')
   getMisReservas(@Req() req: RequestWithUser) {
     const idUsuario = req.usuario.id;
     return this.reservaService.obtenerReservasPorUsuario(idUsuario);

@@ -29,7 +29,6 @@ export class ExpDispComponent implements OnChanges {
     if (this.experiencia && this.fechaBusqueda) {
       this.filtrarFechaBusqueda();
       }
-
   }
 
 
@@ -46,10 +45,10 @@ export class ExpDispComponent implements OnChanges {
   }
 
   calcularTotal(): number {
-    const precio =
-      this.fechaSeleccionada?.precio ||
-      this.experiencia?.fechasExperiencias[0].precio;
-    return precio! * this.adultos + this.ninos * 20000;
+    const base = this.fechaSeleccionada?.precio ?? 0;
+    const descuento = this.fechaSeleccionada?.descuento ?? 0;
+    const precioFinal = base * (1 - descuento);
+    return precioFinal * this.adultos + this.ninos * 20000;
   }
 
   irAPagar() {

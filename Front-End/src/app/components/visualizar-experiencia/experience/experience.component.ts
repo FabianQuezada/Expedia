@@ -2,6 +2,9 @@ import { Component, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Experiencia } from 'src/app/models/experiencia';
 import { ExperienceService } from 'src/app/services/experience.service';
+import { FechasExperienciaService } from 'src/app/services/fechas-experiencia.service';
+import { FechaCompleta } from 'src/app/models/fecha-completa.model';
+
 
 @Component({
   selector: 'app-experience',
@@ -9,18 +12,22 @@ import { ExperienceService } from 'src/app/services/experience.service';
   styleUrls: ['./experience.component.css']
 })
 export class ExperienceComponent {
+  fechasDisponibles: FechaCompleta[] = [];
   experiencia: Experiencia | undefined;
   fechaSeleccionada: Date | undefined;
   ciudad: string = '...';
+  idExperiencia!: number;
   
   constructor(
-    private experienciaService: ExperienceService, 
+    private experienciaService: ExperienceService,
+    private fechasService: FechasExperienciaService, 
     private route: ActivatedRoute, 
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = +params['id'];
+      this.idExperiencia = id;
       this.experienciaService.getExperienciaPorId(id).subscribe(data => {
         this.experiencia = data;
         this.obtenerCiudadDesdeUbicacion();
@@ -31,6 +38,15 @@ export class ExperienceComponent {
     this.route.queryParams.subscribe(params => {
       if (params['date']) {
         this.fechaSeleccionada = new Date(params['date']);
+      }
+    });
+
+    this.fechasService.getFechasConDescuento().subscribe({
+      next: fechas => {
+        this.fechasDisponibles = fechas.filter(f => f.idExperiencia === this.idExperiencia);
+      },
+      error: err => {
+        console.error('Error al obtener fechas con descuento:', err);
       }
     });
   }

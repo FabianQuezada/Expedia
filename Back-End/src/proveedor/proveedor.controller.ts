@@ -30,21 +30,29 @@ export interface RequestWithUsuario extends Request {
 export class ProveedorController {
   constructor(private readonly proveedorService: ProveedorService) {}
 
+  @ApiBearerAuth()
+  @Auth(Rol.ADMIN)
   @Post()
   create(@Body() createProveedorDto: CreateProveedorDto) {
     return this.proveedorService.create(createProveedorDto);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.ADMIN)
   @Get()
   findAll() {
     return this.proveedorService.findAll();
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.ADMIN)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.proveedorService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.ADMIN)
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -53,6 +61,8 @@ export class ProveedorController {
     return this.proveedorService.update(+id, updateProveedorDto);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.proveedorService.remove(+id);

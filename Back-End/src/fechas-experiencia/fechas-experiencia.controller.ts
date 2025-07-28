@@ -23,8 +23,9 @@ export class FechasExperienciaController {
     private readonly fechasExperienciaService: FechasExperienciaService,
   ) {}
 
-  @Post('agregar-fechas/:idExperiencia')
+  @ApiBearerAuth()
   @Auth(Rol.PROVEEDOR)
+  @Post('agregar-fechas/:idExperiencia')
   async agregarFechas(
     @Param('idExperiencia', ParseIntPipe) idExperiencia: number,
     @Body() createFechasExperienciaDto: CreateFechasExperienciaDto[],
@@ -35,17 +36,7 @@ export class FechasExperienciaController {
     );
   }
 
-  @Get('descuentos')
-  async getFechasConDescuento() {
-    return this.fechasExperienciaService.findAllConDescuento();
-  }
-
-  @Get('descuento-prueba')
-  async prueba() {
-    return this.fechasExperienciaService.aplicarDescuentoMensual();
-  }
-
-  @Get('all')
+  @Get('')
   findAll() {
     return this.fechasExperienciaService.findAll();
   }
@@ -58,6 +49,8 @@ export class FechasExperienciaController {
     return this.fechasExperienciaService.findOne(new Date(fecha), +idExperiencia);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.PROVEEDOR)
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -69,6 +62,8 @@ export class FechasExperienciaController {
     );
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.PROVEEDOR)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.fechasExperienciaService.remove(+id);
