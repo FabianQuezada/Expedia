@@ -11,13 +11,14 @@
     <div class="text-center my-5">
       <h3 class="fw-semibold">Crea una cuenta</h3>
     </div>
-    <form>
+    <form (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <input
           type="names"
           class="form-control rounded-pill p-3"
           id="inputNames"
           placeholder="Nombres"
+              [(ngModel)]="formData.name"
         />
       </div>
       <div class="mb-3">
@@ -26,6 +27,7 @@
           class="form-control rounded-pill p-3 mb-4"
           id="inputSurnames"
           placeholder="Apellidos"
+          [(ngModel)]="formData.surname"
         />
       </div>
       <div class="mb-3">
@@ -34,6 +36,7 @@
           class="form-control rounded-pill p-3 mb-4"
           id="inputEmail"
           placeholder="Correo electrónico"
+          [(ngModel)]="formData.email"
         />
       </div>
       <div class="mb-3">
@@ -42,6 +45,7 @@
           class="form-control rounded-pill p-3 mb-4"
           id="inputPassword"
           placeholder="Contraseña"
+          [(ngModel)]="formData.password"
         />
       </div>
       <div class="d-grid">

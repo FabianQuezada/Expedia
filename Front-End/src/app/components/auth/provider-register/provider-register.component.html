@@ -1,0 +1,71 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+    <div class="d-grid justify-content-center">
+      <img
+        src="assets/images/Logo-Expedia.png"
+        alt="Expedia Logo"
+        class="img-fluid"
+        style="width: 200px; height: auto"
+      />
+    </div>
+    <div class="text-center my-5">
+      <h3 class="fw-semibold">Crea una cuenta de proovedor</h3>
+    </div>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="mb-3">
+    <input
+      type="text"
+      formControlName="empresa"
+      class="form-control rounded-pill p-3"
+      placeholder="Nombre de la Empresa"
+      [ngClass]="{ 'is-invalid': submitted && f['empresa'].errors }"
+    />
+    <div *ngIf="submitted && f['empresa'].errors" class="invalid-feedback ms-2">
+      <div *ngIf="f['empresa'].errors['required']">Este campo es requerido.</div>
+      <div *ngIf="f['empresa'].errors['minlength']">Debe tener al menos 2 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      type="email"
+      formControlName="email"
+      class="form-control rounded-pill p-3"
+      placeholder="Correo electrónico"
+      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+    />
+    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback ms-2">
+      <div *ngIf="f['email'].errors['required']">Correo es requerido.</div>
+      <div *ngIf="f['email'].errors['email']">Correo inválido.</div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      type="password"
+      formControlName="password"
+      class="form-control rounded-pill p-3"
+      placeholder="Contraseña"
+      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+    />
+    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback ms-2">
+      <div *ngIf="f['password'].errors['required']">Contraseña es requerida.</div>
+      <div *ngIf="f['password'].errors['minlength']">Mínimo 6 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-lg btn-expedia-secondary py-3">
+      Crear cuenta
+    </button>
+  </div>
+
+  <div class="d-grid mt-2">
+    <button type="button" class="btn btn-lg btn-expedia-primary py-3" [routerLink]="['/login']">
+      Iniciar Sesión
+    </button>
+  </div>
+</form>
+
+  </div>
+</div>

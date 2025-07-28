@@ -39,9 +39,9 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/metodo-pago-reprogramacion/metodo-pago-reprogramacion.component';
-
 
 @NgModule({
   declarations: [
@@ -83,8 +83,11 @@ import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/m
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
+    ProviderRegisterComponent,
     MetodoPagoReprogramacionComponent
-    ],
+  ],
+
+    
 
   imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule
   ],

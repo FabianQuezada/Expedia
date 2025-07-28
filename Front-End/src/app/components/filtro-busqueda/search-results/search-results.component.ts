@@ -26,14 +26,15 @@ export class SearchResultsComponent {
       const destinoParam = query['location'];
       const fechaParam = query['date'];
 
-      if (destinoParam) {
-        this.destino = destinoParam.replace(/-/g, ' ').trim().toLowerCase();
+      
+      if (!destinoParam && !fechaParam) {
+        this.router.navigate(['/']);
+        return;
       }
 
-      if (fechaParam) {
-        this.fecha = new Date(fechaParam);
-      }
-
+      this.destino = destinoParam.replace(/-/g, ' ').trim().toLowerCase();
+      this.fecha = new Date(fechaParam);
+    
       this.experienciaService.getExperiencias().subscribe(data => {
         this.experiencias = data;
         this.filtrarExperiencias();
