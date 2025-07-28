@@ -52,4 +52,5 @@ export class AuthService {
   getProfile(): Observable<any> {
     return this.http.get(`${this.apiUrl}/profile`);
   }
+  
 }

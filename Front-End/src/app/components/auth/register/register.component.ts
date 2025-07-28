@@ -1,50 +1,56 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   formData = {
     name: '',
     surname: '',
     email: '',
-    password: ''
+    password: '',
   };
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  mensajeError: string | null = null;
 
-  ngAfterViewInit() {
-    const form = document.querySelector('form');
-    if (form) {
-      form.addEventListener('submit', this.onSubmit.bind(this));
-    }
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
-    const { name, surname, email, password } = this.formData;
-
-    if (!name || !surname || !email || !password) {
-      alert('Por favor completa todos los campos ❗');
+  onSubmit(form: NgForm): void {
+    if (form.invalid) {
+      Object.values(form.controls).forEach((control) =>
+        control.markAsTouched()
+      );
+      this.mensajeError = 'Por favor completa todos los campos.';
       return;
     }
 
-    this.authService.register({ nombre: name, apellido: surname, correo: email, contraseña: password }).subscribe({
-      next: (res) => {
-        console.log('Registro exitoso ✔️', res);
-        alert('Usuario registrado correctamente');
-        this.router.navigate(['/login']);
-      },
-      error: (err) => {
-        console.error('Error al registrar ❌', err);
-        alert('Ocurrió un error al registrar el usuario');
-      }
-    });
+    const { name, surname, email, password } = this.formData;
+
+    this.authService
+      .register({
+        nombre: name,
+        apellido: surname,
+        correo: email,
+        contraseña: password,
+      })
+      .subscribe({
+        next: (res) => {
+          this.mensajeError = null;
+          alert('Usuario registrado correctamente');
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Error al registrar ❌', err);
+          alert('Error al registrar'+err?.error?.message);
+          this.mensajeError = Array.isArray(err?.error?.message)
+            ? err.error.message.join('. ')
+            : err?.error?.message || 'Error inesperado al registrar.';
+        },
+      });
   }
 }
