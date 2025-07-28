@@ -46,7 +46,7 @@ export class RegisterComponent {
         },
         error: (err) => {
           console.error('Error al registrar ❌', err);
-          alert('Error al registrar'+err?.error?.message);
+          alert('Error al registrar: '+err?.error?.message);
           this.mensajeError = Array.isArray(err?.error?.message)
             ? err.error.message.join('. ')
             : err?.error?.message || 'Error inesperado al registrar.';

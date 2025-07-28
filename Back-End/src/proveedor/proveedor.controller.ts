@@ -30,6 +30,20 @@ export interface RequestWithUsuario extends Request {
 export class ProveedorController {
   constructor(private readonly proveedorService: ProveedorService) {}
 
+  @Patch('profile-proveedor')
+  @Auth(Rol.PROVEEDOR)
+  updatePerfil(
+    @Req() req: RequestWithUsuario,
+
+    @Body() updateUsuarioDto: UpdateProveedorDto,
+  ) {
+    // 🧩 Consolas de diagnóstico
+    console.log('🧩 PATCH req.usuario:', req.usuario);
+    console.log('🧩 typeof req.usuario.id:', typeof req.usuario.id);
+    console.log('🧩 valor de req.usuario.id:', req.usuario.id);
+
+    return this.proveedorService.update(req.usuario.id, updateUsuarioDto);
+  }
   @Post()
   create(@Body() createProveedorDto: CreateProveedorDto) {
     return this.proveedorService.create(createProveedorDto);
@@ -56,21 +70,6 @@ export class ProveedorController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.proveedorService.remove(+id);
-  }
-
-  @Patch('profile-proveedor')
-  @Auth(Rol.PROVEEDOR)
-  updatePerfil(
-    @Req() req: RequestWithUsuario,
-
-    @Body() updateUsuarioDto: UpdateProveedorDto,
-  ) {
-    // 🧩 Consolas de diagnóstico
-    console.log('🧩 PATCH req.usuario:', req.usuario);
-    console.log('🧩 typeof req.usuario.id:', typeof req.usuario.id);
-    console.log('🧩 valor de req.usuario.id:', req.usuario.id);
-
-    return this.proveedorService.update(req.usuario.id, updateUsuarioDto);
   }
 
   @Get('profile-proveedor')
