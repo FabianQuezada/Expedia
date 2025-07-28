@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Experience } from 'src/app/models/experience.model';
-import { ExperienceService } from 'src/app/services/experience/experience.service';
+import { ReservaService } from 'src/app/services/reserva.service';
 
 @Component({
   selector: 'app-experience-history',
@@ -8,14 +8,15 @@ import { ExperienceService } from 'src/app/services/experience/experience.servic
   styleUrls: ['./experience-history.component.css'],
 })
 export class ExperienceHistoryComponent implements OnInit {
-  constructor(private experienceService: ExperienceService) {}
+  constructor(private reservaService: ReservaService) {}
   experienceInactive: Experience[] = [];
   experienceActive: Experience[] = [];
 
   ngOnInit(): void {
-    this.experienceService.getAllExperiences$().subscribe((experiences) => {
-      this.experienceActive = experiences.filter((exp) => exp.esActiva());
-      this.experienceInactive = experiences.filter((exp) => !exp.esActiva());
+    this.reservaService.getMisReservas$().subscribe((experiences: Experience[]) => {
+      console.log('Experiencias reservadas:', experiences);
+      this.experienceActive = experiences.filter(exp => exp.esActiva());
+      this.experienceInactive = experiences.filter(exp => !exp.esActiva());
     });
   }
 }

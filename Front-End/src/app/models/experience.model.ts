@@ -12,8 +12,7 @@ export class Experience {
 
   esActiva(): boolean {
     const hoy = new Date();
-    const [day, month, year] = this.fecha.split('/').map(Number);
-    const fechaExp = new Date(year, month - 1, day);
+    const fechaExp = new Date(this.fecha);
 
     hoy.setHours(0, 0, 0, 0);
     fechaExp.setHours(0, 0, 0, 0);

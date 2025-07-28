@@ -7,6 +7,7 @@ import { Repository, Raw } from 'typeorm';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
 import { Experiencia } from 'src/experiencia/entities/experiencia.entity';
 import { FechasExperiencia } from 'src/fechas-experiencia/entities/fechas-experiencia.entity';
+import { Resena } from 'src/resena/entities/resena.entity';
 
 @Injectable()
 export class ReservaService {
@@ -19,6 +20,8 @@ export class ReservaService {
     private readonly experienciaRepository: Repository<Experiencia>,
     @InjectRepository(FechasExperiencia)
     private readonly fechasExperienciaRepository: Repository<FechasExperiencia>,
+    @InjectRepository(Resena)
+    private readonly resenaRepository: Repository<Resena>,
   ) {}
 
   async create(createReservaDto: CreateReservaDto) {
@@ -77,6 +80,61 @@ export class ReservaService {
     await this.reservaRepository.insert(reserva);
     return reserva;
   }
+
+  async obtenerReservasPorUsuario(idUsuario: number) {
+    const reservas = await this.reservaRepository.find({
+      where: { idUsuario },
+      order: { fecha: 'DESC' },
+    });
+
+    const experienciaIds = [...new Set(reservas.map(r => r.idExperiencia))];
+
+    const experiencias = await this.experienciaRepository.find({
+      where: experienciaIds.map(id => ({ idExperiencia: id })),
+      relations: ['imagenes'],
+    });
+
+    const experienciaMap = new Map<number, Experiencia>();
+    experiencias.forEach(exp => experienciaMap.set(exp.idExperiencia, exp));
+
+    // ✅ Obtener promedios y conteos de reseñas en una sola consulta
+    const resenasStats = await this.resenaRepository
+      .createQueryBuilder('resena')
+      .select('resena.idExperiencia', 'idExperiencia')
+      .addSelect('COUNT(*)', 'cantidad')
+      .addSelect('AVG(resena.puntuacion)', 'promedio')
+      .where('resena.idExperiencia IN (:...ids)', { ids: experienciaIds })
+      .groupBy('resena.idExperiencia')
+      .getRawMany();
+
+    const resenaStatsMap = new Map<number, { cantidad: number; promedio: number }>();
+    resenasStats.forEach(stat => {
+      resenaStatsMap.set(Number(stat.idExperiencia), {
+        cantidad: Number(stat.cantidad),
+        promedio: parseFloat(stat.promedio),
+      });
+    });
+
+    // ✅ Generar la respuesta final
+    return reservas.map(reserva => {
+      const experiencia = experienciaMap.get(reserva.idExperiencia);
+      if (!experiencia) return null;
+
+      const stats = resenaStatsMap.get(reserva.idExperiencia);
+
+      return {
+        id: experiencia.idExperiencia,
+        imagenUrl: experiencia.imagenes?.[0]?.url ?? 'https://via.placeholder.com/400x200?text=Sin+imagen',
+        titulo: experiencia.titulo,
+        fecha: reserva.fecha,
+        precio: reserva.totalPago,
+        puntuacion: stats?.promedio ?? 0,
+        resenas: stats?.cantidad ?? 0,
+        descripcion: experiencia.descripcion,
+      };
+    }).filter(Boolean); // eliminar posibles nulls
+  }
+
   async findAll() {
     return await this.reservaRepository.find();
   }
