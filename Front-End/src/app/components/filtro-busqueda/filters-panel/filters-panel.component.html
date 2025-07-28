@@ -1,0 +1,98 @@
+<div class="card border mb-3">
+  <div class="card-body">
+    <p class="fs-5 fw-bold card-title">Filtrar por</p>
+    <p class="fs-6 fw-semibold">Puntuación de los viajeros</p>
+
+    <!-- Cualquiera -->
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="travelerRating"
+        id="ratingAny"
+        checked
+        (change)="setPuntuacion(0)"
+      />
+      <label class="form-check-label" for="ratingAny"> Cualquiera </label>
+    </div>
+
+    <!-- Magnífica 9+ -->
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="travelerRating"
+        id="rating9"
+        (change)="setPuntuacion(9)"
+      />
+      <label class="form-check-label" for="rating9"> Magnífica 9+ </label>
+    </div>
+
+    <!-- Muy buena 8+ -->
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="travelerRating"
+        id="rating8"
+        (change)="setPuntuacion(8)"
+      />
+      <label class="form-check-label" for="rating8"> Muy buena 8+ </label>
+    </div>
+
+    <!-- Buena 7+ -->
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        name="travelerRating"
+        id="rating7"
+        (change)="setPuntuacion(7)"
+      />
+      <label class="form-check-label" for="rating7"> Buena 7+ </label>
+    </div>
+
+    <!-- Filtro Precio -->
+    <div class="mt-4">
+      <label for="priceRange" class="form-label d-flex justify-content-between">
+        <span class="fw-bold">Precio máximo</span>
+      </label>
+
+      <input
+        type="range"
+        class="form-range"
+        min="10000"
+        max="100000"
+        id="priceRange"
+        [(ngModel)]="price"
+        (change)="onFiltroChange()"
+      />
+
+      <div class="d-flex justify-content-between small text-muted">
+        <!-- Considerar que valor mínimo sea dinámico según ofertas actuales -->
+        <span>Mín $10.000</span>
+        <span>${{ price }}</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="fw-bold mt-3">Categoría</p>
+      <div *ngFor="let categoria of categorias" class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [id]="'cat-' + categoria"
+          [value]="categoria"
+          [checked]="categoriasSeleccionadas.has(categoria)"
+          (change)="onCategoriaChange(categoria, $event)"
+        />
+        <label
+          class="form-check-label text-capitalize"
+          [for]="'cat-' + categoria"
+        >
+          {{ categoria }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

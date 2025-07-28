@@ -1,0 +1,50 @@
+<div class="scroll-fade-container">
+  <div class="scroll-content" #scrollBox (scroll)="onScroll()">
+    <!-- Imagen principal -->
+    <img
+      [src]="servicio.imagenes?.[0]?.url || 'assets/images/no-image.jpg'"
+      alt="{{ servicio.titulo }}"
+      class="service-image mb-3 rounded"
+    />
+
+    <h2 class="fw-bold">{{ servicio.titulo }}</h2>
+    <p><strong>Descripción:</strong> {{ servicio.descripcion }}</p>
+
+    <!-- Mapa con ubicación -->
+    <div class="map" *ngIf="servicio.ubicacion">
+      <strong>Ubicación:</strong>
+      <iframe
+        width="100%"
+        height="200"
+        style="border: 0; border-radius: 10px; margin-top: 10px"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        [src]="sanitizarMapa(servicio.ubicacion)"
+      ></iframe>
+    </div>
+
+    <p><strong>Categoría:</strong> {{ servicio.categoria }}</p>
+    <p><strong>Duración:</strong> {{ servicio.duracion }} hrs</p>
+    <p><strong>Estado:</strong> {{ servicio.estado }}</p>
+    <p>
+      <strong>Precio base:</strong>
+      CLP {{ servicio.precio.toLocaleString('es-CL') }}
+    </p>
+
+    <!-- Fechas disponibles -->
+    <div *ngIf="servicio.fechasExperiencias?.length">
+      <h4 class="mt-4">Fechas Disponibles</h4>
+      <ul class="list-unstyled">
+        <li *ngFor="let fecha of servicio.fechasExperiencias">
+          📅 {{ fecha.fecha | date: 'fullDate' }} - 💲
+          {{ fecha.precio.toLocaleString('es-CL') }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FADES -->
+  <div class="fade fade-top" [class.visible]="isTopVisible"></div>
+  <div class="fade fade-bottom" [class.visible]="isBottomVisible"></div>
+</div>

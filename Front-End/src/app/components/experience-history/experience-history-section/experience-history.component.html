@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="d-flex flex-column align-items-center">
+  <div class="w-75 justify-content-start my-5">
+    <h3 class="poppins-medium">Activos</h3>
+    <app-carousel-experiences
+      [carouselId]="'carousel1'"
+      [experiences]="experienceActive"
+    ></app-carousel-experiences>
+    <hr class="mx-2 mt-4" />
+    <h3 class="poppins-medium">Finalizada</h3>
+    <app-carousel-experiences
+      [carouselId]="'carousel2'"
+      [experiences]="experienceInactive"
+    ></app-carousel-experiences>
+  </div>
+</div>

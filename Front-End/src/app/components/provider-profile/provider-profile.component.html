@@ -1,0 +1,292 @@
+<app-navbar></app-navbar>
+
+<div class="container my-4">
+  <div class="row">
+    <!-- PANEL IZQUIERDO -->
+    <div class="col-md-3">
+      <div class="left-panel">
+        <div class="mb-3">
+          <h5 class="fw-semibold">{{ provider.nombreEmpresa }}</h5>
+          <p class="text-muted small">{{ provider.correo }}</p>
+          <p class="small">
+            Administra tu perfil y configuraciones en un solo lugar
+          </p>
+        </div>
+
+        <div class="d-flex flex-column gap-3">
+          <button
+            class="btn-opciones"
+            [ngClass]="{ active: seccionSeleccionada === 'perfil' }"
+            (click)="seccionSeleccionada = 'perfil'"
+          >
+            <i class="bi bi-person fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-semibold">Perfil</div>
+              <div class="text-muted subtitulo">
+                Ingresa tus datos personales
+              </div>
+            </div>
+          </button>
+
+          <button
+            class="btn-opciones"
+            [ngClass]="{ active: seccionSeleccionada === 'servicios' }"
+            (click)="mostrarServicios()"
+          >
+            <i class="bi bi-briefcase fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-semibold">Mis Servicios</div>
+              <div class="text-muted subtitulo">Gestiona tus experiencias</div>
+            </div>
+          </button>
+
+          <button
+            class="btn-opciones"
+            [ngClass]="{ active: seccionSeleccionada === 'notificaciones' }"
+            (click)="seccionSeleccionada = 'notificaciones'"
+          >
+            <i class="bi bi-bell fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-semibold">Notificaciones</div>
+              <div class="text-muted subtitulo">Configura tus alertas</div>
+            </div>
+          </button>
+
+          <button
+            class="btn-opciones"
+            [ngClass]="{ active: seccionSeleccionada === 'ayudaComentarios' }"
+            (click)="seccionSeleccionada = 'ayudaComentarios'"
+          >
+            <i class="bi bi-question-circle fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-semibold">Ayuda y comentarios</div>
+              <div class="text-muted subtitulo">Obtén asistencia</div>
+            </div>
+          </button>
+
+          <button class="btn-opciones" (click)="cerrarSesion()">
+            <i class="bi bi-box-arrow-right fs-4 mt-1"></i>
+            <div class="d-flex flex-column justify-content-center">
+              <div class="fw-semibold">Cerrar Sesión</div>
+              <div class="text-muted subtitulo">Salir de tu cuenta</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="col-md-9">
+      <div class="right-panel card p-4">
+        <!-- PERFIL -->
+        <ng-container *ngIf="seccionSeleccionada === 'perfil'">
+          <h4 class="fw-bold">{{ provider.nombreEmpresa }}</h4>
+          <hr class="mb-4" />
+
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="fw-semibold">Información Básica</h5>
+            <button
+              class="btn btn-link p-0"
+              (click)="editarPerfil = !editarPerfil"
+            >
+              {{ editarPerfil ? "Cancelar" : "Editar" }}
+            </button>
+          </div>
+
+          <form *ngIf="editarPerfil; else verPerfil" [formGroup]="formPerfil">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="nombreEmpresa" class="form-label"
+                  ><strong>Nombre</strong></label
+                >
+                <input
+                  id="nombreEmpresa"
+                  type="text"
+                  class="form-control"
+                  formControlName="nombreEmpresa"
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="descripcion" class="form-label"
+                  ><strong>Descripción</strong></label
+                >
+                <input
+                  id="descripcion"
+                  type="text"
+                  class="form-control"
+                  formControlName="descripcion"
+                />
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <label for="correo" class="form-label"
+                  ><strong>Correo</strong></label
+                >
+                <input
+                  id="correo"
+                  type="email"
+                  class="form-control"
+                  [value]="formPerfil.get('correo')?.value"
+                  readonly
+                />
+              </div>
+              <div class="col-md-6">
+                <label for="numeroTelefono" class="form-label"
+                  ><strong>Número de teléfono</strong></label
+                >
+                <input
+                  id="numeroTelefono"
+                  type="text"
+                  class="form-control"
+                  formControlName="numeroTelefono"
+                />
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <button
+                type="button"
+                class="btn btn-primary me-2"
+                (click)="guardarPerfil()"
+                [disabled]="formPerfil.invalid"
+              >
+                Guardar
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="editarPerfil = false"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+
+          <ng-template #verPerfil>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Nombre</strong></p>
+                <p>{{ provider.nombreEmpresa }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Descripción</strong></p>
+                <p>{{ provider.descripcion }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p><strong>Correo</strong></p>
+                <p>{{ provider.correo }}</p>
+              </div>
+              <div class="col-md-6">
+                <p><strong>Número de teléfono</strong></p>
+                <p>{{ provider.numeroTelefono }}</p>
+              </div>
+            </div>
+          </ng-template>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <p><strong>Fecha de Registro</strong></p>
+              <p>{{ provider.fechaRegistro }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Calificación</strong></p>
+              <p>{{ provider.calificacion }}</p>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- MIS SERVICIOS -->
+        <ng-container *ngIf="seccionSeleccionada === 'servicios'">
+          <div
+            class="servicios-header d-flex align-items-center justify-content-between mb-3"
+          >
+            <h4 class="fw-bold mb-3">Mis Servicios</h4>
+            <button
+              class="btn-agregar-servicio"
+              [routerLink]="['/add-service']"
+            >
+              Añadir Servicio
+            </button>
+          </div>
+
+          <div *ngIf="(servicios?.length || 0) > 0; else sinServicios">
+            <div
+              *ngFor="let servicio of servicios"
+              class="servicio-card d-flex mb-3 shadow-sm rounded"
+            >
+              <div>
+                <img
+                  [src]="
+                    servicio.imagenes[0]?.url || 'assets/images/default.jpg'
+                  "
+                  class="servicio-img"
+                />
+              </div>
+              <div
+                class="p-3 d-flex flex-column justify-content-between flex-grow-1"
+              >
+                <div>
+                  <h5 class="mb-1 fw-bold">{{ servicio.titulo }}</h5>
+                  <p class="mb-2">{{ servicio.descripcion }}</p>
+                </div>
+                <div class="precio-editar-container mt-2">
+                  <p class="mb-0 precio me-3 flex-grow-1">
+                    Desde CLP {{ obtenerPrecioMinimo(servicio) | number }}
+                  </p>
+                  <div class="botones-container">
+                    <button
+                      class="btn-editar me-2"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn-editar"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Editar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <ng-template #sinServicios>
+            <p>No tienes servicios registrados aún.</p>
+          </ng-template>
+        </ng-container>
+
+        <!-- DETALLE SERVICIO -->
+        <ng-container
+          *ngIf="
+            seccionSeleccionada === 'detalleServicio' && servicioSeleccionado
+          "
+        >
+          <h4 class="fw-bold mb-3">Detalle del Servicio</h4>
+          <app-view-service
+            [servicio]="servicioSeleccionado"
+          ></app-view-service>
+        </ng-container>
+
+        <!-- NOTIFICACIONES -->
+        <div *ngIf="seccionSeleccionada === 'notificaciones'">
+          <h3 class="fw-bold mb-3">Notificaciones</h3>
+          <hr />
+          <p>Configuración de notificaciones próximamente.</p>
+        </div>
+
+        <!-- AYUDA Y COMENTARIOS -->
+        <div *ngIf="seccionSeleccionada === 'ayudaComentarios'">
+          <h3 class="fw-bold mb-3">Ayuda y Comentarios</h3>
+          <hr />
+          <p>¿Tienes dudas? Contáctanos en soporteexpedia.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

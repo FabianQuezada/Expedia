@@ -5,19 +5,46 @@ import { ContenidoPagoComponent } from './paginas/pago/contenido-pago/contenido-
 import { AnuncioComponent } from './paginas/anuncio/anuncio.component';
 import { PerfilComponent } from './paginas/perfil/perfil.component';
 import { LoginComponent } from './paginas/login/login.component';
-import { ContenidoReprogramacionComponent } from './paginas/reprogramacion/contenido-reprogramacion/contenido-reprogramacion.component'; // ✅ NUEVO
+import { ContenidoReprogramacionComponent } from './paginas/reprogramacion/contenido-reprogramacion/contenido-reprogramacion.component'; 
+import { ContenidoPagoComponent } from './components/pago/contenido-pago/contenido-pago.component';
+import { HomeComponent } from './components/home/home.component';
+import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProviderProfileComponent } from './components/provider-profile/provider-profile.component';
+import { NewServiceComponent } from './components/create-service/new-service/new-service.component';
+import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
+
 
 const routes: Routes = [
-  { path: '', component: VisualizarExperienciaComponent },
-  { path: 'pago', component: ContenidoPagoComponent },
-  { path: 'anuncio', component: AnuncioComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'reprogramacion', component: ContenidoReprogramacionComponent } // ✅ CORREGIDO
+  
+  {path: '', component: HomeComponent},
+  {path: 'resultados', component: SearchResultsComponent},
+  {path: 'experiencia/:id', component: ExperienceComponent },
+  {path: 'resenas', component: ReviewsComponent },
+  {path: 'pago', component: ContenidoPagoComponent },
+  {path: 'login', component: LoginComponent },
+  {path: 'register', component: RegisterComponent },
+  {path: 'home', component: HomeComponent },
+  {path: 'resenas/:idExperiencia', component: ReviewsComponent },
+  {path: 'resenas/:id', component: ReviewsComponent},
+  {path: 'user-profile', component: UserProfileComponent},
+  {path: 'provider-profile', component: ProviderProfileComponent},
+  {path: 'add-service', component: NewServiceComponent},
+  {path: 'perfil', component: UserProfileComponent},
+  {path: 'historialExperiencia', component: ExperienceHistoryComponent},
+  {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
+  {path: 'anuncio', component: AnuncioComponent },
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
+  
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}

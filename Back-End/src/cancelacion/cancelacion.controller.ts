@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { CancelacionService } from './cancelacion.service';
 import { CreateCancelacionDto } from './dto/create-cancelacion.dto';
 import { UpdateCancelacionDto } from './dto/update-cancelacion.dto';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Cancelación')
+@ApiBearerAuth()
+@Auth(Rol.USUARIO)
 @Controller('cancelacion')
 export class CancelacionController {
   constructor(private readonly cancelacionService: CancelacionService) {}
 
-  @Post()
-  create(@Body() createCancelacionDto: CreateCancelacionDto) {
-    return this.cancelacionService.create(createCancelacionDto);
+  @Post(':idReserva')
+  cancelarReserva(@Param('idReserva', ParseIntPipe) idReserva: number,
+    @Body() createCancelacionDto: CreateCancelacionDto) {
+    return this.cancelacionService.cancelarReserva(idReserva, createCancelacionDto);
   }
 
   @Get()

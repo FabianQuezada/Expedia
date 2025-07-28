@@ -1,8 +1,31 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Req,
+  NotFoundException,
+} from '@nestjs/common';
 import { ProveedorService } from './proveedor.service';
-import { CreateProveedorDto } from './dto/create-proveedor.dto';
 import { UpdateProveedorDto } from './dto/update-proveedor.dto';
+import { CreateProveedorDto } from './dto/create-proveedor.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Rol } from 'src/common/enums/rol.enum';
 
+export interface RequestWithUsuario extends Request {
+  usuario: {
+    id: number;
+    correo: string;
+    rol: Rol;
+  };
+}
+
+@ApiBearerAuth()
+@ApiTags('Proveedor')
 @Controller('proveedor')
 export class ProveedorController {
   constructor(private readonly proveedorService: ProveedorService) {}
@@ -23,12 +46,38 @@ export class ProveedorController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProveedorDto: UpdateProveedorDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateProveedorDto: UpdateProveedorDto,
+  ) {
     return this.proveedorService.update(+id, updateProveedorDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.proveedorService.remove(+id);
+  }
+
+  @Patch('profile-proveedor')
+  @Auth(Rol.PROVEEDOR)
+  updatePerfil(
+    @Req() req: RequestWithUsuario,
+
+    @Body() updateUsuarioDto: UpdateProveedorDto,
+  ) {
+    // 🧩 Consolas de diagnóstico
+    console.log('🧩 PATCH req.usuario:', req.usuario);
+    console.log('🧩 typeof req.usuario.id:', typeof req.usuario.id);
+    console.log('🧩 valor de req.usuario.id:', req.usuario.id);
+
+    return this.proveedorService.update(req.usuario.id, updateUsuarioDto);
+  }
+
+  @Get('profile-proveedor')
+  @Auth(Rol.PROVEEDOR)
+  getProfileProveedor(@Req() req: RequestWithUsuario) {
+    const idProveedor = req.usuario.id;
+
+    return this.proveedorService.findOne(idProveedor);
   }
 }

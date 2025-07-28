@@ -8,6 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FechasExperienciaModule } from './fechas-experiencia/fechas-experiencia.module';
 import { ReservaModule } from './reserva/reserva.module';
+import { AuthModule } from './auth/auth.module';
+import { CaracteristicaModule } from './caracteristica/caracteristica.module';
+import { ImagenModule } from './imagen/imagen.module';
+import { CancelacionModule } from './cancelacion/cancelacion.module';
+import { ReprogramacionModule } from './reprogramacion/reprogramacion.module';
+import { PagoModule } from './pago/pago.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ResenaModule } from './resena/resena.module';
 
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
@@ -23,16 +31,25 @@ import { ReservaModule } from './reserva/reserva.module';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [__dirname ], // 
+        entities: [__dirname + '/**/*.entity.{ts,js}'],
         synchronize: true,
         autoLoadEntities: true,
       }),
       inject: [ConfigService],
     }),
     FechasExperienciaModule,
-    ReservaModule
+    ReservaModule,
+    AuthModule,
+    CaracteristicaModule,
+    ImagenModule,
+    CancelacionModule,
+    ReprogramacionModule,
+    ScheduleModule.forRoot(),
+    PagoModule,
+    ResenaModule,
+
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
