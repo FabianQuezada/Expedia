@@ -30,11 +30,10 @@ export class FechasExperienciaService {
     return resultado;
   }
 
-  @Cron('*/2 * * * *')
+  @Cron('*/2 * * * *')  //CronExpression.EVERY_HOUR   //'*/2 * * * *'
   async aplicarDescuentoMensual() {
     const qb = this.fechasRepository.createQueryBuilder('fe');
 
-    // Subconsulta: contar reservas por fecha
     const subquery = qb
       .subQuery()
       .select('fe_sub.fecha', 'fecha')
@@ -45,20 +44,19 @@ export class FechasExperienciaService {
       .groupBy('fe_sub.fecha, fe_sub.idExperiencia')
       .getQuery();
 
-    // Obtener mínimo
-    const fechasConCantidad = await this.fechasRepository.query(
-      `SELECT fecha, idExperiencia, cantidad FROM (${subquery}) AS sub ORDER BY cantidad ASC LIMIT 1`
+    const fechasConPocasReservas = await this.fechasRepository.query(
+      `SELECT fecha, idExperiencia, cantidad FROM (${subquery}) AS sub ORDER BY cantidad ASC LIMIT 2`
     );
 
-    if (fechasConCantidad.length === 0) return;
+    if (fechasConPocasReservas.length === 0) return;
 
-    for (const fecha of fechasConCantidad) {
+    for (const fecha of fechasConPocasReservas) {
       await this.fechasRepository.update(
         { fecha: fecha.fecha, idExperiencia: fecha.idExperiencia },
         { descuento: 0.20 }
       );
-      console.log('Fechas con menor reserva:', fechasConCantidad);
     }
+    console.log('Se aplicó descuento a fechas con baja demanda:', fechasConPocasReservas);
   }
 
   async findAllConDescuento() {

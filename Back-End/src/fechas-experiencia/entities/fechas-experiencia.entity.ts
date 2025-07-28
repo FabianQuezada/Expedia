@@ -2,6 +2,7 @@ import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany } from "typeorm
 import { Experiencia } from "../../experiencia/entities/experiencia.entity";
 import { Descuento } from "../../descuento/entities/descuento.entity";
 import { Reserva } from "../../reserva/entities/reserva.entity";
+import { Expose } from 'class-transformer';
 
 @Index("ID_Experiencia", ["idExperiencia"], {})
 @Index("ID_Descuento", ["idDescuento"], {})
@@ -25,6 +26,13 @@ export class FechasExperiencia {
 
   @Column("int", { name: "ID_Descuento", nullable: true })
   idDescuento: number | null;
+
+  @Expose()
+  get precioConDescuento(): number {
+    const precio = parseFloat(this.precio.toString());
+    const descuento = parseFloat(this.descuento?.toString() || '0');
+    return +(precio * (1 - descuento)).toFixed(2);
+  }
 
   @Column('int', { name: 'Cupos_Disponibles' })
   cuposDisponibles: number;

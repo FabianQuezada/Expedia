@@ -49,11 +49,15 @@ export class ResenaController {
     return this.resenaService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.USUARIO)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateResenaDto: UpdateResenaDto) {
     return this.resenaService.update(+id, updateResenaDto);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.USUARIO)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.resenaService.remove(+id);

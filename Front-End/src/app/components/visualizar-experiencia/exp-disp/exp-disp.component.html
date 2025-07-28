@@ -8,13 +8,26 @@
     <button
       type="button"
       class="btn btn-lg btn-light border border-secondary me-1"
-      *ngFor="let fecha of experiencia?.fechasExperiencias"
+      *ngFor="let fecha of experiencia?.fechasExperiencias as fechas"
       [class.active]="fecha === fechaSeleccionada"
       (click)="seleccionarFecha(fecha)"
     >
-      {{ dateUtilService.getFechaCorta(fecha.fecha) }}<br /><strong
-        >CLP {{ fecha.precio }}</strong
-      >
+      {{ dateUtilService.getFechaCorta(fecha.fecha) }}<br />
+      <ng-container *ngIf="fecha.descuento && fecha.descuento > 0; else sinDescuento">
+        <small class="text-danger fw-semibold">
+          -{{ fecha.descuento * 100 | number:'1.0-0' }}% OFF
+        </small><br />
+        <span class="text-decoration-line-through text-muted small">
+          CLP {{ fecha.precio }}
+        </span><br />
+        <strong>
+          CLP {{ fecha.precio * (1 - fecha.descuento) | number:'1.0-0' }}
+        </strong>
+      </ng-container>
+      <ng-template #sinDescuento>
+        <strong>CLP {{ fecha.precio }}</strong>
+      </ng-template>
+
     </button>
   </div>
 
@@ -65,11 +78,21 @@
       </div>
 
       <div class="col-md-4">
-        <p>
-          CLP {{ fechaSeleccionada.precio }} × {{ adultos }} adulto{{
-            adultos > 1 ? "s" : ""
-          }}
+        <p *ngIf="fechaSeleccionada.descuento && fechaSeleccionada.descuento > 0">
+          <span class="text-danger fw-semibold">
+            -{{ fechaSeleccionada.descuento * 100 | number:'1.0-0' }}% descuento aplicado
+          </span><br />
+          <span class="text-decoration-line-through text-muted small">
+            CLP {{ fechaSeleccionada.precio }}
+          </span><br />
+          Precio final: <strong>CLP {{
+            (fechaSeleccionada.precio * (1 - fechaSeleccionada.descuento)) | number:'1.0-0'
+          }} × {{ adultos }} adulto{{ adultos > 1 ? "s" : "" }}</strong>
         </p>
+        <p *ngIf="!fechaSeleccionada.descuento || fechaSeleccionada.descuento === 0">
+          CLP {{ fechaSeleccionada.precio }} × {{ adultos }} adulto{{ adultos > 1 ? "s" : "" }}
+        </p>
+
         <p *ngIf="ninos > 0">
           + CLP {{ 20000 }} × {{ ninos }} niño {{ ninos > 1 ? "s" : "" }}
         </p>
