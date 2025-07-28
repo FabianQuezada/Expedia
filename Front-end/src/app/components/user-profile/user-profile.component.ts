@@ -65,9 +65,7 @@ guardarPerfil(): void {
     this.userService.updateUserProfile(datosFormulario).subscribe({
       next: (data) => {
         this.user = { ...this.user, ...datosFormulario };
-        this.editarPerfil = false;
-        console.log('Perfil actualizado exitosamente');
-      },
+        this.editarPerfil = false;      },
       error: (err) => {
         console.error('Error al actualizar perfil', err);
       }

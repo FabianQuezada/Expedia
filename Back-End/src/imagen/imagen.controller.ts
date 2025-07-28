@@ -31,11 +31,15 @@ export class ImagenController {
     return this.imagenService.findOne(+id);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.PROVEEDOR)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateImagenDto: UpdateImagenDto) {
     return this.imagenService.update(+id, updateImagenDto);
   }
 
+  @ApiBearerAuth()
+  @Auth(Rol.PROVEEDOR)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.imagenService.remove(+id);

@@ -97,7 +97,6 @@ export class ReservaService {
     const experienciaMap = new Map<number, Experiencia>();
     experiencias.forEach(exp => experienciaMap.set(exp.idExperiencia, exp));
 
-    // ✅ Obtener promedios y conteos de reseñas en una sola consulta
     const resenasStats = await this.resenaRepository
       .createQueryBuilder('resena')
       .select('resena.idExperiencia', 'idExperiencia')
@@ -115,7 +114,6 @@ export class ReservaService {
       });
     });
 
-    // ✅ Generar la respuesta final
     return reservas.map(reserva => {
       const experiencia = experienciaMap.get(reserva.idExperiencia);
       if (!experiencia) return null;
@@ -124,7 +122,7 @@ export class ReservaService {
 
       return {
         id: experiencia.idExperiencia,
-        imagenUrl: experiencia.imagenes?.[0]?.url ?? 'https://via.placeholder.com/400x200?text=Sin+imagen',
+        imagenUrl: experiencia.imagenes?.[0]?.url,
         titulo: experiencia.titulo,
         fecha: reserva.fecha,
         precio: reserva.totalPago,
@@ -132,7 +130,7 @@ export class ReservaService {
         resenas: stats?.cantidad ?? 0,
         descripcion: experiencia.descripcion,
       };
-    }).filter(Boolean); // eliminar posibles nulls
+    }).filter(Boolean);
   }
 
   async findAll() {

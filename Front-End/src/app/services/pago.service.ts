@@ -12,7 +12,6 @@ export class PagoService {
   constructor(private http: HttpClient) {}
 
   crearPago(pago: CreatePagoDto): Observable<{ success: boolean }> {
-    console.log('📡 Enviando pago al backend:', pago);
     return this.http.post<{ success: boolean }>(this.baseUrl, pago);
   }
 }

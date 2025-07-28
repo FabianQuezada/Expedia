@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, ViewChildren, QueryList, OnInit } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, ViewChild, ViewChildren, QueryList, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Review } from 'src/app/models/review';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +20,7 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
     transform: 'translateX(0px)'
   };
 
-  idExperiencia!: number;
+  @Input() idExperiencia: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -43,7 +43,7 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
           this.ordenar(this.selectedOrder);
         },
         error: (err) => {
-          console.error('❌ Error al cargar reseñas:', err);
+          console.error('Error al cargar reseñas:', err);
         }
       });
   }

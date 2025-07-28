@@ -14,12 +14,31 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authState.isAuthenticated()) {
-      return true;
-    } else {
+    state: RouterStateSnapshot
+  ): boolean | UrlTree {
+    if (!this.authState.isAuthenticated()) {
       return this.router.createUrlTree(['/login']);
-    }  
+    }
+
+    const userRole = this.authState.getUserRole();
+
+    const rutasRestringidasParaProveedor = [
+      '/perfil',
+      '/historialExperiencia',
+      '/pago'
+    ];
+
+    // Si el proveedor intenta acceder a una ruta restringida -> redirigir
+    if (userRole === 'proveedor') {
+      const intento = rutasRestringidasParaProveedor.some((ruta) =>
+        state.url.startsWith(ruta)
+      );
+      if (intento) {
+        return this.router.createUrlTree(['/home']);
+      }
+    }
+
+    return true;
   }
   
 }

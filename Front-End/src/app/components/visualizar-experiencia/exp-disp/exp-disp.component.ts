@@ -24,12 +24,10 @@ export class ExpDispComponent implements OnChanges {
   constructor(private router: Router, protected expService: ExperienceService, protected dateUtilService: DateUtilsService, private authStateService: AuthStateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Fecha de búsqueda recibida:', this.fechaBusqueda);
     this.fechaBusqueda ??= new Date();
     if (this.experiencia && this.fechaBusqueda) {
       this.filtrarFechaBusqueda();
       }
-
   }
 
 
@@ -46,10 +44,10 @@ export class ExpDispComponent implements OnChanges {
   }
 
   calcularTotal(): number {
-    const precio =
-      this.fechaSeleccionada?.precio ||
-      this.experiencia?.fechasExperiencias[0].precio;
-    return precio! * this.adultos + this.ninos * 20000;
+    const base = this.fechaSeleccionada?.precio ?? 0;
+    const descuento = this.fechaSeleccionada?.descuento ?? 0;
+    const precioFinal = base * (1 - descuento);
+    return precioFinal * this.adultos + this.ninos * 20000;
   }
 
   irAPagar() {
@@ -65,7 +63,6 @@ export class ExpDispComponent implements OnChanges {
         ciudad: this.ciudad,
         titulo: this.experiencia?.titulo,
         fecha: this.fechaSeleccionada.fecha,
-        hora: this.generarHora(),
         total: this.calcularTotal(),
         adultos: this.adultos,
         ninos: this.ninos,
@@ -74,15 +71,9 @@ export class ExpDispComponent implements OnChanges {
     });
   }
 
-  generarHora(): string {
-    const hora = Math.floor(Math.random() * 12) + 9;
-    const minutos = Math.floor(Math.random() * 60);
-    return `${hora}:${minutos.toString().padStart(2, '0')}`;
-  }
 
   filtrarFechaBusqueda() {
     const fechaRef = new Date(this.fechaBusqueda!.toISOString().split('T')[0]); 
-    console.log('Fecha de referencia para filtrado:', fechaRef);
     this.fechasFiltradas = this.experiencia!.fechasExperiencias
       .filter(f => new Date(f.fecha) >= fechaRef)
       .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())

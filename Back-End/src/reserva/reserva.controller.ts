@@ -28,16 +28,19 @@ interface RequestWithUser extends Request {
 @Controller('reserva')
 export class ReservaController {
   constructor(private readonly reservaService: ReservaService) {}
-  @Get('mis-reservas')
-  getMisReservas(@Req() req: RequestWithUser) {
-    const idUsuario = req.usuario.id;
-    return this.reservaService.obtenerReservasPorUsuario(idUsuario);
-  }
   @ApiBearerAuth()
   @Auth(Rol.USUARIO)
   @Post()
   create(@Body() createReservaDto: CreateReservaDto) {
     return this.reservaService.create(createReservaDto);
+  }
+
+  @ApiBearerAuth()
+  @Auth(Rol.USUARIO)
+  @Get('mis-reservas')
+  getMisReservas(@Req() req: RequestWithUser) {
+    const idUsuario = req.usuario.id;
+    return this.reservaService.obtenerReservasPorUsuario(idUsuario);
   }
 
   @ApiBearerAuth()
@@ -73,4 +76,5 @@ export class ReservaController {
   ) {
     return this.reservaService.remove(idReserva, idUsuario);
   }
+
 }

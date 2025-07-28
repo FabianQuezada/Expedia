@@ -18,18 +18,24 @@ export class RegisterComponent {
 
   mensajeError: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  onSubmit(form: NgForm): void {
-    if (form.invalid) {
-      Object.values(form.controls).forEach((control) =>
-        control.markAsTouched()
-      );
-      this.mensajeError = 'Por favor completa todos los campos.';
+  ngAfterViewInit() {
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', this.onSubmit.bind(this));
+    }
+  }
+
+  onSubmit() {
+    const { name, surname, email, password } = this.formData;
+    if (!name || !surname || !email || !password) {
+      alert('Por favor completa todos los campos');
       return;
     }
-
-    const { name, surname, email, password } = this.formData;
 
     this.authService
       .register({
@@ -45,8 +51,8 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          console.error('Error al registrar ❌', err);
-          alert('Error al registrar: '+err?.error?.message);
+          console.error('Error al registrar', err);
+          alert('Error al registrar'+err?.error?.message);
           this.mensajeError = Array.isArray(err?.error?.message)
             ? err.error.message.join('. ')
             : err?.error?.message || 'Error inesperado al registrar.';

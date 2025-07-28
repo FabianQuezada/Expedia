@@ -58,7 +58,7 @@ export class ProviderProfileComponent implements OnInit {
         });
       },
       error: (err) => {
-        console.error('❌ Error al obtener perfil del proveedor:', err);
+        console.error('Error al obtener perfil del proveedor:', err);
       },
     });
 
@@ -77,10 +77,9 @@ export class ProviderProfileComponent implements OnInit {
     this.experienceService.getMisExperiencias().subscribe({
       next: (data: Experiencia[]) => {
         this.servicios = data;
-        console.log('✅ Experiencias del proveedor logueado:', data);
       },
       error: (err) => {
-        console.error('❌ Error al cargar experiencias del proveedor:', err);
+        console.error('Error al cargar experiencias del proveedor:', err);
       }
     });
   }
@@ -105,14 +104,13 @@ export class ProviderProfileComponent implements OnInit {
             ...updated
           };
           this.editarPerfil = false;
-          console.log('✅ Perfil actualizado correctamente en el backend:', updated);
         },
         error: (err) => {
-          console.error('❌ Error al actualizar perfil en el backend:', err);
+          console.error('Error al actualizar perfil en el backend:', err);
         }
       });
     } else {
-      console.warn('⚠️ Formulario inválido');
+      console.warn('Formulario inválido');
     }
   }
 

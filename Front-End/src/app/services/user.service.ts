@@ -26,7 +26,6 @@ export class UserService {
   }
 
   updateUserProfile(user: Partial<updateUser>): Observable<updateUser> {
-    console.log(user)
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,

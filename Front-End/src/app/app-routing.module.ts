@@ -14,6 +14,9 @@ import { NewServiceComponent } from './components/create-service/new-service/new
 import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
 import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
+import { ResenaGuard } from './guards/resena.guard';
+import { PagoGuard } from './guards/pago.guard';
 import { EditServiceComponent } from './components/create-service/edit-service/edit-service.component';
 
 
@@ -22,19 +25,17 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'resultados', component: SearchResultsComponent},
   {path: 'experiencia/:id', component: ExperienceComponent },
-  {path: 'resenas', component: ReviewsComponent },
-  {path: 'pago', component: ContenidoPagoComponent },
+  {path: 'pago', component: ContenidoPagoComponent, canActivate: [PagoGuard] },
   {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent },
   {path: 'home', component: HomeComponent },
-  {path: 'resenas/:idExperiencia', component: ReviewsComponent },
-  {path: 'resenas/:id', component: ReviewsComponent},
-  {path: 'provider-profile', component: ProviderProfileComponent},
-  {path: 'add-service', component: NewServiceComponent},
+  {path: 'resenas/:idExperiencia', component: ReviewsComponent, canActivate: [ResenaGuard] },
+  {path: 'perfil-proveedor', component: ProviderProfileComponent, canActivate: [RoleGuard]},
+  {path: 'add-service', component: NewServiceComponent, canActivate: [RoleGuard]},
   {path: 'perfil', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'historialExperiencia', component: ExperienceHistoryComponent},
-  {path: 'provider-register', component: ProviderRegisterComponent},
-  {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
+  {path: 'registro-proveedor', component: ProviderRegisterComponent},
+  {path: 'reprogramacion/:id', component: ContenidoReprogramacionComponent },
   {path: 'edit-service/:id', component: EditServiceComponent }
 ]
 

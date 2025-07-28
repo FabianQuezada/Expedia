@@ -12,7 +12,7 @@
       <h3 class="fw-semibold">Crea una cuenta de usuario</h3>
     </div>
 
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+    <form #form="ngForm" (ngSubmit)="onSubmit()" novalidate>
       <!-- Nombres -->
       <div class="mb-3">
         <input
@@ -21,6 +21,7 @@
           id="inputNames"
           name="name"
           placeholder="Nombres"
+          [(ngModel)]="formData.name"
           [(ngModel)]="formData.name"
           required
           #name="ngModel"
@@ -42,7 +43,10 @@
           required
           #surname="ngModel"
         />
-        <div *ngIf="surname.invalid && surname.touched" class="text-danger ms-2 mt-1">
+        <div
+          *ngIf="surname.invalid && surname.touched"
+          class="text-danger ms-2 mt-1"
+        >
           El apellido es obligatorio.
         </div>
       </div>
@@ -59,7 +63,10 @@
           required
           #email="ngModel"
         />
-        <div *ngIf="email.invalid && email.touched" class="text-danger ms-2 mt-1">
+        <div
+          *ngIf="email.invalid && email.touched"
+          class="text-danger ms-2 mt-1"
+        >
           El correo es obligatorio.
         </div>
       </div>
@@ -76,17 +83,17 @@
           required
           #password="ngModel"
         />
-        <div *ngIf="password.invalid && password.touched" class="text-danger ms-2 mt-1">
+        <div
+          *ngIf="password.invalid && password.touched"
+          class="text-danger ms-2 mt-1"
+        >
           La contraseña es obligatoria.
         </div>
       </div>
 
       <!-- Botón de registro -->
       <div class="d-grid">
-        <button
-          type="submit"
-          class="btn btn-lg btn-expedia-secondary py-3"
-        >
+        <button type="submit" class="btn btn-lg btn-expedia-secondary py-3">
           Crear cuenta
         </button>
       </div>
@@ -96,7 +103,7 @@
       <!-- Botón para ir a iniciar sesión -->
       <div class="d-grid">
         <button
-          type="button"
+          type="submit"
           class="btn btn-lg btn-expedia-primary py-3"
           [routerLink]="['/login']"
         >

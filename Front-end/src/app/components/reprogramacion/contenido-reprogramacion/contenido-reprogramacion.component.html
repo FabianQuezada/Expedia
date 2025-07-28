@@ -1,108 +1,206 @@
 <app-navbar></app-navbar>
 
-<div class="container" style="max-width: 1320px; padding-top: 3rem; padding-bottom: 3rem;">
-
-  <!-- ✅ GALERÍA sin CSS externo -->
+<div
+  class="container"
+  style="max-width: 1320px; padding-top: 3rem; padding-bottom: 3rem"
+>
+  <!-- GALERÍA sin CSS externo -->
   <div class="row mb-5 g-2">
     <div class="col-md-6">
-      <img src="assets/valpo1.jpg" alt="Grande" class="img-fluid w-100 h-100 rounded">
+      <img
+        src="assets/valpo1.jpg"
+        alt="Grande"
+        class="img-fluid w-100 h-100 rounded"
+      />
     </div>
     <div class="col-md-6 d-flex flex-column gap-2">
       <div class="d-flex gap-2">
-        <img src="assets/playa.jpg" alt="Playa" class="img-fluid w-50 rounded">
-        <img src="assets/valpo2.jpg" alt="Puerto" class="img-fluid w-50 rounded">
+        <img
+          src="assets/playa.jpg"
+          alt="Playa"
+          class="img-fluid w-50 rounded"
+        />
+        <img
+          src="assets/valpo2.jpg"
+          alt="Puerto"
+          class="img-fluid w-50 rounded"
+        />
       </div>
-      <img src="assets/casa.jpg" alt="Casa ancha" class="img-fluid w-100 rounded">
+      <img
+        src="assets/casa.jpg"
+        alt="Casa ancha"
+        class="img-fluid w-100 rounded"
+      />
     </div>
   </div>
 
-  <!-- ✅ DETALLE Y MAPA -->
+  <!-- DETALLE Y MAPA -->
   <div class="bg-white rounded shadow p-4 mt-4">
-    <h1 class="fw-bold mb-2" style="font-size: 1.6rem;">
-      Recorrido de día completo por el puerto de Valparaíso y Viña del Mar desde Santiago
+    <h1 class="fw-bold mb-2" style="font-size: 1.6rem">
+      Recorrido de día completo por el puerto de Valparaíso y Viña del Mar desde
+      Santiago
     </h1>
     <div class="d-flex align-items-center gap-3 mb-3">
-      <span class="badge bg-success text-white px-3 py-2 rounded-pill fw-semibold" style="font-size: 0.9rem;">
+      <span
+        class="badge bg-success text-white px-3 py-2 rounded-pill fw-semibold"
+        style="font-size: 0.9rem"
+      >
         ⭐ 9.8/10
       </span>
-      <a href="#" class="text-primary text-decoration-none" style="font-size: 0.9rem;">1 millón de opiniones</a>
+      <a
+        href="#"
+        class="text-primary text-decoration-none"
+        style="font-size: 0.9rem"
+        >1 millón de opiniones</a
+      >
     </div>
     <p class="fw-bold fs-5 text-dark mb-3">CLP 80.000</p>
     <h5 class="fw-semibold">Descripción</h5>
     <p class="mb-4">
-      Disfruta una excursión guiada de un día completo desde Santiago hacia la costa del Pacífico, visitando dos de las
-      ciudades más emblemáticas de Chile: Valparaíso, con su encanto bohemio, cerros coloridos y arte urbano, y Viña del
-      Mar, conocida como la “Ciudad Jardín”.
+      Disfruta una excursión guiada de un día completo desde Santiago hacia la
+      costa del Pacífico, visitando dos de las ciudades más emblemáticas de
+      Chile: Valparaíso, con su encanto bohemio, cerros coloridos y arte urbano,
+      y Viña del Mar, conocida como la “Ciudad Jardín”.
     </p>
     <div class="text-end">
-      <iframe src="https://maps.google.com/maps?q=Valparaiso,Chile&t=&z=12&ie=UTF8&iwloc=&output=embed" width="300"
-        height="200" style="border:0;" allowfullscreen loading="lazy"></iframe>
+      <iframe
+        src="https://maps.google.com/maps?q=Valparaiso,Chile&t=&z=12&ie=UTF8&iwloc=&output=embed"
+        width="300"
+        height="200"
+        style="border: 0"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
     </div>
   </div>
 
-  <!-- ✅ FORMULARIO -->
-  <form class="bg-white rounded shadow p-4 mt-5" [formGroup]="formulario" (ngSubmit)="reagendar()">
-
+  <!-- FORMULARIO -->
+  <form
+    class="bg-white rounded shadow p-4 mt-5"
+    [formGroup]="formulario"
+    (ngSubmit)="reagendar()"
+  >
     <div *ngIf="reservaExitosa" class="alert alert-success mb-4" role="alert">
-      ✅ ¡Reserva reagendada con éxito!
+      ¡Reserva reagendada con éxito!
     </div>
 
     <h5 class="fw-bold mb-3">Fecha Programación</h5>
-    <p class="mb-2">Su fecha de programación de su actividad es del <strong>{{ datosRecibidos.fecha }}</strong></p>
-    <label for="nueva-fecha" class="form-label fw-semibold">Fecha Disponible:</label>
-    <input type="date" id="nueva-fecha" class="form-control mb-4" formControlName="nuevaFecha" />
+    <p class="mb-2">
+      Su fecha de programación de su actividad es del
+      <strong>{{ datosRecibidos.fecha }}</strong>
+    </p>
+    <label for="nueva-fecha" class="form-label fw-semibold"
+      >Fecha Disponible:</label
+    >
+    <input
+      type="date"
+      id="nueva-fecha"
+      class="form-control mb-4"
+      formControlName="nuevaFecha"
+    />
 
-    <!-- ✅ MÉTODO DE PAGO COMPONENTE -->
+    <!-- MÉTODO DE PAGO COMPONENTE -->
     <app-metodo-pago-reprogramacion
       [formulario]="formulario"
       [metodoSeleccionado]="metodoSeleccionado"
-      (seleccionMetodo)="seleccionarMetodo($event)">
+      (seleccionMetodo)="seleccionarMetodo($event)"
+    >
     </app-metodo-pago-reprogramacion>
 
-    <!-- 👤 ENCARGADO -->
+    <!-- ENCARGADO -->
     <div class="row mt-5" formGroupName="encargado">
       <h5 class="fw-semibold">Encargado de la reserva</h5>
 
       <div class="col-md-6 mb-2">
-        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre"
-          [ngClass]="{ 'is-invalid': formulario.get('encargado.nombre')?.invalid && formulario.get('encargado.nombre')?.touched }">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Nombre"
+          formControlName="nombre"
+          [ngClass]="{
+            'is-invalid':
+              formulario.get('encargado.nombre')?.invalid &&
+              formulario.get('encargado.nombre')?.touched
+          }"
+        />
         <div class="invalid-feedback">Solo letras.</div>
       </div>
 
       <div class="col-md-6 mb-2">
-        <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido"
-          [ngClass]="{ 'is-invalid': formulario.get('encargado.apellido')?.invalid && formulario.get('encargado.apellido')?.touched }">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Apellido"
+          formControlName="apellido"
+          [ngClass]="{
+            'is-invalid':
+              formulario.get('encargado.apellido')?.invalid &&
+              formulario.get('encargado.apellido')?.touched
+          }"
+        />
         <div class="invalid-feedback">Solo letras.</div>
       </div>
 
       <div class="col-md-6 mb-2">
-        <input type="text" class="form-control" placeholder="N° celular" formControlName="celular" inputmode="numeric"
+        <input
+          type="text"
+          class="form-control"
+          placeholder="N° celular"
+          formControlName="celular"
+          inputmode="numeric"
           (keydown)="soloNumeros($event)"
-          [ngClass]="{ 'is-invalid': formulario.get('encargado.celular')?.invalid && formulario.get('encargado.celular')?.touched }">
+          [ngClass]="{
+            'is-invalid':
+              formulario.get('encargado.celular')?.invalid &&
+              formulario.get('encargado.celular')?.touched
+          }"
+        />
         <div class="invalid-feedback">Solo números.</div>
       </div>
 
       <div class="col-md-6 mb-2">
-        <input type="email" class="form-control" placeholder="Correo electrónico" formControlName="correo"
-          [ngClass]="{ 'is-invalid': formulario.get('encargado.correo')?.invalid && formulario.get('encargado.correo')?.touched }">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Correo electrónico"
+          formControlName="correo"
+          [ngClass]="{
+            'is-invalid':
+              formulario.get('encargado.correo')?.invalid &&
+              formulario.get('encargado.correo')?.touched
+          }"
+        />
         <div class="invalid-feedback">Correo no válido.</div>
       </div>
     </div>
 
-    <!-- 👥 PERSONAS -->
+    <!-- PERSONAS -->
     <div class="mt-4">
       <h5 class="fw-semibold text-primary">
         <i class="bi bi-people-fill me-2"></i> Personas que viajan:
       </h5>
-      <p><i class="bi bi-person-fill me-1"></i> Adultos: {{ datosRecibidos.adultos }}</p>
-      <p><i class="bi bi-person-circle me-1"></i> Niños: {{ datosRecibidos.ninos }}</p>
+      <p>
+        <i class="bi bi-person-fill me-1"></i> Adultos:
+        {{ datosRecibidos.adultos }}
+      </p>
+      <p>
+        <i class="bi bi-person-circle me-1"></i> Niños:
+        {{ datosRecibidos.ninos }}
+      </p>
     </div>
 
-    <!-- ✅ BOTONES -->
+    <!-- BOTONES -->
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <button type="button" class="btn btn-outline-secondary" (click)="cancelar()">Cancelar</button>
-      <button type="submit" class="btn btn-warning fw-semibold">Reagendar</button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-warning fw-semibold">
+        Reagendar
+      </button>
     </div>
-
   </form>
 </div>

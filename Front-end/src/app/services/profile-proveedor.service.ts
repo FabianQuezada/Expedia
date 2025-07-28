@@ -24,7 +24,6 @@ export class ProfileProveedorService {
   
   updateUserProfile(updateData: Partial<updateProvider >): Observable<updateProvider > {
 
-    console.log(updateData)
     return this.http.patch<updateProvider >(`${this.apiUrl}/proveedor/profile-proveedor`, updateData);
   }
   

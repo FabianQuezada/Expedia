@@ -50,7 +50,7 @@ export class ProviderRegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error: (err: HttpErrorResponse) => {
-        console.error('❌ Error al registrar:', err);
+        console.error('Error al registrar:', err);
         if (err.error && err.error.message) {
           this.errorMessage = Array.isArray(err.error.message)
             ? err.error.message.join(', ')

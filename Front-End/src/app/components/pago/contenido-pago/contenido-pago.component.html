@@ -91,9 +91,6 @@
         <li class="list-group-item">
           Fecha: {{ dateUtil.getFechaLarga(datosRecibidos.fecha) }}
         </li>
-        <li class="list-group-item">
-          Hora: {{ dateUtil.getHora(datosRecibidos.fecha) }}
-        </li>
         <li class="list-group-item fw-bold">
           Total experiencia: CLP {{ datosRecibidos.total }}
         </li>
@@ -105,7 +102,6 @@
       type="submit"
       class="btn btn-primary w-100 fs-5"
       [disabled]="formulario.invalid"
-
     >
       <i class="bi bi-check-circle-fill me-2"></i>Reservar
     </button>

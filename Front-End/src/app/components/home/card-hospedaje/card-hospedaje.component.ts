@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./card-hospedaje.component.css']
 })
 export class CardHospedajeComponent {
-//@Input() hospeje!: {}; 
 
 hospedaje = {
   id: 1,

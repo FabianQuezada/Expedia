@@ -10,6 +10,7 @@ import { Experiencia } from 'src/app/models/experiencia';
   styleUrls: ['./exp-desc.component.css'],
 })
 export class ExpDescComponent implements OnChanges {
+
   @Input() experiencia: Experiencia | undefined;
   caracteristicas: Caracteristica[] = [];
 

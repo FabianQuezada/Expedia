@@ -13,6 +13,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class CancelacionController {
   constructor(private readonly cancelacionService: CancelacionService) {}
 
+  @Auth(Rol.USUARIO)
   @Post(':idReserva')
   cancelarReserva(@Param('idReserva', ParseIntPipe) idReserva: number,
     @Body() createCancelacionDto: CreateCancelacionDto) {
@@ -20,22 +21,27 @@ export class CancelacionController {
   }
 
   @Get()
+  @Auth(Rol.ADMIN)
   findAll() {
     return this.cancelacionService.findAll();
   }
 
+  @Auth(Rol.ADMIN)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.cancelacionService.findOne(+id);
   }
 
+  @Auth(Rol.ADMIN)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCancelacionDto: UpdateCancelacionDto) {
     return this.cancelacionService.update(+id, updateCancelacionDto);
   }
 
+  @Auth(Rol.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.cancelacionService.remove(+id);
   }
+  
 }
