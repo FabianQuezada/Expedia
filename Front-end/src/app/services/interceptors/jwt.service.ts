@@ -1,4 +1,3 @@
-// src/app/interceptors/jwt.service.ts
 import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
@@ -9,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+export class JwtService implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler

@@ -25,7 +25,7 @@ export class ExperienciaService {
     @InjectRepository(Resena)
     private resenaRepository: Repository<Resena>
   ) {}
-
+  
   async create(data: CreateExperienciaDto & { idProveedor: number }) {
     const {
       imagenes,
@@ -98,7 +98,6 @@ export class ExperienciaService {
     });
 
     const resultados: ExperienciaResponseDto[] = [];
-    console.log('✔️ Experiencias enviadas:', resultados);
     for (const exp of experiencias) {
       const result = await this.resenaRepository
         .createQueryBuilder('resena')
@@ -166,4 +165,5 @@ export class ExperienciaService {
   async contarResenasPorExperiencia(idExperiencia: number): Promise<number> {
     return this.resenaRepository.count({ where: { idExperiencia } });
   }
+  
 }

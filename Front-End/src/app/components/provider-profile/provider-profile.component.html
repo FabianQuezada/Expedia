@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="container my-4">
   <div class="row">
     <!-- PANEL IZQUIERDO -->
@@ -22,7 +23,7 @@
             <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Perfil</div>
               <div class="text-muted subtitulo">
-                Ingresa tus datos personales y documentos de viaje
+                Ingresa tus datos personales
               </div>
             </div>
           </button>
@@ -35,9 +36,7 @@
             <i class="bi bi-briefcase fs-4 mt-1"></i>
             <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Mis Servicios</div>
-              <div class="text-muted subtitulo">
-                Gestiona las experiencias que ofreces
-              </div>
+              <div class="text-muted subtitulo">Gestiona tus experiencias</div>
             </div>
           </button>
 
@@ -49,9 +48,7 @@
             <i class="bi bi-bell fs-4 mt-1"></i>
             <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Notificaciones</div>
-              <div class="text-muted subtitulo">
-                Elige las notificaciones que quieres recibir
-              </div>
+              <div class="text-muted subtitulo">Configura tus alertas</div>
             </div>
           </button>
 
@@ -67,13 +64,11 @@
             </div>
           </button>
 
-          <button class="btn-opciones">
+          <button class="btn-opciones" (click)="cerrarSesion()">
             <i class="bi bi-box-arrow-right fs-4 mt-1"></i>
             <div class="d-flex flex-column justify-content-center">
               <div class="fw-semibold">Cerrar Sesión</div>
-              <div class="text-muted subtitulo">
-                Salir de tu cuenta de forma segura
-              </div>
+              <div class="text-muted subtitulo">Salir de tu cuenta</div>
             </div>
           </button>
         </div>
@@ -109,8 +104,6 @@
                   type="text"
                   class="form-control"
                   formControlName="nombreEmpresa"
-                  placeholder="Ingrese nombre de la empresa"
-                  title="Nombre de la empresa"
                 />
               </div>
               <div class="col-md-6">
@@ -122,8 +115,6 @@
                   type="text"
                   class="form-control"
                   formControlName="descripcion"
-                  placeholder="Descripción del proveedor"
-                  title="Descripción del proveedor"
                 />
               </div>
             </div>
@@ -137,24 +128,9 @@
                   id="correo"
                   type="email"
                   class="form-control"
-                  formControlName="correo"
-                  placeholder="correo@ejemplo.com"
-                  title="Correo electrónico"
+                  [value]="formPerfil.get('correo')?.value"
+                  readonly
                 />
-                <div
-                  class="text-danger small mt-1"
-                  *ngIf="
-                    formPerfil.get('correo')?.invalid &&
-                    formPerfil.get('correo')?.touched
-                  "
-                >
-                  <div *ngIf="formPerfil.get('correo')?.errors?.['required']">
-                    El correo es obligatorio.
-                  </div>
-                  <div *ngIf="formPerfil.get('correo')?.errors?.['email']">
-                    Formato de correo inválido.
-                  </div>
-                </div>
               </div>
               <div class="col-md-6">
                 <label for="numeroTelefono" class="form-label"
@@ -165,27 +141,7 @@
                   type="text"
                   class="form-control"
                   formControlName="numeroTelefono"
-                  placeholder="+56912345678"
-                  title="Número de teléfono"
                 />
-                <div
-                  class="text-danger small mt-1"
-                  *ngIf="
-                    formPerfil.get('numeroTelefono')?.invalid &&
-                    formPerfil.get('numeroTelefono')?.touched
-                  "
-                >
-                  <div
-                    *ngIf="formPerfil.get('numeroTelefono')?.errors?.['required']"
-                  >
-                    El número de teléfono es obligatorio.
-                  </div>
-                  <div
-                    *ngIf="formPerfil.get('numeroTelefono')?.errors?.['pattern']"
-                  >
-                    Número de teléfono inválido.
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -219,15 +175,14 @@
                 <p>{{ provider.descripcion }}</p>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <p><strong>Correo</strong></p>
-                <p>{{ provider.correo || "Sin información" }}</p>
+                <p>{{ provider.correo }}</p>
               </div>
               <div class="col-md-6">
                 <p><strong>Número de teléfono</strong></p>
-                <p>{{ provider.numeroTelefono || "Sin información" }}</p>
+                <p>{{ provider.numeroTelefono }}</p>
               </div>
             </div>
           </ng-template>
@@ -265,8 +220,9 @@
             >
               <div>
                 <img
-                  [src]="servicio.imagen"
-                  alt="Imagen del servicio"
+                  [src]="
+                    servicio.imagenes[0]?.url || 'assets/images/default.jpg'
+                  "
                   class="servicio-img"
                 />
               </div>
@@ -274,16 +230,27 @@
                 class="p-3 d-flex flex-column justify-content-between flex-grow-1"
               >
                 <div>
-                  <h5 class="mb-1 fw-bold">{{ servicio.nombre }}</h5>
+                  <h5 class="mb-1 fw-bold">{{ servicio.titulo }}</h5>
                   <p class="mb-2">{{ servicio.descripcion }}</p>
                 </div>
-                <div class="precio-editar-container">
-                  <p class="mb-0 precio">
-                    CLP {{ servicio.precio.toLocaleString("es-CL") }}
+                <div class="precio-editar-container mt-2">
+                  <p class="mb-0 precio me-3 flex-grow-1">
+                    Desde CLP {{ obtenerPrecioMinimo(servicio) | number }}
                   </p>
-                  <button class="btn-editar" (click)="mostrarDetalle(servicio)">
-                    Ver
-                  </button>
+                  <div class="botones-container">
+                    <button
+                      class="btn-editar me-2"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn-editar"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Editar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -300,153 +267,24 @@
             seccionSeleccionada === 'detalleServicio' && servicioSeleccionado
           "
         >
-          <h4 class="fw-bold mb-3">Mis Servicios</h4>
-          <div class="fixed-height-scroll">
-            <app-view-service
-              [servicio]="servicioSeleccionado"
-            ></app-view-service>
-          </div>
+          <h4 class="fw-bold mb-3">Detalle del Servicio</h4>
+          <app-view-service
+            [servicio]="servicioSeleccionado"
+          ></app-view-service>
         </ng-container>
 
         <!-- NOTIFICACIONES -->
         <div *ngIf="seccionSeleccionada === 'notificaciones'">
-          <h3 class="mb-3 fw-bold">Notificaciones</h3>
-          <hr class="mb-4" />
-          <p>prueba</p>
+          <h3 class="fw-bold mb-3">Notificaciones</h3>
+          <hr />
+          <p>Configuración de notificaciones próximamente.</p>
         </div>
 
         <!-- AYUDA Y COMENTARIOS -->
         <div *ngIf="seccionSeleccionada === 'ayudaComentarios'">
-          <h3 class="mb-3 fw-bold">Ayuda y Comentarios</h3>
-          <hr class="mb-4" />
-
-          <div class="mb-5">
-            <h4>Soporte para Proveedores</h4>
-            <div class="accordion" id="faqAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq1">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFaq1"
-                    aria-expanded="false"
-                    aria-controls="collapseFaq1"
-                  >
-                    ¿Cómo puedo agregar o modificar mis servicios?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFaq1"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="faq1"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Puedes gestionar tus servicios desde la pestaña "Mis
-                    Servicios". Ahí puedes añadir nuevas experiencias, editar
-                    las existentes y actualizar precios o descripciones.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq2">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFaq2"
-                    aria-expanded="false"
-                    aria-controls="collapseFaq2"
-                  >
-                    ¿Cómo actualizo la disponibilidad de mis servicios?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFaq2"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="faq2"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    La disponibilidad se actualiza automáticamente en función de
-                    las reservas confirmadas. También puedes modificar
-                    manualmente la disponibilidad en la sección de cada
-                    servicio.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="faq3">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFaq3"
-                    aria-expanded="false"
-                    aria-controls="collapseFaq3"
-                  >
-                    ¿Cómo puedo gestionar cancelaciones y reprogramaciones?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFaq3"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="faq3"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Desde la plataforma podrás gestionar cancelaciones o
-                    reprogramaciones con notificaciones en tiempo real para
-                    garantizar una respuesta rápida a tus clientes.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mb-5">
-            <h4>Recomendaciones para Optimizar tu Perfil</h4>
-            <ul>
-              <li>
-                Mantén actualizada la información y disponibilidad de tus
-                servicios para evitar conflictos de reserva.
-              </li>
-              <li>
-                Responde oportunamente a las consultas y solicitudes de los
-                viajeros para mejorar tu reputación.
-              </li>
-              <li>
-                Ofrece descripciones claras y fotos atractivas para aumentar la
-                reserva de tus experiencias.
-              </li>
-            </ul>
-          </div>
-
-          <div class="mb-5">
-            <h4>Contacto y Soporte</h4>
-            <p>
-              Si necesitas asistencia adicional, puedes comunicarte con nuestro
-              equipo de soporte especializado para proveedores:
-            </p>
-            <ul class="list-unstyled">
-              <li>
-                <i class="bi bi-envelope-fill me-2"></i
-                ><strong>Email:</strong> soporte-proveedores&#64;expedia.com
-              </li>
-              <li>
-                <i class="bi bi-telephone-fill me-2"></i
-                ><strong>Teléfono:</strong> +1 (800) 987-6543
-              </li>
-              <li>
-                <i class="bi bi-clock-fill me-2"></i
-                ><strong>Horario de atención:</strong> Lunes a Viernes, 9:00 a
-                18:00 (GMT-4)
-              </li>
-            </ul>
-          </div>
+          <h3 class="fw-bold mb-3">Ayuda y Comentarios</h3>
+          <hr />
+          <p>¿Tienes dudas? Contáctanos en soporteexpedia.com</p>
         </div>
       </div>
     </div>

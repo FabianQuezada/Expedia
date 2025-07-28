@@ -82,22 +82,31 @@ export class AuthService {
     }
 
     const payload = {
-      sub: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor,
       correo: usuario.correo,
       rol,
+      id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor,
+      
     };
-
+    console.log('🎯 Payload del token JWT:', payload);
     const token = await this.jwtService.signAsync(payload);
 
     return {
       token,
       correo: usuario.correo,
       rol,
-      id: payload.sub,
+      id: payload.id,
     };
   }
 
-  async profile({ correo, rol }: { correo: string; rol: string }) {
-    return await this.usuarioService.findOneByEmail(correo);
+  async profile(user: { correo: string; rol: string }) {
+    if (!user?.correo) {
+      throw new UnauthorizedException('Usuario no autenticado');
+    }
+
+    return this.usuarioService.findOneByEmail(user.correo);
+  }
+
+  async profileProveedor(usuario: { id: number }) {
+    return this.proveedorService.findOne(usuario.id);
   }
 }

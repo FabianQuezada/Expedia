@@ -44,6 +44,7 @@ export class ContenidoPagoComponent implements OnInit {
 
     const userId = this.authState.getUserId(); // ✅ Usar servicio
     if (userId) {
+      console.log(userId)
       this.userId = userId;
     } else {
       console.error('No se pudo obtener el ID del usuario desde el token');

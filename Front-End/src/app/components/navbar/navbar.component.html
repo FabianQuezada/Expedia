@@ -1,5 +1,6 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid justify-content-center">
+    <!-- Logo -->
     <a class="navbar-brand" routerLink="/">
       <img
         src="assets/images/Logo-Expedia.png"
@@ -9,6 +10,7 @@
       />
     </a>
 
+    <!-- Botones públicos -->
     <button class="btn border-0 fw-semibold">Anunciar una propiedad</button>
     <button class="btn border-0 fw-semibold">Atención al cliente</button>
 
@@ -21,7 +23,7 @@
       Mis Viajes
     </button>
 
-    <!-- SI está logueado: botón con nombre -->
+    <!-- Dropdown con perfil y logout -->
     <div *ngIf="isLoggedIn" class="dropdown ms-4">
       <button
         class="btn border border-secondary rounded-pill fw-semibold d-flex align-items-center gap-2"
@@ -30,10 +32,14 @@
         aria-expanded="false"
       >
         <i class="bi bi-person-circle"></i>
-        {{ nombreUsuario || "Mi perfil" }}
+        {{ nombreUsuario || 'Mi perfil' }}
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" [routerLink]="['/perfil']" routerLink="/profile">Mi perfil </a></li>
+        <li>
+          <button class="dropdown-item" (click)="goToPerfil()">
+            Mi perfil
+          </button>
+        </li>
         <li>
           <button class="dropdown-item text-danger" (click)="logout()">
             Cerrar sesión
@@ -42,7 +48,7 @@
       </ul>
     </div>
 
-    <!-- SI NO está logueado -->
+    <!-- Si NO está logueado -->
     <button
       *ngIf="!isLoggedIn"
       class="btn border border-secondary rounded-pill fw-semibold d-flex align-items-center gap-2 ms-4"
@@ -53,4 +59,3 @@
     </button>
   </div>
 </nav>
-

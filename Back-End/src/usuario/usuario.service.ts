@@ -33,6 +33,7 @@ export class UsuarioService {
   }
 
   async findOne(id: number): Promise<Usuario> {
+    console.log()
     const user = await this.usuarioRepository.findOneBy({ idUsuario: id });
     if (!user) {
       throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
@@ -58,4 +59,5 @@ export class UsuarioService {
   remove(id: number) {
     return `This action removes a #${id} usuario`;
   }
+  
 }

@@ -17,7 +17,6 @@ import { PagoModule } from './pago/pago.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { ResenaModule } from './resena/resena.module';
 
-
 @Module({
   imports: [ExperienciaModule, UsuarioModule, ProveedorModule,
     ConfigModule.forRoot({
@@ -51,6 +50,6 @@ import { ResenaModule } from './resena/resena.module';
 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

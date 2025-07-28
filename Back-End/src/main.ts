@@ -12,21 +12,29 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
       transform: true,
       transformOptions: {
-        enableImplicitConversion: true
-      }
-    })
+        enableImplicitConversion: true,
+      },
+    }),
   );
 
   app.enableCors();
-
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,               // ❌ ignora propiedades extras
+      forbidNonWhitelisted: true,   // ❌ lanza error si viene algo no esperado
+      transform: true,              // ✅ transforma el body a la clase DTO
+    }),
+  );
   const config = new DocumentBuilder()
-    .setTitle("Expedia")
-    .setDescription("La API de Expedia permite acceder a una amplia gama de servicios relacionados con la planificación de viajes. Esta documentación proporciona una guía completa para integrar y utilizar todos los endpoints disponibles de Expedia.")
-    .setVersion("1.0")
+    .setTitle('Expedia')
+    .setDescription(
+      'La API de Expedia permite acceder a una amplia gama de servicios relacionados con la planificación de viajes. Esta documentación proporciona una guía completa para integrar y utilizar todos los endpoints disponibles de Expedia.',
+    )
+    .setVersion('1.0')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("docs", app, document);
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }

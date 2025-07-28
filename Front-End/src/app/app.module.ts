@@ -2,6 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+import { AppComponent } from './app.component';
+import { VisualizarExperienciaComponent } from './paginas/visualizar-experiencia/visualizar-experiencia.component';
+import { AnuncioComponent } from './paginas/anuncio/anuncio.component';
+import { PerfilComponent } from './paginas/perfil/perfil.component';
+import { LoginComponent } from './paginas/login/login.component';
+import { ContenidoPagoComponent } from './paginas/pago/contenido-pago/contenido-pago.component';
+import { MetodoPagoComponent } from './paginas/pago/metodo-pago/metodo-pago.component';
+import { ContenidoReprogramacionComponent } from './paginas/reprogramacion/contenido-reprogramacion/contenido-reprogramacion.component';
+import { MetodoPagoReprogramacionComponent } from './paginas/reprogramacion/metodo-pago-reprogramacion/metodo-pago-reprogramacion.component';
+import { NavbarComponent } from './paginas/navbar/navbar.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
@@ -27,7 +39,6 @@ import { SearchBarActivityComponent } from './components/search-bar-activity/sea
 import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
 import { CarouselExperiencesComponent } from './components/experience-history/carousel-experiences/carousel-experiences.component';
 import { CardExperienceComponent } from './components/experience-history/card-experience/card-experience.component';
-
 import { ResultsListComponent } from './components/filtro-busqueda/results-list/results-list.component';
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
@@ -38,13 +49,28 @@ import { ExpOtherComponent } from './components/visualizar-experiencia/exp-other
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from './services/interceptors/jwt.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
+import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
+    VisualizarExperienciaComponent,
+    AnuncioComponent,
+    PerfilComponent,
+    LoginComponent,
+    ContenidoPagoComponent,
+    MetodoPagoComponent,
+    ContenidoReprogramacionComponent,
+    MetodoPagoReprogramacionComponent,
+    NavbarComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
     LoginComponent,
     RegisterComponent,
     NavbarComponent,

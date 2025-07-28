@@ -10,6 +10,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 interface RequestWithUser extends Request {
   usuario: {
+    id: number;           
     correo: string;
     rol: string;
   };
@@ -49,5 +50,12 @@ export class AuthController {
   @Auth(Rol.USUARIO)
   profile(@Req() req:RequestWithUser) {
     return this.authService.profile(req.usuario);
+  }
+
+  @ApiBearerAuth()
+  @Get('profile-proveedor')
+  @Auth(Rol.PROVEEDOR)
+  profileProvedor(@Req() req:RequestWithUser) {
+    return this.authService.profileProveedor(req.usuario);
   }
 }
