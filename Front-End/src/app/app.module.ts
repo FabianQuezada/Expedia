@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { ContenidoReprogramacionComponent } from './components/reprogramacion/contenido-reprogramacion/contenido-reprogramacion.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -27,7 +28,6 @@ import { SearchBarActivityComponent } from './components/search-bar-activity/sea
 import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
 import { CarouselExperiencesComponent } from './components/experience-history/carousel-experiences/carousel-experiences.component';
 import { CardExperienceComponent } from './components/experience-history/card-experience/card-experience.component';
-
 import { ResultsListComponent } from './components/filtro-busqueda/results-list/results-list.component';
 import { FiltersPanelComponent } from './components/filtro-busqueda/filters-panel/filters-panel.component';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
@@ -39,11 +39,18 @@ import { ReviewsComponent } from './components/reviews/reviews.component';
 import { ExperienceComponent } from './components/visualizar-experiencia/experience/experience.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
+import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/metodo-pago-reprogramacion/metodo-pago-reprogramacion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    ContenidoPagoComponent,
+    MetodoPagoComponent,
+    ContenidoReprogramacionComponent,
+    NavbarComponent,
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
@@ -76,7 +83,12 @@ import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
     ContenidoPagoComponent,
     MetodoPagoComponent,
     PagoComponent,
+    ProviderRegisterComponent,
+    MetodoPagoReprogramacionComponent
   ],
+
+    
+
   imports: [BrowserModule, AppRoutingModule, GoogleMapsModule, FormsModule, ReactiveFormsModule, HttpClientModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS,

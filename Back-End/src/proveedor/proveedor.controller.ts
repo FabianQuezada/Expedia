@@ -57,10 +57,27 @@ export class ProveedorController {
   remove(@Param('id') id: string) {
     return this.proveedorService.remove(+id);
   }
+
+  @Patch('profile-proveedor')
+  @Auth(Rol.PROVEEDOR)
+  updatePerfil(
+    @Req() req: RequestWithUsuario,
+
+    @Body() updateUsuarioDto: UpdateProveedorDto,
+  ) {
+    // 🧩 Consolas de diagnóstico
+    console.log('🧩 PATCH req.usuario:', req.usuario);
+    console.log('🧩 typeof req.usuario.id:', typeof req.usuario.id);
+    console.log('🧩 valor de req.usuario.id:', req.usuario.id);
+
+    return this.proveedorService.update(req.usuario.id, updateUsuarioDto);
+  }
+
   @Get('profile-proveedor')
   @Auth(Rol.PROVEEDOR)
   getProfileProveedor(@Req() req: RequestWithUsuario) {
     const idProveedor = req.usuario.id;
+
     return this.proveedorService.findOne(idProveedor);
   }
 }

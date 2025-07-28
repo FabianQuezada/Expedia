@@ -89,4 +89,19 @@ export class AuthStateService {
       return null;
     }
   }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+
+    try {
+      const decoded: any = jwtDecode(token);
+      const exp = decoded.exp;
+      if (!exp) return true; // si no hay `exp`, asumimos válido
+      const now = Date.now().valueOf() / 1000;
+      return now < exp;
+    } catch (e) {
+      return false;
+    }
+  }
 }

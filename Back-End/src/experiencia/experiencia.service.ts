@@ -98,7 +98,6 @@ export class ExperienciaService {
     });
 
     const resultados: ExperienciaResponseDto[] = [];
-    console.log('✔️ Experiencias enviadas:', resultados);
     for (const exp of experiencias) {
       const result = await this.resenaRepository
         .createQueryBuilder('resena')

@@ -85,8 +85,9 @@ export class AuthService {
       correo: usuario.correo,
       rol,
       id: rol === Rol.USUARIO ? usuario.idUsuario : usuario.idProveedor,
+      
     };
-
+    console.log('🎯 Payload del token JWT:', payload);
     const token = await this.jwtService.signAsync(payload);
 
     return {

@@ -10,7 +10,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 interface RequestWithUser extends Request {
   usuario: {
-    id: number;           // 👈 AGREGA ESTA LÍNEA
+    id: number;           
     correo: string;
     rol: string;
   };

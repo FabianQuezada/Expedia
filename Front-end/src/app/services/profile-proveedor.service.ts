@@ -2,7 +2,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Provider } from '../models/provider'; // ajusta si aplica
+import { Provider } from '../models/provider'; 
+import { updateProvider } from '../models/Provider/updateProvider'; 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,16 +13,19 @@ export class ProfileProveedorService {
 
   constructor(private http: HttpClient) {}
 
-  getMiPerfil(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mi-perfil`);
-  }
-
   getUserProfile(): Observable<Provider> {
-      const token = localStorage.getItem('token'); // o this.authState.getToken() si lo tienes
+      const token = localStorage.getItem('token'); 
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`,
       });
   
       return this.http.get<Provider>(`${this.apiUrl}/auth/profile-proveedor`, { headers });
     }
+  
+  updateUserProfile(updateData: Partial<updateProvider >): Observable<updateProvider > {
+
+    console.log(updateData)
+    return this.http.patch<updateProvider >(`${this.apiUrl}/proveedor/profile-proveedor`, updateData);
+  }
+  
 }
