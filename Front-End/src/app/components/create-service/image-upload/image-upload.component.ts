@@ -28,4 +28,8 @@ export class ImageUploadComponent {
     return this.imagePreviews.filter((img): img is string => img !== null).map((url) => ({ url }));
   }
 
+  setImagenes(imagenes: Imagen[]): void {
+  this.imagePreviews = imagenes.map(img => img.url);
+}
+
 }

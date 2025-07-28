@@ -6,11 +6,12 @@ import { Experiencia } from './entities/experiencia.entity';
 import { ImagenModule } from 'src/imagen/imagen.module';
 import { FechasExperienciaModule } from 'src/fechas-experiencia/fechas-experiencia.module';
 import { ResenaModule } from '../resena/resena.module';
+import { Imagen } from '../imagen/entities/imagen.entity';
 
 @Module({
   imports: [ TypeOrmModule.forFeature([Experiencia]),
   ImagenModule,
-  FechasExperienciaModule,ResenaModule
+  FechasExperienciaModule,ResenaModule,Imagen,
   ],
   controllers: [ExperienciaController],
   providers: [ExperienciaService],

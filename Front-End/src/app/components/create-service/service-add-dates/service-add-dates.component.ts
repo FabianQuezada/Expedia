@@ -52,4 +52,8 @@ export class ServiceAddDatesComponent {
   getFechas(): Fecha[] {
     return [...this.fechas];
   }
+  setFechas(fechas: Fecha[]): void {
+  console.log(fechas)
+  this.fechas = [...fechas];
+  }
 }

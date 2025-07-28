@@ -42,6 +42,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/metodo-pago-reprogramacion/metodo-pago-reprogramacion.component';
+import { EditServiceComponent } from './components/create-service/edit-service/edit-service.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/m
     MetodoPagoComponent,
     PagoComponent,
     ProviderRegisterComponent,
-    MetodoPagoReprogramacionComponent
+    MetodoPagoReprogramacionComponent,
+    EditServiceComponent
   ],
 
     

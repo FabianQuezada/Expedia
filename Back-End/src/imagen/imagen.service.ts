@@ -6,23 +6,25 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ImagenService {
-    constructor(
+  constructor(
     @InjectRepository(Imagen)
     private readonly imagenRepository: Repository<Imagen>,
   ) {}
 
   async agregarImagenes(idExperiencia: number, imagenes: { url: string }[]) {
-    if (!imagenes?.length) throw new BadRequestException('Debes enviar al menos una imagen');
+    if (!imagenes?.length) {
+      throw new BadRequestException('Debes enviar al menos una imagen');
+    }
 
-    const nuevasImagenes = imagenes.map(img =>
+    const nuevasImagenes = imagenes.map((img) =>
       this.imagenRepository.create({
         url: img.url,
-        idExperiencia,
+        experiencia: { idExperiencia }, // 
       }),
     );
+
     await this.imagenRepository.save(nuevasImagenes);
   }
-
   findAll() {
     return `This action returns all imagen`;
   }

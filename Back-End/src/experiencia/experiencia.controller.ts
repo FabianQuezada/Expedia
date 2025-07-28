@@ -31,6 +31,14 @@ interface RequestWithUser extends Request {
 export class ExperienciaController {
   constructor(private readonly experienciaService: ExperienciaService) {}
 
+  @Patch(':id')
+  @Auth(Rol.PROVEEDOR)
+  update(
+    @Param('id') id: string,
+    @Body() updateExperienciaDto: UpdateExperienciaDto,
+  ) {
+    return this.experienciaService.update(+id, updateExperienciaDto);
+  }
   @Post('crear-experiencia')
   @Auth(Rol.PROVEEDOR)
   create(
@@ -62,15 +70,6 @@ export class ExperienciaController {
     return this.experienciaService.findOne(+id);
   }
 
-  @Patch(':id')
-  @Auth(Rol.PROVEEDOR)
-  update(
-    @Param('id') id: string,
-    @Body() updateExperienciaDto: UpdateExperienciaDto,
-  ) {
-    return this.experienciaService.update(+id, updateExperienciaDto);
-  }
-
   @Delete(':id')
   @Auth(Rol.PROVEEDOR)
   remove(@Param('id') id: string) {
@@ -84,5 +83,4 @@ export class ExperienciaController {
   async countResenas(@Param('id', ParseIntPipe) id: number) {
     return this.experienciaService.contarResenasPorExperiencia(id);
   }
-
 }

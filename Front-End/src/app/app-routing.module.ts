@@ -14,6 +14,7 @@ import { NewServiceComponent } from './components/create-service/new-service/new
 import { ExperienceHistoryComponent } from './components/experience-history/experience-history-section/experience-history.component';
 import { ProviderRegisterComponent } from './components/auth/provider-register/provider-register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { EditServiceComponent } from './components/create-service/edit-service/edit-service.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
   {path: 'historialExperiencia', component: ExperienceHistoryComponent},
   {path: 'provider-register', component: ProviderRegisterComponent},
   {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
-
+  {path: 'edit-service/:id', component: EditServiceComponent }
 ]
 
 @NgModule({

@@ -16,29 +16,31 @@ export class ExperienceService {
     return this.http.post(`${this.apiUrl}/crear-experiencia`, experiencia);
   }
 
-  // Obtener todas las experiencias
   getExperiencias(): Observable<Experiencia[]> {
     return this.http.get<Experiencia[]>(this.apiUrl);
   }
 
-  // Obtener una experiencia específica por ID
   getExperienciaPorId(id: number): Observable<Experiencia> {
     return this.http.get<Experiencia>(`${this.apiUrl}/${id}`);
   }
 
-  // Obtener experiencias solo del proveedor logueado
+  actualizarExperiencia(
+    id: number,
+    experiencia: CrearExperiencia
+  ): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${id}`, experiencia);
+  }
+
   getMisExperiencias(): Observable<Experiencia[]> {
     return this.http.get<Experiencia[]>(`${this.apiUrl}/mis-experiencias`);
   }
 
-  // Obtener cantidad de reseñas de una experiencia
   getCantidadResenas(idExperiencia: number): Observable<number> {
     return this.http.get<number>(
       `${this.apiUrl}/${idExperiencia}/resenas/count`
     );
   }
 
-  // Utilidad para formatear fecha
   getFechaString(fecha: Date): string {
     const opciones: Intl.DateTimeFormatOptions = {
       weekday: 'short',
@@ -46,12 +48,11 @@ export class ExperienceService {
       month: 'short',
     };
 
-    let fechaFormateada = new Date(fecha).toLocaleDateString(
-      'es-CL',
-      opciones
-    );
+    let fechaFormateada = new Date(fecha).toLocaleDateString('es-CL', opciones);
     return fechaFormateada
       .toLowerCase()
       .replace(/(^|\s)([a-záéíóúüñ])/, (m) => m.toLowerCase());
   }
+  
+  
 }

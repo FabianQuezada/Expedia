@@ -8,6 +8,7 @@ import { UpdateExperienciaDto } from './dto/update-experiencia.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Experiencia } from './entities/experiencia.entity';
+import { Imagen } from '../imagen/entities/imagen.entity';
 import { ImagenService } from 'src/imagen/imagen.service';
 import { FechasExperienciaService } from 'src/fechas-experiencia/fechas-experiencia.service';
 import { Caracteristica } from 'src/caracteristica/entities/caracteristica.entity';
@@ -23,9 +24,12 @@ export class ExperienciaService {
     private imagenService: ImagenService,
     private fechasExperienciaService: FechasExperienciaService,
     @InjectRepository(Resena)
-    private resenaRepository: Repository<Resena>
+    private resenaRepository: Repository<Resena>,
+
+    @InjectRepository(Imagen) // 👈 ¡esto es lo que falta!
+    private readonly imagenRepository: Repository<Imagen>,
   ) {}
-  
+
   async create(data: CreateExperienciaDto & { idProveedor: number }) {
     const {
       imagenes,
@@ -141,8 +145,50 @@ export class ExperienciaService {
       puntuacionPromedio: parseFloat(puntuacionPromedio.toFixed(1)),
     });
   }
-  update(id: number, updateExperienciaDto: UpdateExperienciaDto) {
-    return `This action updates a #${id} experiencia`;
+  async update(id: number, dto: UpdateExperienciaDto) {
+    const experiencia = await this.experienciaRepository.findOne({
+      where: { idExperiencia: id },
+      relations: ['imagenes'],
+    });
+
+    if (!experiencia) {
+      throw new NotFoundException(`Experiencia #${id} no encontrada`);
+    }
+
+    if (dto.imagenes?.length) {
+      // Borrar imágenes asociadas
+      await this.imagenRepository
+        .createQueryBuilder()
+        .delete()
+        .where('ID_Experiencia = :id', { id })
+        .execute();
+
+      // Crear nuevas imágenes relacionadas correctamente
+      const nuevasImagenes = dto.imagenes.map((img) =>
+        this.imagenRepository.create({
+          url: img.url,
+          experiencia: { idExperiencia: id },
+        }),
+      );
+
+      await this.imagenRepository.save(nuevasImagenes);
+    }
+
+    const experienciaActualizada = this.experienciaRepository.merge(
+      experiencia,
+      dto,
+    );
+    await this.experienciaRepository.save(experienciaActualizada);
+
+    const experienciaConImagenes = await this.experienciaRepository.findOne({
+      where: { idExperiencia: id },
+      relations: ['imagenes'],
+    });
+
+    return {
+      message: `Experiencia #${id} actualizada correctamente`,
+      data: experienciaConImagenes,
+    };
   }
 
   remove(id: number) {
@@ -165,5 +211,4 @@ export class ExperienciaService {
   async contarResenasPorExperiencia(idExperiencia: number): Promise<number> {
     return this.resenaRepository.count({ where: { idExperiencia } });
   }
-  
 }

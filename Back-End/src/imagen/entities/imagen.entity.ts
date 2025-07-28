@@ -6,9 +6,6 @@ export class Imagen {
   @PrimaryGeneratedColumn({ name: "ID_Imagen" })
   idImagen: number;
 
-  @Column({ name: 'ID_Experiencia' })
-  idExperiencia: number; 
-
   @ManyToOne(() => Experiencia, experiencia => experiencia.imagenes, {
     onDelete: 'CASCADE',
   })

@@ -7,15 +7,15 @@ import { GoogleMapsModule } from '@angular/google-maps';
 })
 export class ServiceDetailUploadComponent {
   center: google.maps.LatLngLiteral = {
-    lat: -33.4489, 
-    lng: -70.6693
+    lat: -33.4489,
+    lng: -70.6693,
   };
 
   nuevaExperiencia = {
-  titulo: '',
-  descripcion: '',
-  ubicacion: null as google.maps.LatLngLiteral | null,
-  categoria: ''
+    titulo: '',
+    descripcion: '',
+    ubicacion: null as google.maps.LatLngLiteral | null,
+    categoria: '',
   };
 
   zoom = 14;
@@ -32,7 +32,7 @@ export class ServiceDetailUploadComponent {
     if (!input) return;
 
     const autocomplete = new google.maps.places.Autocomplete(input, {
-      types: ['geocode']
+      types: ['geocode'],
     });
 
     autocomplete.addListener('place_changed', () => {
@@ -43,7 +43,7 @@ export class ServiceDetailUploadComponent {
         const location = place.geometry.location;
         this.markerPosition = {
           lat: location.lat(),
-          lng: location.lng()
+          lng: location.lng(),
         };
 
         this.center = { ...this.markerPosition };
@@ -56,12 +56,15 @@ export class ServiceDetailUploadComponent {
     if (event.latLng) {
       this.markerPosition = {
         lat: event.latLng.lat(),
-        lng: event.latLng.lng()
+        lng: event.latLng.lng(),
       };
-    this.getAddressFromCoords(this.markerPosition.lat, this.markerPosition.lng);
+      this.getAddressFromCoords(
+        this.markerPosition.lat,
+        this.markerPosition.lng
+      );
     }
   }
-  
+
   getAddressFromCoords(lat: number, lng: number): void {
     const geocoder = new google.maps.Geocoder();
     const latLng = { lat, lng };
@@ -92,7 +95,7 @@ export class ServiceDetailUploadComponent {
 
         this.markerPosition = {
           lat: location.lat(),
-          lng: location.lng()
+          lng: location.lng(),
         };
 
         this.center = { ...this.markerPosition };
@@ -102,34 +105,145 @@ export class ServiceDetailUploadComponent {
       }
     });
   }
-  
+
   getDetails() {
     this.nuevaExperiencia.ubicacion = this.markerPosition;
 
     const experienciaFinal = {
       ...this.nuevaExperiencia,
-      caracteristicas: this.obtenerCaracteristicas()
+      caracteristicas: this.obtenerCaracteristicas(),
     };
 
     return experienciaFinal;
   }
 
   obtenerCaracteristicas(): number[] {
-    const opciones: { id: string, label: string, value: number }[] = [
-      { id: 'checkCancelacion', label: 'Cancelación gratuita disponible', value: 1 },
+    const opciones: { id: string; label: string; value: number }[] = [
+      {
+        id: 'checkCancelacion',
+        label: 'Cancelación gratuita disponible',
+        value: 1,
+      },
       { id: 'checkVoucher', label: 'Voucher móvil', value: 2 },
-      { id: 'checkTraslado', label: 'Traslado de hoteles seleccionados', value: 3 },
-      { id: 'checkAccesibilidad' , label: 'Accesible para personas con movilidad reducida', value: 4 },
+      {
+        id: 'checkTraslado',
+        label: 'Traslado de hoteles seleccionados',
+        value: 3,
+      },
+      {
+        id: 'checkAccesibilidad',
+        label: 'Accesible para personas con movilidad reducida',
+        value: 4,
+      },
       { id: 'checkConfirmacion', label: 'Confirmación instantánea', value: 5 },
-      { id: 'checkIdiomas', label: 'Varios idiomas', value: 6 }
+      { id: 'checkIdiomas', label: 'Varios idiomas', value: 6 },
     ];
 
     return opciones
-      .filter(op => {
+      .filter((op) => {
         const input = document.getElementById(op.id) as HTMLInputElement;
         return input && input.checked;
       })
-      .map(op => op.value);
+      .map((op) => op.value);
+  }
+  setData(exp: any): void {
+    // Adaptar ubicación
+    let ubicacionAdaptada: { lat: number; lng: number } | null = null;
+    if (exp.ubicacion) {
+      if (typeof exp.ubicacion === 'string') {
+        const [lat, lng] = exp.ubicacion.split(',').map(Number);
+        ubicacionAdaptada = { lat, lng };
+      } else if (
+        typeof exp.ubicacion === 'object' &&
+        exp.ubicacion.lat &&
+        exp.ubicacion.lng
+      ) {
+        ubicacionAdaptada = exp.ubicacion;
+      }
+    } else {
+      // Ubicación por defecto
+      ubicacionAdaptada = { lat: -33.4489, lng: -70.6693 };
+    }
+
+    // Adaptar categoría
+    const categoriaAdaptada =
+      typeof exp.categoria === 'string'
+        ? exp.categoria
+        : exp.categoria?.nombre ?? '';
+
+    this.nuevaExperiencia = {
+      titulo: exp.titulo,
+      descripcion: exp.descripcion,
+      categoria: categoriaAdaptada,
+      ubicacion: ubicacionAdaptada,
+    };
+
+    this.markerPosition = ubicacionAdaptada;
+    if (this.markerPosition) {
+      this.center = this.markerPosition;
+    }
+
+    setTimeout(() => {
+      this.setCaracteristicas(exp.idCaracteristicas ?? []);
+      this.setCategoria(categoriaAdaptada);
+      if (ubicacionAdaptada) {
+        this.setUbicacion(ubicacionAdaptada);
+      }
+    }, 0);
+  }
+
+  setCategoria(categoria: string): void {
+    console.log(categoria);
+    this.nuevaExperiencia.categoria = categoria;
+
+    // Si usas radio buttons o checkboxes para categorías:
+    const categoriasIds = [
+      'catCultural',
+      'catAventura',
+      'catGastronomia',
+      // agrega aquí los ids de tus categorías
+    ];
+
+    categoriasIds.forEach((catId) => {
+      const input = document.getElementById(catId) as HTMLInputElement;
+      if (input) {
+        input.checked = input.value === categoria;
+      }
+    });
+  }
+
+  setUbicacion(ubicacion: { lat: number; lng: number }): void {
+    console.log(ubicacion);
+    this.nuevaExperiencia.ubicacion = ubicacion;
+    this.markerPosition = ubicacion;
+    this.center = ubicacion;
+  }
+
+  setCaracteristicas(ids: number[]): void {
+    const idToDomId: { [key: number]: string } = {
+      1: 'checkCancelacion',
+      2: 'checkVoucher',
+      3: 'checkTraslado',
+      4: 'checkAccesibilidad',
+      5: 'checkConfirmacion',
+      6: 'checkIdiomas',
+    };
+
+    // Limpiar todos los checks primero
+    Object.values(idToDomId).forEach((elementId) => {
+      const input = document.getElementById(elementId) as HTMLInputElement;
+      if (input) {
+        input.checked = false;
+      }
+    });
+
+    // Setear los checks correspondientes
+    ids.forEach((id) => {
+      const elementId = idToDomId[id];
+      const input = document.getElementById(elementId) as HTMLInputElement;
+      if (input) {
+        input.checked = true;
+      }
+    });
   }
 }
-

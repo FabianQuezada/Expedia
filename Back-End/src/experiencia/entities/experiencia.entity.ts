@@ -69,7 +69,7 @@ export class Experiencia {
     },
   )
   @JoinTable({
-    name: 'experiencia_caracteristica', 
+    name: 'experiencia_caracteristica',
     joinColumn: {
       name: 'id_experiencia',
       referencedColumnName: 'idExperiencia',
