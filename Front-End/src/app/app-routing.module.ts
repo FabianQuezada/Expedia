@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'perfil', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'historialExperiencia', component: ExperienceHistoryComponent},
   {path: 'provider-register', component: ProviderRegisterComponent},
-  {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
+  {path: 'reprogramacion/:id', component: ContenidoReprogramacionComponent },
 
 ]
 
