@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Descuento } from "../../descuento/entities/descuento.entity";
 import { Experiencia } from "../../experiencia/entities/experiencia.entity";
+import { ProveedorUpdateLog } from './proveedorUpdateLog.entity';
 
 @Entity("proveedor", { schema: "nest_bd" })
 export class Proveedor {
@@ -30,4 +31,7 @@ export class Proveedor {
 
   @OneToMany(() => Experiencia, (experiencia) => experiencia.proveedor)
   experiencias: Experiencia[];
+
+  @OneToMany(() => ProveedorUpdateLog, log => log.proveedor)
+  logs: ProveedorUpdateLog[];
 }

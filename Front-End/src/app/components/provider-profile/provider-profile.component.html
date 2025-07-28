@@ -128,7 +128,8 @@
                   id="correo"
                   type="email"
                   class="form-control"
-                  formControlName="correo"
+                  [value]="formPerfil.get('correo')?.value"
+                  readonly
                 />
               </div>
               <div class="col-md-6">
@@ -200,17 +201,22 @@
 
         <!-- MIS SERVICIOS -->
         <ng-container *ngIf="seccionSeleccionada === 'servicios'">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="fw-bold">Mis Servicios</h4>
-            <a class="btn btn-primary" [routerLink]="['/add-service']"
-              >Añadir Servicio</a
+          <div
+            class="servicios-header d-flex align-items-center justify-content-between mb-3"
+          >
+            <h4 class="fw-bold mb-3">Mis Servicios</h4>
+            <button
+              class="btn-agregar-servicio"
+              [routerLink]="['/add-service']"
             >
+              Añadir Servicio
+            </button>
           </div>
 
           <div *ngIf="(servicios?.length || 0) > 0; else sinServicios">
             <div
               *ngFor="let servicio of servicios"
-              class="servicio-card d-flex mb-3 shadow-sm rounded overflow-hidden"
+              class="servicio-card d-flex mb-3 shadow-sm rounded"
             >
               <div>
                 <img
@@ -218,7 +224,6 @@
                     servicio.imagenes[0]?.url || 'assets/images/default.jpg'
                   "
                   class="servicio-img"
-                  style="width: 160px; height: 120px; object-fit: cover"
                 />
               </div>
               <div
@@ -226,24 +231,33 @@
               >
                 <div>
                   <h5 class="mb-1 fw-bold">{{ servicio.titulo }}</h5>
-                  <p class="mb-1 text-muted">{{ servicio.ubicacion }}</p>
                   <p class="mb-2">{{ servicio.descripcion }}</p>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <a
-                    class="btn btn-outline-primary btn-sm"
-                    [routerLink]="['/experiencia', servicio.idExperiencia]"
-                  >
-                    Ver
-                  </a>
-                  
+                <div class="precio-editar-container mt-2">
+                  <p class="mb-0 precio me-3 flex-grow-1">
+                    Desde CLP {{ obtenerPrecioMinimo(servicio) | number }}
+                  </p>
+                  <div class="botones-container">
+                    <button
+                      class="btn-editar me-2"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Ver
+                    </button>
+                    <button
+                      class="btn-editar"
+                      [routerLink]="['/experiencia', servicio.idExperiencia]"
+                    >
+                      Editar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <ng-template #sinServicios>
-            <p class="text-muted">No tienes servicios registrados aún.</p>
+            <p>No tienes servicios registrados aún.</p>
           </ng-template>
         </ng-container>
 

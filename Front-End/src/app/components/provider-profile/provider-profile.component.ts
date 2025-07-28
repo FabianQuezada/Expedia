@@ -16,6 +16,7 @@ export class ProviderProfileComponent implements OnInit {
   seccionSeleccionada: 'perfil' | 'servicios' | 'detalleServicio' | 'notificaciones' | 'ayudaComentarios' = 'perfil';
   editarPerfil = false;
   formPerfil!: FormGroup;
+  cantidadResenas: { [id: number]: number } = {};
 
   provider = {
     nombreEmpresa: '',
@@ -49,7 +50,7 @@ export class ProviderProfileComponent implements OnInit {
         this.formPerfil = this.fb.group({
           nombreEmpresa: [this.provider.nombreEmpresa, [Validators.required]],
           descripcion: [this.provider.descripcion],
-          correo: [this.provider.correo, [Validators.required, Validators.email]],
+          correo: [{ value: this.provider.correo, disabled: true }, [Validators.required, Validators.email]],
           numeroTelefono: [
             this.provider.numeroTelefono,
             [Validators.required, Validators.pattern(/^\+?\d{7,15}$/)],
@@ -60,11 +61,19 @@ export class ProviderProfileComponent implements OnInit {
         console.error('❌ Error al obtener perfil del proveedor:', err);
       },
     });
+
+    this.servicios.forEach((exp) => {
+      if (exp.idExperiencia) {
+        this.experienceService.getCantidadResenas(exp.idExperiencia).subscribe({
+          next: (count) => (this.cantidadResenas[exp.idExperiencia] = count),
+          error: () => (this.cantidadResenas[exp.idExperiencia] = 0),
+        });
+      }
+    });
   }
 
   mostrarServicios(): void {
     this.seccionSeleccionada = 'servicios';
-
     this.experienceService.getMisExperiencias().subscribe({
       next: (data: Experiencia[]) => {
         this.servicios = data;
@@ -83,18 +92,36 @@ export class ProviderProfileComponent implements OnInit {
 
   guardarPerfil(): void {
     if (this.formPerfil.valid) {
-      this.provider = {
-        ...this.provider,
-        ...this.formPerfil.value
+      const updatedData = {
+        nombreEmpresa: this.formPerfil.value.nombreEmpresa,
+        descripcion: this.formPerfil.value.descripcion,
+        numeroTelefono: this.formPerfil.value.numeroTelefono
       };
-      this.editarPerfil = false;
-      console.log('✅ Perfil actualizado (solo en frontend):', this.provider);
-      // Si quieres guardar en backend en el futuro, aquí iría el PATCH
+
+      this.profileService.updateUserProfile(updatedData).subscribe({
+        next: (updated) => {
+          this.provider = {
+            ...this.provider,
+            ...updated
+          };
+          this.editarPerfil = false;
+          console.log('✅ Perfil actualizado correctamente en el backend:', updated);
+        },
+        error: (err) => {
+          console.error('❌ Error al actualizar perfil en el backend:', err);
+        }
+      });
+    } else {
+      console.warn('⚠️ Formulario inválido');
     }
   }
 
   cerrarSesion(): void {
     this.authState.logout();
     this.router.navigate(['/login']);
+  }
+
+  obtenerPrecioMinimo(exp: Experiencia): number {
+    return Math.min(...(exp.fechasExperiencias?.map((f) => f.precio) || [0]));
   }
 }
