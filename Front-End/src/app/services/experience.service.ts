@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Experiencia } from '../models/experiencia';
+import { CrearExperiencia } from '../models/createExperience';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,10 @@ export class ExperienceService {
   private apiUrl = 'http://localhost:3000/experiencia';
 
   constructor(private http: HttpClient) {}
+
+  crearExperiencia(experiencia: CrearExperiencia): Observable<any> {
+    return this.http.post(`${this.apiUrl}/crear-experiencia`, experiencia);
+  }
 
   // Obtener todas las experiencias
   getExperiencias(): Observable<Experiencia[]> {

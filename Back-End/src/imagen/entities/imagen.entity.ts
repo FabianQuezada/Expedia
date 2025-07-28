@@ -15,6 +15,6 @@ export class Imagen {
   @JoinColumn({ name: 'ID_Experiencia' })
   experiencia: Experiencia;
 
-  @Column({ name: 'URL' })
+  @Column('longtext', { name: 'URL' })
   url: string;
 }

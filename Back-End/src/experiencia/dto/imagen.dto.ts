@@ -1,6 +1,6 @@
-import { IsUrl } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class ImagenDto {
-    @IsUrl()
+    @IsString()
     url: string;
 }

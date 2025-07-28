@@ -1,7 +1,7 @@
 export enum CategoriaExperiencia {
   AVENTURA = 'aventura',
   CULTURAL = 'cultural',
-  GASTRONOMIA = 'gastronomia',
+  GASTRONOMIA = 'gastronomía',
   NATURALEZA = 'naturaleza',
-  HISTORTICA = 'historica'
+  HISTORICA = 'histórica'
 }

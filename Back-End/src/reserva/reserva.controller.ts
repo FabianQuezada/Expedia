@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/common';
 import { ReservaService } from './reserva.service';
 import { CreateReservaDto } from './dto/create-reserva.dto';
 import { UpdateReservaDto } from './dto/update-reserva.dto';
@@ -6,8 +6,17 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { Rol } from '../common/enums/rol.enum';
 
+
+interface RequestWithUser extends Request {
+  usuario: {
+    correo: string;
+    rol: string;
+    id: number;
+  };
+}
 @ApiBearerAuth()
 @ApiTags('Reserva')
+@Auth(Rol.USUARIO)
 @Controller('reserva')
 export class ReservaController {
   constructor(private readonly reservaService: ReservaService) {}
@@ -18,8 +27,10 @@ export class ReservaController {
   create(@Body() createReservaDto: CreateReservaDto) {
     return this.reservaService.create(createReservaDto);
   }
+
   @ApiBearerAuth()
   @Auth(Rol.USUARIO)
+
   @Get()
   findAll() {
     return this.reservaService.findAll();
@@ -48,5 +59,11 @@ export class ReservaController {
     @Param('idReserva') idReserva: number,
     @Param('idUsuario') idUsuario: number) {
     return this.reservaService.remove(idReserva, idUsuario);
+  }
+  
+    @Get('mis-reservas')
+  getMisReservas(@Req() req: RequestWithUser) {
+    const idUsuario = req.usuario.id;
+    return this.reservaService.obtenerReservasPorUsuario(idUsuario);
   }
 }
