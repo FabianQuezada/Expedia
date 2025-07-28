@@ -1,0 +1,98 @@
+<h5 class="fw-bold mb-3">Medio de Pago</h5>
+
+<!-- Opciones de método de pago -->
+<div class="btn-group w-100 mb-4" role="group">
+  <input type="radio" class="btn-check" name="metodoPago" id="metodoCredito" (click)="seleccionarMetodo('credito')" checked>
+  <label class="btn btn-outline-primary" for="metodoCredito">
+    <i class="bi bi-credit-card"></i> Tarjeta de Crédito
+  </label>
+
+  <input type="radio" class="btn-check" name="metodoPago" id="metodoDebito" (click)="seleccionarMetodo('debito')">
+  <label class="btn btn-outline-primary" for="metodoDebito">
+    <i class="bi bi-credit-card-2-front-fill"></i> Tarjeta de Débito
+  </label>
+
+  <input type="radio" class="btn-check" name="metodoPago" id="metodoPaypal" (click)="seleccionarMetodo('paypal')">
+  <label class="btn btn-outline-primary" for="metodoPaypal">
+    <i class="bi bi-paypal"></i> PayPal
+  </label>
+</div>
+
+<!-- Formulario de tarjeta de crédito -->
+<div *ngIf="metodoSeleccionado === 'credito'">
+  <h6 class="fw-semibold mb-3">Formulario de Tarjeta de Crédito</h6>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Nombre en la tarjeta" formControlName="nombreTarjeta"
+        maxlength="40"
+        [ngClass]="{ 'is-invalid': formulario.get('nombreTarjeta')?.invalid && formulario.get('nombreTarjeta')?.touched }">
+      <div class="invalid-feedback">Solo letras.</div>
+    </div>
+    <div class="col-md-6">
+      <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" placeholder="Número de tarjeta"
+        maxlength="16" (keydown)="soloNumeros($event)" formControlName="numeroTarjeta"
+        [ngClass]="{ 'is-invalid': formulario.get('numeroTarjeta')?.invalid && formulario.get('numeroTarjeta')?.touched }">
+      <div class="invalid-feedback">Debe tener 16 dígitos.</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" inputmode="numeric" class="form-control" placeholder="MM/YY" maxlength="5"
+        (keydown)="soloFecha($event)" formControlName="fechaVencimiento"
+        [ngClass]="{ 'is-invalid': formulario.get('fechaVencimiento')?.invalid && formulario.get('fechaVencimiento')?.touched }">
+      <div class="invalid-feedback">Formato inválido (ej: 04/28).</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" placeholder="CVV" maxlength="3"
+        (keydown)="soloNumeros($event)" formControlName="cvv"
+        [ngClass]="{ 'is-invalid': formulario.get('cvv')?.invalid && formulario.get('cvv')?.touched }">
+      <div class="invalid-feedback">Debe tener 3 dígitos.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de tarjeta de débito -->
+<div *ngIf="metodoSeleccionado === 'debito'">
+  <h6 class="fw-semibold mb-3">Formulario de Tarjeta de Débito</h6>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" placeholder="Nombre en la tarjeta" formControlName="nombreDebito"
+        maxlength="40"
+        [ngClass]="{ 'is-invalid': formulario.get('nombreDebito')?.invalid && formulario.get('nombreDebito')?.touched }">
+      <div class="invalid-feedback">Solo letras.</div>
+    </div>
+    <div class="col-md-6">
+      <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" placeholder="Número de tarjeta"
+        maxlength="16" (keydown)="soloNumeros($event)" formControlName="numeroDebito"
+        [ngClass]="{ 'is-invalid': formulario.get('numeroDebito')?.invalid && formulario.get('numeroDebito')?.touched }">
+      <div class="invalid-feedback">Debe tener 16 dígitos.</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" inputmode="numeric" class="form-control" placeholder="MM/YY" maxlength="5"
+        (keydown)="soloFecha($event)" formControlName="fechaDebito"
+        [ngClass]="{ 'is-invalid': formulario.get('fechaDebito')?.invalid && formulario.get('fechaDebito')?.touched }">
+      <div class="invalid-feedback">Formato inválido (ej: 04/28).</div>
+    </div>
+    <div class="col-md-4">
+      <input type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" placeholder="CVV" maxlength="3"
+        (keydown)="soloNumeros($event)" formControlName="cvvDebito"
+        [ngClass]="{ 'is-invalid': formulario.get('cvvDebito')?.invalid && formulario.get('cvvDebito')?.touched }">
+      <div class="invalid-feedback">Debe tener 3 dígitos.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulario de PayPal -->
+<div *ngIf="metodoSeleccionado === 'paypal'">
+  <h6 class="fw-semibold mb-3 mt-4">Cuenta de PayPal</h6>
+  <div class="mb-3">
+    <label class="form-label">Correo electrónico de PayPal:</label>
+    <input type="email" class="form-control" placeholder="usuario@paypal.com" formControlName="correoPaypal"
+      [ngClass]="{ 'is-invalid': formulario.get('correoPaypal')?.invalid && formulario.get('correoPaypal')?.touched }">
+    <div class="invalid-feedback">Correo no válido.</div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Contraseña de PayPal:</label>
+    <input type="password" class="form-control" formControlName="clavePaypal"
+      [ngClass]="{ 'is-invalid': formulario.get('clavePaypal')?.invalid && formulario.get('clavePaypal')?.touched }">
+    <div class="invalid-feedback">Campo obligatorio.</div>
+  </div>
+</div>

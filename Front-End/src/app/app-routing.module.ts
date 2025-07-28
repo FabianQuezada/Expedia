@@ -1,5 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VisualizarExperienciaComponent } from './paginas/visualizar-experiencia/visualizar-experiencia.component';
+import { ContenidoPagoComponent } from './paginas/pago/contenido-pago/contenido-pago.component';
+import { AnuncioComponent } from './paginas/anuncio/anuncio.component';
+import { PerfilComponent } from './paginas/perfil/perfil.component';
+import { LoginComponent } from './paginas/login/login.component';
+import { ContenidoReprogramacionComponent } from './paginas/reprogramacion/contenido-reprogramacion/contenido-reprogramacion.component'; 
 import { ContenidoPagoComponent } from './components/pago/contenido-pago/contenido-pago.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchResultsComponent } from './components/filtro-busqueda/search-results/search-results.component';
@@ -30,6 +36,9 @@ const routes: Routes = [
   {path: 'add-service', component: NewServiceComponent},
   {path: 'perfil', component: UserProfileComponent},
   {path: 'historialExperiencia', component: ExperienceHistoryComponent},
+  {path: 'reprogramacion', component: ContenidoReprogramacionComponent },
+  {path: 'anuncio', component: AnuncioComponent },
+
 ];
 
 @NgModule({

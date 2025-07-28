@@ -1,0 +1,116 @@
+<div class="container py-5">
+  <!-- ✅ HEADER BOOTSTRAP CON RUTAS -->
+  <header class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+    <img src="assets/expedia-logo.png" alt="Expedia" style="height: 40px;" />
+    <nav class="d-flex gap-3 align-items-center">
+      <a routerLink="/anuncio" class="text-decoration-none fw-bold text-dark">Anunciar una propiedad</a>
+      <a href="#" class="text-decoration-none fw-bold text-dark">Atención al cliente</a> <!-- sin funcionalidad -->
+      <a routerLink="/perfil" class="text-decoration-none fw-bold text-dark">Mis viajes</a>
+      <a routerLink="/login" class="btn btn-outline-dark">Iniciar Sesión</a> <!-- ✅ actualizado -->
+    </nav>
+  </header>
+
+  <!-- 🔽 CONTENIDO DE LA EXPERIENCIA -->
+  <section class="experiencia" *ngIf="experiencia">
+    <h2>{{ experiencia.ciudad }}:<br /><span>{{ experiencia.titulo }}</span></h2>
+
+    <!-- ✅ Galería igual a la de Expedia -->
+    <div class="galeria-expedia">
+      <div class="imagen-grande">
+        <img src="assets/valpo1.jpg" alt="Imagen principal" />
+      </div>
+
+      <div class="imagenes-derecha">
+        <div class="imagenes-superiores">
+          <img src="assets/playa.jpg" alt="Miniatura 1" />
+          <img src="assets/valpo2.jpg" alt="Miniatura 2" />
+        </div>
+        <div class="imagen-inferior">
+          <img src="assets/casa.jpg" alt="Miniatura inferior" />
+        </div>
+      </div>
+    </div>
+
+    <div class="informacion">
+      <div class="datos">
+        <h3>Datos generales</h3>
+        <ul>
+          <li>Parada en Curacaví para degustación gratuita de vino y aceite de oliva</li>
+          <li>Coloreadas casas de Valparaíso</li>
+          <li>Parques y jardines de Viña del Mar</li>
+        </ul>
+
+        <h3>Características</h3>
+        <ul>
+          <li>✅ Cancelación gratuita disponible</li>
+          <li>⏰ {{ experiencia.duracion }}</li>
+          <li>🌐 Voucher móvil</li>
+          <li>⚡ Confirmación instantánea</li>
+        </ul>
+
+        <h3>Disponibilidad</h3>
+        <div class="fechas">
+          <button 
+            *ngFor="let fecha of experiencia.fechasDisponibles"
+            [class.seleccionada]="fecha === fechaSeleccionada"
+            (click)="seleccionarFecha(fecha)">
+            {{ fecha.fecha }}<br><strong>CLP {{ fecha.precio }}</strong>
+          </button>
+        </div>
+
+        <div *ngIf="fechaSeleccionada" class="resumen-box">
+          <div class="resumen-left">
+            <p><strong>Desde Santiago:</strong> Viña del Mar, Valparaíso y Valle de Casablanca</p>
+            <p>⏱️ {{ experiencia.duracion }}</p>
+          </div>
+
+          <div class="resumen-mid">
+            <p>👤 Personas</p>
+            <div class="selector">
+              <button (click)="cambiarCantidad('adultos', -1)" [disabled]="adultos <= 1">-</button>
+              <span>{{ adultos }} adulto{{ adultos > 1 ? 's' : '' }}</span>
+              <button (click)="cambiarCantidad('adultos', 1)">+</button>
+            </div>
+
+            <p>🧒 Niños</p>
+            <div class="selector">
+              <button (click)="cambiarCantidad('ninos', -1)" [disabled]="ninos <= 0">-</button>
+              <span>{{ ninos }} niño{{ ninos !== 1 ? 's' : '' }}</span>
+              <button (click)="cambiarCantidad('ninos', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="resumen-right">
+            <p>CLP {{ fechaSeleccionada?.precio }} × {{ adultos }} adulto{{ adultos > 1 ? 's' : '' }}</p>
+            <p *ngIf="ninos > 0">+ CLP {{ ninos * 20000 }} × {{ ninos }} niño{{ ninos > 1 ? 's' : '' }}</p>
+            <p class="total"><strong>Total: CLP {{ calcularTotal() }}</strong></p>
+            <button class="btn-reservar" (click)="irAPagar()">Reservar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mapa">
+        <iframe
+          src="https://maps.google.com/maps?q=Valparaiso,Chile&t=&z=10&ie=UTF8&iwloc=&output=embed"
+        ></iframe>
+        <div class="rating">
+          <strong>{{ experiencia.rating }}</strong> {{ experiencia.estado }}
+          <div>⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="incluye">
+      <h3>¿Qué incluye o no?</h3>
+      <ul>
+        <li *ngFor="let item of experiencia.incluye">✅ {{ item }}</li>
+        <li *ngFor="let item of experiencia.noIncluye">❌ {{ item }}</li>
+      </ul>
+    </div>
+
+    <div class="descripcion">
+      <h3>De qué se trata</h3>
+      <p>{{ experiencia.descripcion }}</p>
+    </div>
+  </section>
+</div>
