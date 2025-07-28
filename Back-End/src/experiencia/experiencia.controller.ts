@@ -84,4 +84,5 @@ export class ExperienciaController {
   async countResenas(@Param('id', ParseIntPipe) id: number) {
     return this.experienciaService.contarResenasPorExperiencia(id);
   }
+
 }

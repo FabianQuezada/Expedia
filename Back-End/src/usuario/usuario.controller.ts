@@ -15,7 +15,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { Rol } from 'src/common/enums/rol.enum';
 import { Request } from 'express';
-import { UseGuards } from '@nestjs/common';
+
 
 export interface RequestWithUsuario extends Request {
   usuario: {
@@ -57,6 +57,13 @@ export class UsuarioController {
   ) {
     console.log('🛠️ PATCH req.usuario:', req.usuario); // <- Ya no usas req.user
     return this.usuarioService.update(req.usuario.id, updateUsuarioDto);
+  }
+
+  @Auth(Rol.USUARIO)
+  @Get('mi-perfil')
+  getMiPerfil(@Req() req: RequestWithUsuario) {
+    console.log('🛠️ GET req.user:', req.user);
+    return this.usuarioService.findOne(req.usuario.id);
   }
 
   @Delete(':id')

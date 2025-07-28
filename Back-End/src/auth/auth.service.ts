@@ -104,4 +104,8 @@ export class AuthService {
 
     return this.usuarioService.findOneByEmail(user.correo);
   }
+
+  async profileProveedor(usuario: { id: number }) {
+    return this.proveedorService.findOne(usuario.id);
+  }
 }

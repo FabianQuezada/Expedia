@@ -4,10 +4,10 @@ import { Proveedor } from './entities/proveedor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProveedorDto } from './dto/create-proveedor.dto';
+import { NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class ProveedorService {
-
   constructor(
     @InjectRepository(Proveedor)
     private readonly proveedorRepository: Repository<Proveedor>,
@@ -18,22 +18,30 @@ export class ProveedorService {
   }
 
   findOneByEmail(correo: string) {
-    return this.proveedorRepository.findOneBy({ correo })
+    return this.proveedorRepository.findOneBy({ correo });
   }
 
   findByEmailWithPassword(correo: string) {
     return this.proveedorRepository.findOne({
       where: { correo },
-      select: ['idProveedor', 'nombreEmpresa', 'correo', 'contraseña']
-    })
+      select: ['idProveedor', 'nombreEmpresa', 'correo', 'contraseña'],
+    });
   }
 
   findAll() {
     return this.proveedorRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} proveedor`;
+  async findOne(id: number): Promise<Proveedor> {
+    const proveedor = await this.proveedorRepository.findOneBy({
+      idProveedor: id,
+    });
+
+    if (!proveedor) {
+      throw new NotFoundException(`Proveedor con ID ${id} no encontrado`);
+    }
+
+    return proveedor;
   }
 
   update(id: number, updateProveedorDto: UpdateProveedorDto) {

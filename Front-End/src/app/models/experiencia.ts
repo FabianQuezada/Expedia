@@ -1,7 +1,6 @@
 import { Fecha } from './Fecha';
 import { Imagen } from './Imagen';
 
-
 export interface Experiencia {
   idExperiencia: number;
   titulo: string;

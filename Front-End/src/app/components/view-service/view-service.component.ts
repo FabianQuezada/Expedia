@@ -1,5 +1,5 @@
 import { Component, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { ServiceProvider } from 'src/app/models/service-provider';
+import { Experiencia } from 'src/app/models/experiencia';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -8,7 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./view-service.component.css']
 })
 export class ViewServiceComponent implements AfterViewInit {
-  @Input() servicio!: ServiceProvider;
+  @Input() servicio!: Experiencia;
   @ViewChild('scrollBox') scrollBox!: ElementRef<HTMLDivElement>;
 
   iconosCaracteristicas: { [clave: string]: string } = {
@@ -29,7 +29,7 @@ export class ViewServiceComponent implements AfterViewInit {
   isBottomVisible = true;
 
   ngAfterViewInit() {
-    this.onScroll(); // inicializa el estado de las sombras
+    this.onScroll(); // inicializa sombras
   }
 
   onScroll() {

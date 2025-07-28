@@ -33,7 +33,7 @@ export class UsuarioService {
   }
 
   async findOne(id: number): Promise<Usuario> {
-    console.log(id)
+    console.log()
     const user = await this.usuarioRepository.findOneBy({ idUsuario: id });
     if (!user) {
       throw new NotFoundException(`Usuario con ID ${id} no encontrado`);

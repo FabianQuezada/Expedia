@@ -21,7 +21,19 @@ export class ExperienceService {
     return this.http.get<Experiencia>(`${this.apiUrl}/${id}`);
   }
 
-  // Formatear fecha para mostrar en UI
+  // Obtener experiencias solo del proveedor logueado
+  getMisExperiencias(): Observable<Experiencia[]> {
+    return this.http.get<Experiencia[]>(`${this.apiUrl}/mis-experiencias`);
+  }
+
+  // Obtener cantidad de reseñas de una experiencia
+  getCantidadResenas(idExperiencia: number): Observable<number> {
+    return this.http.get<number>(
+      `${this.apiUrl}/${idExperiencia}/resenas/count`
+    );
+  }
+
+  // Utilidad para formatear fecha
   getFechaString(fecha: Date): string {
     const opciones: Intl.DateTimeFormatOptions = {
       weekday: 'short',
@@ -29,14 +41,12 @@ export class ExperienceService {
       month: 'short',
     };
 
-    let fechaFormateada = new Date(fecha).toLocaleDateString('es-CL', opciones);
+    let fechaFormateada = new Date(fecha).toLocaleDateString(
+      'es-CL',
+      opciones
+    );
     return fechaFormateada
       .toLowerCase()
       .replace(/(^|\s)([a-záéíóúüñ])/, (m) => m.toLowerCase());
-  }
-  getCantidadResenas(idExperiencia: number): Observable<number> {
-    return this.http.get<number>(
-      `${this.apiUrl}/${idExperiencia}/resenas/count`
-    );
   }
 }
