@@ -14,7 +14,6 @@ export class ExperienceHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.reservaService.getMisReservas$().subscribe((experiences: Experience[]) => {
-      console.log('Experiencias reservadas:', experiences);
       this.experienceActive = experiences.filter(exp => exp.esActiva());
       this.experienceInactive = experiences.filter(exp => !exp.esActiva());
     });
