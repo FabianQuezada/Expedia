@@ -43,7 +43,7 @@ export class ReviewsComponent implements OnInit, AfterViewInit {
           this.ordenar(this.selectedOrder);
         },
         error: (err) => {
-          console.error('❌ Error al cargar reseñas:', err);
+          console.error('Error al cargar reseñas:', err);
         }
       });
   }

@@ -32,13 +32,10 @@ export class RegisterComponent {
 
   onSubmit() {
     const { name, surname, email, password } = this.formData;
-    console.log('Datos del formulario:', this.formData);
     if (!name || !surname || !email || !password) {
-      alert('Por favor completa todos los campos ❗');
+      alert('Por favor completa todos los campos');
       return;
     }
-
-    const { name, surname, email, password } = this.formData;
 
     this.authService
       .register({
@@ -54,7 +51,7 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          console.error('Error al registrar ❌', err);
+          console.error('Error al registrar', err);
           alert('Error al registrar'+err?.error?.message);
           this.mensajeError = Array.isArray(err?.error?.message)
             ? err.error.message.join('. ')

@@ -96,11 +96,10 @@ export class ContenidoReprogramacionComponent implements OnInit {
 
     if (f.invalid) {
       f.markAllAsTouched();
-      alert('⚠️ Por favor, completa todos los campos requeridos.');
+      alert('Por favor, completa todos los campos requeridos.');
       return;
     }
 
-    console.log('✅ Reprogramación enviada:', f.value);
     this.reservaExitosa = true;
     setTimeout(() => this.reservaExitosa = false, 3000);
   }

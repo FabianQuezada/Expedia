@@ -75,7 +75,6 @@ export class ServiceDetailUploadComponent {
     });
   }
 
-  // Método para manejar automáticamente el tamaño del textarea de titulo
   autoResize(event: Event): void {
     const textarea = event.target as HTMLTextAreaElement;
     textarea.style.height = 'auto'; // reset height

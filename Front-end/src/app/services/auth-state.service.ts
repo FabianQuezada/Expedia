@@ -41,7 +41,7 @@ export class AuthStateService {
       const decoded: DecodedToken = jwtDecode(token);
       return decoded.correo || null;
     } catch (e) {
-      console.warn('❌ Error al decodificar el token:', e);
+      console.warn('Error al decodificar el token:', e);
       return null;
     }
   }
@@ -68,10 +68,9 @@ export class AuthStateService {
 
     try {
       const decoded: DecodedToken = jwtDecode(token);
-      console.log('✅ ID extraído del token:', decoded.id);
       return decoded.id;
     } catch (error) {
-      console.error('❌ Error al decodificar token:', error);
+      console.error('Error al decodificar token:', error);
       return null;
     }
   }
@@ -85,7 +84,7 @@ export class AuthStateService {
       const decoded: DecodedToken = jwtDecode(token);
       return decoded.rol || null;
     } catch (error) {
-      console.error('❌ Error al obtener el rol:', error);
+      console.error('Error al obtener el rol:', error);
       return null;
     }
   }

@@ -36,15 +36,14 @@ export class ContenidoPagoComponent implements OnInit {
     private reservaService: ReservaService,
     protected dateUtil: DateUtilsService,
     private router: Router,
-    private authState: AuthStateService // ✅ Inyectar servicio
+    private authState: AuthStateService
   ) {}
 
   ngOnInit(): void {
     this.datosRecibidos = history.state;
 
-    const userId = this.authState.getUserId(); // ✅ Usar servicio
+    const userId = this.authState.getUserId();
     if (userId) {
-      console.log(userId)
       this.userId = userId;
     } else {
       console.error('No se pudo obtener el ID del usuario desde el token');
@@ -151,7 +150,7 @@ export class ContenidoPagoComponent implements OnInit {
           Number(this.datosRecibidos.ninos),
         totalPago: Number(this.datosRecibidos.total),
         fecha: this.datosRecibidos.fecha,
-        idUsuario: this.userId, // ✅ seguro
+        idUsuario: this.userId,
         idExperiencia: Number(this.datosRecibidos.idExperiencia),
       };
 
@@ -162,7 +161,7 @@ export class ContenidoPagoComponent implements OnInit {
             metodo: this.metodoSeleccionado!,
             monto: Number(this.datosRecibidos.total),
             idReserva: reservaId,
-            idUsuario: this.userId, // ✅ seguro
+            idUsuario: this.userId,
           };
 
           this.pagoService.crearPago(pagoDTO).subscribe({

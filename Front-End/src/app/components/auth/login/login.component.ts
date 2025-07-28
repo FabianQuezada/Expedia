@@ -38,7 +38,6 @@ export class LoginComponent implements AfterViewInit {
 
     this.authService.login({ correo, contraseña }).subscribe({
       next: (res: any) => {
-        console.log('Login exitoso ✅', res);
         if (res.token) {
           this.authStateService.loginSuccess(res.token);
           this.router.navigate(['/home']);
@@ -47,7 +46,7 @@ export class LoginComponent implements AfterViewInit {
         }
       },
       error: (err) => {
-        console.error('Error de login ❌', err);
+        console.error('Error de login', err);
         alert('Correo o contraseña incorrectos');
       },
     });
