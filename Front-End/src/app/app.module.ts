@@ -19,7 +19,6 @@ import { ProviderProfileComponent } from './components/provider-profile/provider
 import { ViewServiceComponent } from './components/view-service/view-service.component';
 import { ContenidoPagoComponent } from './components/pago/contenido-pago/contenido-pago.component';
 import { MetodoPagoComponent } from './components/pago/metodo-pago/metodo-pago.component';
-import { PagoComponent } from './components/pago/pago.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardVueloComponent } from './components/home/card-vuelo/card-vuelo.component';
 import { CardHospedajeComponent } from './components/home/card-hospedaje/card-hospedaje.component';
@@ -82,7 +81,6 @@ import { MetodoPagoReprogramacionComponent } from './components/reprogramacion/m
     ExperienceComponent,
     ContenidoPagoComponent,
     MetodoPagoComponent,
-    PagoComponent,
     ProviderRegisterComponent,
     MetodoPagoReprogramacionComponent
   ],

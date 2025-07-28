@@ -100,11 +100,6 @@ export class ContenidoPagoComponent implements OnInit {
     return !!control && control.invalid && control.touched;
   }
 
-  generarHora(): string {
-    const hora = Math.floor(Math.random() * 12) + 9;
-    const minutos = Math.floor(Math.random() * 60);
-    return `${hora}:${minutos.toString().padStart(2, '0')}`;
-  }
 
   seleccionarMetodo(metodo: 'credito' | 'debito' | 'paypal'): void {
     this.metodoSeleccionado = metodo;

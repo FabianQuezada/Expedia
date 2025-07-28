@@ -17,8 +17,9 @@
           type="names"
           class="form-control rounded-pill p-3"
           id="inputNames"
+          name="name"
           placeholder="Nombres"
-              [(ngModel)]="formData.name"
+          [(ngModel)]="formData.name"
         />
       </div>
       <div class="mb-3">
@@ -26,6 +27,7 @@
           type="surnames"
           class="form-control rounded-pill p-3 mb-4"
           id="inputSurnames"
+          name="surname"
           placeholder="Apellidos"
           [(ngModel)]="formData.surname"
         />
@@ -35,6 +37,7 @@
           type="email"
           class="form-control rounded-pill p-3 mb-4"
           id="inputEmail"
+          name="email"
           placeholder="Correo electrónico"
           [(ngModel)]="formData.email"
         />
@@ -44,6 +47,7 @@
           type="password"
           class="form-control rounded-pill p-3 mb-4"
           id="inputPassword"
+          name="password"
           placeholder="Contraseña"
           [(ngModel)]="formData.password"
         />
@@ -55,8 +59,11 @@
       </div>
       <p></p>
       <div class="d-grid">
-        <button type="submit" class="btn btn-lg btn-expedia-primary py-3"
-        [routerLink]="['/login']">
+        <button
+          type="submit"
+          class="btn btn-lg btn-expedia-primary py-3"
+          [routerLink]="['/login']"
+        >
           Iniciar Sesión
         </button>
       </div>

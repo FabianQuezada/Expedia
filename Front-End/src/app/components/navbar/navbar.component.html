@@ -11,7 +11,12 @@
     </a>
 
     <!-- Botones públicos -->
-    <button class="btn border-0 fw-semibold">Anunciar una propiedad</button>
+    <button
+      class="btn border-0 fw-semibold"
+      [routerLink]="['registro-proveedor']"
+    >
+      Anunciar una propiedad
+    </button>
     <button class="btn border-0 fw-semibold">Atención al cliente</button>
 
     <!-- Mostrar solo si el usuario está logueado -->
@@ -32,7 +37,7 @@
         aria-expanded="false"
       >
         <i class="bi bi-person-circle"></i>
-        {{ nombreUsuario || 'Mi perfil' }}
+        {{ nombreUsuario || "Mi perfil" }}
       </button>
       <ul class="dropdown-menu">
         <li>

@@ -29,7 +29,7 @@ export class RegisterComponent {
 
   onSubmit() {
     const { name, surname, email, password } = this.formData;
-
+    console.log('Datos del formulario:', this.formData);
     if (!name || !surname || !email || !password) {
       alert('Por favor completa todos los campos ❗');
       return;

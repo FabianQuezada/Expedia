@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 
 // Estructura real de tu token
 interface DecodedToken {
-  id: number;           // 🔁 Usamos 'id' en lugar de 'sub'
+  id: number;           
   correo: string;
   rol: string;
 }

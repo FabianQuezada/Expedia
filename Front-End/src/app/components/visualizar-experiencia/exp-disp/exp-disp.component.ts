@@ -65,7 +65,6 @@ export class ExpDispComponent implements OnChanges {
         ciudad: this.ciudad,
         titulo: this.experiencia?.titulo,
         fecha: this.fechaSeleccionada.fecha,
-        hora: this.generarHora(),
         total: this.calcularTotal(),
         adultos: this.adultos,
         ninos: this.ninos,
@@ -74,11 +73,6 @@ export class ExpDispComponent implements OnChanges {
     });
   }
 
-  generarHora(): string {
-    const hora = Math.floor(Math.random() * 12) + 9;
-    const minutos = Math.floor(Math.random() * 60);
-    return `${hora}:${minutos.toString().padStart(2, '0')}`;
-  }
 
   filtrarFechaBusqueda() {
     const fechaRef = new Date(this.fechaBusqueda!.toISOString().split('T')[0]); 

@@ -1,6 +1,7 @@
 import { Component, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Experiencia } from 'src/app/models/experiencia';
+import { AuthStateService } from 'src/app/services/auth-state.service';
 import { ExperienceService } from 'src/app/services/experience.service';
 
 @Component({
@@ -12,19 +13,23 @@ export class ExperienceComponent {
   experiencia: Experiencia | undefined;
   fechaSeleccionada: Date | undefined;
   ciudad: string = '...';
+  esProveedor: boolean = false;
   
   constructor(
     private experienciaService: ExperienceService, 
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private authState: AuthStateService 
   ) {}
 
   ngOnInit(): void {
+    const rol = this.authState.getUserRole();
+    this.esProveedor = rol === 'proveedor';
+
     this.route.params.subscribe(params => {
       const id = +params['id'];
       this.experienciaService.getExperienciaPorId(id).subscribe(data => {
         this.experiencia = data;
         this.obtenerCiudadDesdeUbicacion();
-        
       });
     });
 
